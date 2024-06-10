@@ -5,13 +5,60 @@
 
 // import { iso3D } from "./iso3D.js";
 import { asciiSwarm } from "./ascii_swarm.js";
+import { asciiHearts } from "./asciiHearts.js";
 // import { terrain } from "./terrain.js";
 // import { wavetable } from "./wavetable.js";
 // import { isometricCube } from "./isometricCube.js";
 // import { sonicParameters } from "./parameters.js";
 
-asciiSwarm("asciiContainer1")
+// random background color on page load
 
+const hexCodes = ['#a0a0a0', '#3a6ea5', '#444444'];
+
+
+// Array of visualizations with their respective container IDs
+const visualizations = [
+    { func: asciiSwarm, container: "asciiContainer1" },
+    { func: asciiHearts, container: "heartsContainer1" }
+    // Add more visualizations as needed
+];
+
+// Function to change the background color
+function changeBackgroundColor() {
+    const randomColor = hexCodes[Math.floor(Math.random() * hexCodes.length)];
+    document.body.style.backgroundColor = randomColor;
+}
+
+// Function to load a random visualization
+function loadRandomVisualization() {
+  const randomIndex = Math.floor(Math.random() * visualizations.length);
+  const { func, container } = visualizations[randomIndex];
+  const containerElement = document.getElementById(container);
+  if (containerElement) {
+      containerElement.style.display = 'block';
+      func(container);
+  } else {
+      console.error(`Container with ID ${container} not found`);
+  }
+}
+
+    // Function to change cursor on mousedown and mouseup
+    function setupCustomCursor() {
+      document.addEventListener('mousedown', () => {
+        console.log("MAAAA")
+        document.body.style.cursor = 'url("../cursor/arrow.cur"), auto';
+      });
+      document.addEventListener('mouseup', () => {
+          document.body.style.cursor = 'auto';
+      });
+  }
+
+  // Execute functions when the page loads
+  window.onload = function() {
+      changeBackgroundColor();
+      loadRandomVisualization();
+      setupCustomCursor();
+  }
 
 ////////////////////////////////////////////////////////// cursors stuff
 

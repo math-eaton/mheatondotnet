@@ -3,29 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-    <link rel="stylesheet" type="text/css" href="src/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/src/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- <script src="https://threejs.org/build/three.js"></script>  -->
-    <title>m. heaton</title>
+    <title>mheaton.net</title>
   </head>
   <body>
     <div class="section">
       <div class="figure interactive">
-        <div id="asciiContainer1"></div>
+        <div id="asciiContainer1" class="vis-container" style="display: none;"></div>
+        <div id="heartsContainer1" class="vis-container" style="display: none;"></div>
       </div>
     </div>
     <div class="section" id="name">
       matthew j. heaton
     </div>
-    <div class="section pointer">
-      <a href="src/html/cv.html">cv</a>
+    <div id="links">
+      <div class="section pointer">
+        <a href="cv.html">cv</a>
+      </div>
+      <div class="section pointer">
+        <a href="https://gsapp-cdp.github.io/archive/projects/2024/remote-sensing/">selected works</a>
+      </div>
+      <div class="section pointer">
+        <a href="https://github.com/math-eaton">github</a>
+      </div>
     </div>
-    <div class="section pointer">
-      <a href="https://gsapp-cdp.github.io/archive/projects/2024/remote-sensing/">selected works</a>
-    </div>
-    <div class="section pointer">
-      <a href="https://github.com/math-eaton">github</a>
-    </div>
-    <script type="module" src="src/js/main.js" defer></script>
+    <script type="module" src="/src/js/main.js" defer></script>
   </body>
 </html>
