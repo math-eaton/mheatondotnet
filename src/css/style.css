@@ -1,21 +1,37 @@
+* {
+
+  cursor: url('../cursor/arrow.cur'), auto;
+
+}
+
+*:mouseDown:hover{
+
+  cursor: url('../cursor/arrow.cur'), auto;
+
+}
+
 .hide-scrollbar {
   overflow: hidden;
 }
 
 html {
-  overflow: hidden;
+  /* overflow: hidden; */
   height: 100%;
   text-transform: lowercase;
+  cursor: url('../cursor/arrow.cur'), auto;
 }
 
+
 body {
-  font-family: sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  /* font-size: large; */
   color: #ececec;
   margin: 0;
   padding: 0;
   height: 100%;
-  cursor: url('../assets/cursors/arrow.cur'), auto;
-  background: #3a6ea5;
+  user-select: none;
+  cursor: url('../cursor/arrow.cur'), auto;
+  background: #323232;
   /* background-image: url('../assets/index/Wind.jpg'); */
   background-size: cover;
   background-position: center;
@@ -30,6 +46,30 @@ body {
 
 }
 
+a {
+  color: #ececec;
+  text-decoration: none; 
+}
+
+
+
+a:visited {
+  color: #ececec;
+  text-decoration: none; 
+}
+
+a:hover {
+  color: #b4b4b4;
+  text-decoration: none; 
+  cursor: url('../cursor/point.cur'), auto;
+}
+
+a:active { 
+  text-decoration: none; 
+}
+
+
+
 button {
   cursor: url('../cursor/point.cur'), auto;
   
@@ -38,14 +78,18 @@ button {
 .section {
   display: flex; /* Set the parent container as a flex container */
   max-width: fit-content;
-  justify-content: space-between; /* Distribute items along the main axis */
-  align-items: center; /* Align items vertically */
-  gap: 10px; /* Add spacing between windows */
-  margin-top: 20px; /* Add some top margin */
-  padding: 5vw;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2vh;
+  margin-top: 1vh;
+  padding: 1vw;
   /* border: #ececec;
   border-width: thin;
   border-style:dotted; */
+}
+
+#name { 
+  padding-bottom: 20vh;
 }
 
 .window {
@@ -61,7 +105,7 @@ button {
 
 .title-bar {
   flex-shrink: 0; /* Prevent title bar from affecting the body height */
-  cursor: url('../assets/cursors/Cursor_15.cur'), auto;
+  cursor: url('../cursor/cursor_15.cur'), auto;
   margin-bottom: 2px;
 }
 
@@ -116,7 +160,7 @@ top: 0;
   max-width: 100%;
   max-height: 100%;
   height: auto;
-  cursor: url('../assets/cursors/arrow.cur'), auto;
+  cursor: url('../cursor/arrow.cur'), auto;
 
 }
 
@@ -243,7 +287,7 @@ top: 0;
   height: 40px;
   /* border-radius: 50%; To make it circular */
   opacity: 0.7;
-  cursor: url('assets/cursors/cursor_15.cur'), auto;
+  cursor: url('assets/cursor/cursor_15.cur'), auto;
 }
 
 .monochrome {
@@ -275,7 +319,7 @@ top: 0;
   width: 300px;
   display: inline-block;
   left: 70%;
-  cursor: url('../assets/cursors/Cursor_3.cur'), auto;
+  cursor: url('../assets/cursor/Cursor_3.cur'), auto;
   
 }
 
@@ -357,16 +401,6 @@ top: 0;
   font-family: fantasy;
 }
 
-#audioButton {
-  cursor: pointer;
-}
-
-#playButton,
-#pauseButton {
-  cursor: pointer;
-  width: 30px;
-  height: 30px;
-}
 
 .status-bar {
   flex-shrink: 0;
@@ -381,7 +415,7 @@ top: 0;
 
 h1 { font-family: Papyrus, fantasy; font-size: 10px; font-style: normal; font-variant: small-caps; font-weight: 700; line-height: 11px; } 
 
-@font-face {
+/* @font-face {
   font-family: 'Perfect DOS VGA 437';
   src: url('PerfectDOSVGA437.eot');
   src: url('PerfectDOSVGA437.eot?#iefix') format('embedded-opentype'),
@@ -391,6 +425,12 @@ h1 { font-family: Papyrus, fantasy; font-size: 10px; font-style: normal; font-va
   font-weight: normal;
   font-style: normal;
   font-display: swap;
+} */
+
+@font-face {
+  font-family: 'Windows';
+  src:  url('./font/W95FA.woff2') format('woff2'),
+        url('./font/W95FA.woff') format('woff');
 }
 
 @keyframes wobble {
@@ -437,9 +477,10 @@ h1 { font-family: Papyrus, fantasy; font-size: 10px; font-style: normal; font-va
   display: block;
 }
 
-.figure .animation {
+.figure .interactive {
   z-index: -1;
   overflow: hidden;
+  /* cursor: pointer; */
   pointer-events: none;
   object-fit: scale-down;
   display: block;
@@ -632,11 +673,10 @@ button:hover {
   flex-basis: 40%; /* 1/3 of the container */
   max-width: 40%; /* Ensure it does not grow beyond 1/3 */
   box-sizing: border-box; /* Include padding in the width calculation */
-  cursor: text;
   padding: 0 2% 0 2%;
   z-index: 123412354534;
   align-items: center;
-  /* cursor: url('/src/cursor/iBeam.cur'), auto; */
+  cursor: url('../cursor/text.cur'), auto;
   /* cursor: text; */
 }
 
@@ -728,7 +768,7 @@ p, ul{
   margin: 0 auto;
   text-align: center;
   overflow: hidden;
-  cursor: url("/src/cursor/whiteCrosshair.cur"), auto;
+  cursor: url('../cursor/whiteCrosshair.cur'), auto;
   transition: filter 0.25s linear; /* Transition applies to the filter property */
   /* z-index: 1; Lower than #intro */
 }
@@ -758,14 +798,14 @@ p, ul{
   width: 20px; /* Thumb width */
   height: 20px; /* Thumb height */
   background: #444; /* Thumb color */
-  cursor: url("/src/cursor/point.cur"), auto;
+  cursor: url('../cursor/point.cur'), auto;
 }
 
 #resolution-slider::-moz-range-thumb {
   width: 20px;
   height: 20px;
   background: #444;
-  cursor: url("/src/cursor/point.cur"), auto;
+  cursor: url('../cursor/point.cur'), auto;
 }
 
 #three-container {
@@ -848,7 +888,7 @@ p, ul{
   border-radius: 5px;
   font-size: medium; /* Adjust the font size as needed */
   max-width: 250px; /* Set a max-width for the container */
-  cursor: url("/src/cursor/point.cur"), auto;
+  cursor: url('../cursor/point.cur'), auto;
 }
 
 #info-container ul {
@@ -1011,16 +1051,16 @@ button#start-button {
 }
 
 .cursor-default {
-  cursor: url("/src/cursor/whiteCrosshair.cur"), auto; /* 15% transparent cursor */
+  cursor: url('../cursor/arrow.cur'), auto;
   opacity: 85%;
 }
 
 #asciiContainer1 {
-  cursor: url("/src/cursor/point.cur"), auto;
-  pointer-events: none;
+  cursor: url('../cursor/point.cur'), auto;
+  /* pointer-events: none; */
   user-select: none;
   position: fixed; 
-  top: -15vh;
+  top: -10vh;
   left: 15vw;
   width: 0%;
   height: 0%;
@@ -1062,42 +1102,42 @@ button#start-button {
 }
 
 .pointer {
-  cursor: pointer; /* Or use a custom cursor file */
+  cursor: url('../cursor/point.cur'), auto;
 }
 
 .cursor-trail {
   position: absolute;
-  width: 22px; /* Adjust size to match your cursor */
-  height: 38px; /* Adjust size to match your cursor */
+  width: 20px; 
+  height: 25px;
   background-size: cover;
   pointer-events: none;
   animation: fadeOut 1s forwards;
-  mix-blend-mode:exclusion;
+  mix-blend-mode:luminosity;
   z-index: 9999999999;
 }
 
 /* Style for default cursor trail */
 .default-cursor-trail {
   /* ... common styles ... */
-  background-image: url("/src/cursor/arrow.png");
+  background-image: url("../cursor/arrow.png");
 }
 
 /* Style for pointer cursor trail */
 .pointer-cursor-trail {
   /* ... common styles ... */
-  background-image: url("/src/cursor/point.png");
+  background-image: url("../cursor/point.png");
 }
 
 /* Style for text cursor trail */
 .text-cursor-trail {
   /* ... common styles ... */
-  background-image: url("/src/cursor/ibeam.png");
+  background-image: url("../cursor/ibeam.png");
 }
 
 /* Style for crosshair cursor trail */
 .crosshair-cursor-trail {
   /* ... common styles ... */
-  background-image: url("/src/cursor/whiteCrosshair.png");
+  background-image: url("../cursor/whiteCrosshair.png");
 }
 
 @keyframes fadeOut {

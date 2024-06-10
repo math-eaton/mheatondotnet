@@ -10,21 +10,61 @@ import { asciiSwarm } from "./ascii_swarm.js";
 // import { isometricCube } from "./isometricCube.js";
 // import { sonicParameters } from "./parameters.js";
 
-document.addEventListener('load', init());
+asciiSwarm("asciiContainer1")
 
-function init(){
 
-document.addEventListener("DOMContentLoaded", (event) => {
+////////////////////////////////////////////////////////// cursors stuff
+
+document.addEventListener("mousemove", function (e) {
+  // Function to check if the element or its parent has the specified class
+  function hasClass(element, className) {
+    while (element) {
+      if (element.classList && element.classList.contains(className)) {
+        return true;
+      }
+      element = element.parentElement;
+    }
+    return false;
+  }
+
+  // Get the element under the cursor
+  let elementUnderCursor = document.elementFromPoint(e.clientX, e.clientY);
+
+  // Check for the 'crosshair' class, and if found, do nothing (no trail)
+  if (hasClass(elementUnderCursor, "crosshair")) {
+    return; // Exit the function, no trail is created
+  }
+
+  let trail = document.createElement("div");
+  trail.className = "cursor-trail";
+
+  // Check for the 'text' class
+  if (hasClass(elementUnderCursor, "text")) {
+    return; // Exit the function, no trail is created
+  } else if (hasClass(elementUnderCursor, "pointer")) {
+    trail.classList.add("pointer-cursor-trail"); // Add specific trail class for pointer
+  } else {
+    trail.classList.add("default-cursor-trail"); // Default trail class for others
+  }
+
+  // Adjust positioning based on cursor size
+  trail.style.left = e.pageX + 1 + "px"; // Adjust for half the width of the cursor
+  trail.style.top = e.pageY - 2 + "px"; // Adjust for half the height of the cursor
+
+  document.body.appendChild(trail);
+
   setTimeout(() => {
-    asciiSwarm("asciiContainer1")
-    // terrain("terrainContainer1");
-    // wavetable("wavetableContainer1");
-    // wavetable("wavetableContainer2");
-    // isometricCube("isoCubeContainer1");
-    // sonicParameters("sonicParametersContainer");
-  }, 500);
+    trail.remove();
+  }, 500); // Remove trail element after N ms
 });
+
+// Function to remove all cursor trails
+function removeAllCursorTrails() {
+  const trails = document.querySelectorAll(".cursor-trail");
+  trails.forEach((trail) => trail.remove());
 }
+
+
 // header text ticker
 
 // class Ticker {

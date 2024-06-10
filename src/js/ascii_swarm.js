@@ -110,9 +110,9 @@ export function asciiSwarm(containerId) {
     // controls = new TrackballControls(camera, renderer.domElement);
 
     // console.log('Controls after init:', controls); // Debug log
-    controls.enableDamping = true; // Optional, but makes the controls smoother
-    controls.dampingFactor = 0.1;
-    controls.enableZoom = true;
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.2;
+    controls.enableZoom = false;
 
     controls.rotateSpeed = 5.0; // Increase rotation speed
     controls.zoomSpeed = 1.2; // Increase zoom speed
