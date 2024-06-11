@@ -96,7 +96,7 @@ button {
   image-rendering: pixelated;
 }
 
-#asciiContainer1, #contourContainer1 {
+#asciiContainer1, #contourContainer1{
   cursor: url('../cursor/point.cur'), auto;
   user-select: none;
   /* width: 100%;
@@ -108,10 +108,16 @@ button {
   width: 0%;
 }
 
+#perpetualContainer1 {
+  width: 0%;
+  z-index: -1;
+}
+
 #about {
+  max-height: 90vh;
   margin-left: 33vw;
   margin-right: 33vw;
-  color: black;
+  /* color: black; */
 }
 
 #me {
@@ -228,7 +234,7 @@ button {
   .vis-container {
     width: 100vw;
     height: 100vh;
-    filter: contrast(0.7);
+    /* filter: contrast(0.7); */
     /* mix-blend-mode:exclusion; */
   }
 
