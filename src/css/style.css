@@ -13,8 +13,9 @@ html {
   overflow: hidden;
 }
 
-mousedown.grabbing {cursor: grabbing;}
-
+mousedown.grabbing {
+  cursor: grabbing;
+}
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -34,6 +35,7 @@ body {
   position: relative;
   zoom: 100%;
   transition: zoom 0.3s;
+  mix-blend-mode:exclusion;
 }
 
 a {
@@ -47,7 +49,6 @@ a:visited {
 }
 
 a:hover {
-  /* filter: invert(1); */
   color: #c0c0c0;
   text-decoration: none;
   cursor: url('../cursor/point.cur'), auto;
@@ -85,44 +86,32 @@ button {
 }
 
 .vis-container {
-  width: 80vw;
-  height: 80vh;
-  filter: contrast(0.7);
-}
-
-
-#asciiContainer1 {
-  cursor: url('../cursor/point.cur'), auto;
-  user-select: none;
   position: fixed;
-  /* top: -10vh;
-  left: 15vw; */
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  /* filter: invert(1); */
-  /* filter: invert(1); */
+  filter: contrast(0.7);
+  image-rendering: pixelated;
+}
+
+#asciiContainer1, #contourContainer1 {
+  cursor: url('../cursor/point.cur'), auto;
+  user-select: none;
+  /* width: 100%;
+  height: 100%; */
+  display: none;
 }
 
 #heartsContainer1 {
-  cursor: url('../cursor/point.cur'), auto;
-  user-select: none;
-  position: absolute;
-  /* top: -10vh;
-  left: 15vw; */
   width: 0%;
-  height: 0%;
-  z-index: 1;
-  /* filter: invert(1) contrast(0.75); */
-  /* filter: invert(1); */
 }
 
 #about {
-
   margin-left: 33vw;
   margin-right: 33vw;
   color: black;
-  /* background-color:darkslategrey; */
 }
 
 #me {
@@ -231,25 +220,22 @@ button {
   }
 
   #name {
-
     margin-top: -5em;
     padding: 1.5em;
-
+    z-index: 3;
   }
 
   .vis-container {
     width: 100vw;
     height: 100vh;
     filter: contrast(0.7);
+    /* mix-blend-mode:exclusion; */
   }
-  
 
   #links {
-    /* position: static; */
     margin-top: 1em;
     padding: 5em;
     margin: -5em;
-  
   }
 
   #me {
@@ -257,6 +243,12 @@ button {
   }
 
   .cursor-trail {
-filter: invert();
+    filter: invert();
+  }
+
+  #contourContainer1{
+    top: -15vh;
+    /* width: 25%; */
+    /* mix-blend-mode:luminosity; */
   }
 }
