@@ -2,23 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/img/favicon.png"/>
+    <link rel="icon" type="image/svg+xml" href="/img/favicon.png"/>
     <link rel="stylesheet" type="text/css" href="/src/css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>mheaton.net</title>
   </head>
   <body>
-    <div class="">
-      <div id="heartsContainer1" class="" style="z-index: -1; height:max-content; position: fixed;"></div>
-  </div>
-    <div class="" id="about">
-        <p>i work on the geospatial applications division at CIESIN in the Climate School at Columbia University<p>
-        <p>i am currently completing an MS in Computational Design Practices at the Columbia University Graduate School of Architecture, Planning and Preservation + hold a BA in Geography from the State University of New York at Geneseo</p>
-        <p>my academic interests include critical geography, experimental cartography, human-computer interaction, and creative coding</p>
+    <div class="section">
+      <div class="figure interactive" style="z-index: -1;">
+        <div id="asciiContainer1" class="vis-container" style="display: none;"></div>
+        <div id="heartsContainer1" class="vis-container" style="display: none;"></div>
+        <div id="contourContainer1" class="vis-container" style="display: none;"></div>
+        <div id="perpetualContainer1" class="vis-container" style="display: none;"></div>
+      </div>
     </div>
-    <script type="module">
-      import { asciiHearts } from '/src/js/asciiHearts.js';
-      asciiHearts('heartsContainer1');
-    </script>
+    <div class="" id="about">
+        <p>i work on the geospatial applications division at <a href="https://ciesin.climate.columbia.edu/">CIESIN</a> in the Climate School at Columbia University<p>
+        <p>i am currently completing an MS in <a href="https://open.spotify.com/artist/4OXHuuwJIOS603XMyPtEQv?si=CaCzRnxIQsGLf2fUDHbDqQ">Computational Design Practices</a> at the Columbia University Graduate School of Architecture, Planning and Preservation + hold a BA in Geography from the State University of New York at Geneseo</p>
+        <p>my academic interests include critical geography, experimental cartography, human-computer interaction, and creative coding</p>
+        <p>extra-curriculars: drumming in <a href="https://open.spotify.com/artist/4OXHuuwJIOS603XMyPtEQv?si=CaCzRnxIQsGLf2fUDHbDqQ">rock bands</a>, <a href="https://tentremors.bandcamp.com/">audio</a> / <a href="https://vimeo.com/497973906?share=copy">video</a> synthesis, alternative process <a href="https://www.instagram.com/math_eaton/">photography</a>, <a href="https://en.wikipedia.org/wiki/Bicycle">cycling</a>, etc<p>
+    </div>
+    <script type="module" src="/src/js/main.js" defer></script>
   </body>
 </html>

@@ -38,19 +38,25 @@ body {
   mix-blend-mode:exclusion;
 }
 
+.plain_link {
+    text-decoration: none;
+    filter: none;
+}
+
 a {
-  color: #ececec;
-  text-decoration: none;
+  color: #00ff00;
+  mix-blend-mode:color-burn;
+  /* text-decoration: none; */
 }
 
 a:visited {
-  color: #ececec;
+  color: #00ff00;
   text-decoration: none;
 }
 
 a:hover {
   color: #c0c0c0;
-  text-decoration: none;
+  /* text-decoration: none; */
   cursor: url('../cursor/point.cur'), auto;
 }
 
@@ -74,6 +80,24 @@ button {
 .pointer {
   padding: 1em;
 }
+
+.copy-message {
+  position: absolute;
+  display: none;
+  /* background-color: #333; */
+  color: #fff;
+  /* padding: 5px; */
+  /* border-radius: 3px; */
+  font-size: 2rem;
+  opacity: 1;
+  transition: opacity 0.35s ease-out;
+  z-index: 1000;
+}
+
+.copy-message.show {
+  display: block;
+}
+
 
 #name {
   padding-bottom: 20vh;
@@ -254,9 +278,9 @@ margin: 15vh;
     visibility: hidden;
   }
 
-  .cursor-trail {
+  /* .cursor-trail {
     filter: invert();
-  }
+  } */
 
   #contourContainer1{
     top: -15vh;

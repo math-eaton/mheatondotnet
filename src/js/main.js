@@ -17,64 +17,108 @@ import { perpetual } from "./perpetual.js";
 
 const hexCodes = ['#959595', '#3a6ea5', '#444444', '#c25237'];
 
-
 // Array of visualizations with their respective container IDs
 const visualizations = [
-    { func: asciiSwarm, container: "asciiContainer1" },
-    { func: asciiHearts, container: "heartsContainer1" },
-    { func: contourSuccession, container: "contourContainer1" },
-    { func: perpetual, container: "perpetualContainer1" }
+  { func: asciiSwarm, container: "asciiContainer1" },
+  { func: asciiHearts, container: "heartsContainer1" },
+  { func: contourSuccession, container: "contourContainer1" },
+  { func: perpetual, container: "perpetualContainer1" }
+];
 
+const aboutVisualizations = [
+  { func: asciiSwarm, container: "asciiContainer1" },
+  { func: asciiHearts, container: "heartsContainer1" }
 ];
 
 // Function to change the background color
 function changeBackgroundColor() {
-    const randomColor = hexCodes[Math.floor(Math.random() * hexCodes.length)];
-    document.body.style.backgroundColor = randomColor;
+  const randomColor = hexCodes[Math.floor(Math.random() * hexCodes.length)];
+  document.body.style.backgroundColor = randomColor;
 }
 
 // Function to load a random visualization
 function loadRandomVisualization() {
-  const randomIndex = Math.floor(Math.random() * visualizations.length);
-  const { func, container } = visualizations[randomIndex];
+  const isAboutPage = window.location.pathname.includes('about.html');
+  const visualizationSet = isAboutPage ? aboutVisualizations : visualizations;
+  const randomIndex = Math.floor(Math.random() * visualizationSet.length);
+  const { func, container } = visualizationSet[randomIndex];
   const containerElement = document.getElementById(container);
 
   if (containerElement) {
       containerElement.style.display = 'block';
       func(container);
   } else {
-      console.error(`Container with ID ${container} not found. Defaulting to hearts visualization.`);
-      const defaultContainer = 'heartsContainer1';
-      let defaultContainerElement = document.getElementById(defaultContainer);
+      console.error(`Container with ID ${container} not found`);
+      if (isAboutPage) {
+          console.log('Defaulting to hearts visualization on about page.');
+          const defaultContainer = 'heartsContainer1';
+          let defaultContainerElement = document.getElementById(defaultContainer);
 
-      if (!defaultContainerElement) {
-          defaultContainerElement = document.createElement('div');
-          defaultContainerElement.id = defaultContainer;
-          document.body.appendChild(defaultContainerElement);
+          if (!defaultContainerElement) {
+              defaultContainerElement = document.createElement('div');
+              defaultContainerElement.id = defaultContainer;
+              defaultContainerElement.className = 'vis-container';
+              document.body.appendChild(defaultContainerElement);
+          }
+
+          defaultContainerElement.style.display = 'block';
+          asciiHearts(defaultContainer);
       }
-
-      defaultContainerElement.style.display = 'block';
-      asciiHearts(defaultContainer);
   }
 }
 
-    // Function to change cursor on mousedown and mouseup
-    function setupCustomCursor() {
-      document.addEventListener('mousedown', () => {
-        console.log("MAAAA")
-        document.body.style.cursor = 'url("../cursor/arrow.cur"), auto';
-      });
-      document.addEventListener('mouseup', () => {
-          document.body.style.cursor = 'auto';
-      });
-  }
+// Function to change cursor on mousedown and mouseup
+function setupCustomCursor() {
+  document.addEventListener('mousedown', () => {
+    document.body.style.cursor = 'url("../cursor/arrow.cur"), auto';
+  });
+  document.addEventListener('mouseup', () => {
+    document.body.style.cursor = 'auto';
+  });
+}
 
-  // Execute functions when the page loads
-  window.onload = function() {
-      changeBackgroundColor();
-      loadRandomVisualization();
-      setupCustomCursor();
-  }
+// Execute functions when the page loads
+window.onload = function() {
+  changeBackgroundColor();
+  loadRandomVisualization();
+  setupCustomCursor();
+}
+
+
+// Function to copy email to clipboard and show a temporary message
+function copyEmailToClipboard(event, email) {
+  // Create a temporary text area to copy the email address
+  var tempTextArea = document.createElement("textarea");
+  tempTextArea.value = email;
+  document.body.appendChild(tempTextArea);
+  tempTextArea.select();
+  document.execCommand("copy");
+  document.body.removeChild(tempTextArea);
+
+  // Get the message div
+  var copyMessage = document.getElementById("copyMessage");
+
+  // Position the message
+  copyMessage.style.left = "50%";
+  copyMessage.style.top = "50%";
+  // copyMessage.style.transform = "translate(-0%, -50%)";
+
+
+  // Show the message
+  copyMessage.classList.add("show");
+
+  // Hide the message after 1 second
+  setTimeout(function () {
+    copyMessage.style.opacity = "0";
+    setTimeout(function () {
+      copyMessage.classList.remove("show");
+      copyMessage.style.opacity = "1";
+    }, 500); // Matches the transition duration
+  }, 1000);
+}
+
+// Attach the function to the window object
+window.copyEmailToClipboard = copyEmailToClipboard;
 
 ////////////////////////////////////////////////////////// cursors stuff
 
