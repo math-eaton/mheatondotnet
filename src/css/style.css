@@ -115,8 +115,10 @@ button {
 
 #about {
   max-height: 90vh;
+  margin-top: 33vh;
   margin-left: 33vw;
   margin-right: 33vw;
+  z-index: 3;
   /* color: black; */
 }
 
@@ -242,6 +244,10 @@ button {
     margin-top: 1em;
     padding: 5em;
     margin: -5em;
+  }
+
+  #about {
+margin: 15vh;  
   }
 
   #me {
