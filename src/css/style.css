@@ -64,7 +64,7 @@ button {
 .section {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: left;
   gap: 2vh;
   margin-top: 1vh;
   padding: 1vw;
@@ -121,9 +121,18 @@ button {
 
   margin-left: 33vw;
   margin-right: 33vw;
+  color: black;
   /* background-color:darkslategrey; */
 }
 
+#me {
+  max-width: 33%;
+  margin-left: 33vw;
+  margin-right: 33vw;
+  padding-top: 10vh;
+  filter: grayscale(1) contrast(0.75);
+  user-select: none;
+}
 
 .figure {
   display: flex;
@@ -175,6 +184,10 @@ button {
   background-image: url("../cursor/whiteCrosshair.png");
 }
 
+.invert {
+  filter: invert();
+}
+
 @keyframes fadeOut {
   from {
     opacity: 1;
@@ -200,7 +213,7 @@ button {
   body {
     padding: 0.5em;
     zoom: 100%;
-    font-size: x-large;
+    font-size: large;
   }
 
   .section {
@@ -208,7 +221,7 @@ button {
     align-items: flex-start;
     gap: 1vh;
     margin-top: 1em;
-    padding: 2em;
+    padding: 1em;
   }
 
   .pointer {
@@ -233,9 +246,17 @@ button {
 
   #links {
     /* position: static; */
-    margin-top: 2em;
+    margin-top: 1em;
     padding: 5em;
     margin: -5em;
   
+  }
+
+  #me {
+    visibility: hidden;
+  }
+
+  .cursor-trail {
+filter: invert();
   }
 }

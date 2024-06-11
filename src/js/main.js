@@ -13,7 +13,7 @@ import { asciiHearts } from "./asciiHearts.js";
 
 // random background color on page load
 
-const hexCodes = ['#a0a0a0', '#3a6ea5', '#444444'];
+const hexCodes = ['#959595', '#3a6ea5', '#444444', '#c25237'];
 
 
 // Array of visualizations with their respective container IDs
