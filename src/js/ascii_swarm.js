@@ -59,9 +59,9 @@ export function asciiSwarm(containerId) {
     camera.position.z = 2.5;
 
     // Renderer
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer( { alpha: true } );
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor(0xf0f0f0);
+    renderer.setClearColor( 0xC0C0C0, 0 ); 
 
     // AsciiEffect
     // Custom CharSet and Options
@@ -71,9 +71,9 @@ export function asciiSwarm(containerId) {
         invert: true,
         resolution: 0.175, // Adjust for more or less detail
         // resolution: 0.3,
-        scale: 1.0,       // Adjust based on your display requirements
-        color: false,     // Set to true if you want colored ASCII characters
-        block: false,
+        scale: 1.0,     
+        color: false,     
+        block: true,
     };  
 
     // AsciiEffect with custom parameters
@@ -81,8 +81,8 @@ export function asciiSwarm(containerId) {
     effect.setSize(window.innerWidth, window.innerHeight);
 
     // Adjust text color and background color
-    effect.domElement.style.color = 'black'; // Adjust text color as needed
-    effect.domElement.style.backgroundColor = 'white'; // Adjust background color as needed
+    // effect.domElement.style.color = 'black'; // Adjust text color as needed
+    // effect.domElement.style.backgroundColor = 'white'; // Adjust background color as needed
 
     // Add AsciiEffect DOM element to the container
     document.getElementById(containerId).appendChild(effect.domElement);
@@ -323,7 +323,7 @@ function createHeart() {
   geometry.center();
 
   const material = new THREE.MeshPhongMaterial({
-      color: 0x000000,
+      color: 0xFFFFFF,
       specular: 0xff00ff,
       shininess: 10,
       side: THREE.FrontSide,
