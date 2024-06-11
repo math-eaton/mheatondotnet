@@ -143,6 +143,11 @@ button {
   margin-left: 33vw;
   margin-right: 33vw;
   z-index: 3;
+  color: #000000;
+  background-color: #00ffc38d;
+  background-blend-mode: exclusion;
+  padding: 0.25em;
+  mix-blend-mode:exclusion;
   /* color: black; */
 }
 
@@ -271,7 +276,8 @@ button {
   }
 
   #about {
-margin: 15vh;  
+margin: 5vh;
+padding: 0.25em;
   }
 
   #me {
