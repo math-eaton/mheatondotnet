@@ -45,7 +45,7 @@ body {
 
 a {
   color: #00ff00;
-  mix-blend-mode:color-burn;
+  mix-blend-mode:exclusion;
   /* text-decoration: none; */
 }
 
@@ -144,7 +144,7 @@ button {
   margin-right: 33vw;
   z-index: 3;
   color: #000000;
-  background-color: #00ffc38d;
+  background-color: #ffff00;
   background-blend-mode: exclusion;
   padding: 0.25em;
   mix-blend-mode:exclusion;
