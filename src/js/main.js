@@ -6,8 +6,8 @@ import { contourSuccession } from "./contours.js";
 import { perpetual } from "./perpetual.js";
 import { horseLoader } from "./horse.js";
 // import { wavetable } from "./wavetable.js";
-import { noiseOverlay } from './p5_noise.js';
-
+import { noiseOverlay } from "./p5_noise.js";
+import { wavetable } from "./wavetable.js"
 
 
 
@@ -18,58 +18,101 @@ const visualizations = [
   { func: asciiHearts, container: "heartsContainer1" },
   { func: contourSuccession, container: "contourContainer1" },
   { func: perpetual, container: "perpetualContainer1" },
-  { func: horseLoader, container: "horseContainer1" }
+  { func: horseLoader, container: "horseContainer1" },
+  // { func: wavetable, container: "wavetableContainer1" },
 ];
 
 const aboutVisualizations = [
   { func: asciiSwarm, container: "asciiContainer1" },
-  { func: asciiHearts, container: "heartsContainer1" }
+  { func: asciiHearts, container: "heartsContainer1" },
+  // { func: wavetable, container: "wavetableContainer1" },
 ];
 
 // random background color on page load
 // const hexCodes = ['#959595', '#3a6ea5', '#444444', '#c25237'];
 const hexCodes = ['#3a6ea5', '#444444', '#c25237'];
 
+let activeColor = null;
+
 function changeBackgroundColor() {
-  const randomColor = hexCodes[Math.floor(Math.random() * hexCodes.length)];
+  let randomColor;
+  do {
+    randomColor = hexCodes[Math.floor(Math.random() * hexCodes.length)];
+  } while (randomColor === activeColor);
+
   document.body.style.backgroundColor = randomColor;
-  
-  const textElements = document.querySelectorAll('.text');
-  textElements.forEach((element) => {
-    // element.style.backgroundColor = randomColor;
-  });
+  activeColor = randomColor;
+
+  // const textElements = document.querySelectorAll('.text');
+  // textElements.forEach((element) => {
+  //   element.style.backgroundColor = randomColor;
+  // });
 }
+
+// Track the currently active visualization
+let activeVisualization = null;
 
 // Function to load a random visualization
 function loadRandomVisualization() {
   const isAboutPage = window.location.pathname.includes('about');
   const visualizationSet = isAboutPage ? aboutVisualizations : visualizations;
-  const randomIndex = Math.floor(Math.random() * visualizationSet.length);
-  const { func, container } = visualizationSet[randomIndex];
+
+  let randomIndex;
+  let newVisualization;
+
+  do {
+    randomIndex = Math.floor(Math.random() * visualizationSet.length);
+    newVisualization = visualizationSet[randomIndex];
+  } while (activeVisualization && newVisualization.container === activeVisualization.container);
+
+  const { func, container } = newVisualization;
   const containerElement = document.getElementById(container);
 
   if (containerElement) {
-      containerElement.style.display = 'block';
-      func(container);
+    if (activeVisualization) {
+      // Hide the currently active visualization
+      document.getElementById(activeVisualization.container).style.display = 'none';
+    }
+    containerElement.style.display = 'block';
+    func(container);
+    activeVisualization = { func, container };
   } else {
-      console.error(`Container with ID ${container} not found`);
-      if (isAboutPage) {
-          console.log('Defaulting to hearts visualization on about page.');
-          const defaultContainer = 'heartsContainer1';
-          let defaultContainerElement = document.getElementById(defaultContainer);
+    console.error(`Container with ID ${container} not found`);
+    if (isAboutPage) {
+      console.log('Defaulting to hearts visualization on about page.');
+      const defaultContainer = 'heartsContainer1';
+      let defaultContainerElement = document.getElementById(defaultContainer);
 
-          if (!defaultContainerElement) {
-              defaultContainerElement = document.createElement('div');
-              defaultContainerElement.id = defaultContainer;
-              defaultContainerElement.className = 'vis-container';
-              document.body.appendChild(defaultContainerElement);
-          }
-
-          defaultContainerElement.style.display = 'block';
-          asciiHearts(defaultContainer);
+      if (!defaultContainerElement) {
+        defaultContainerElement = document.createElement('div');
+        defaultContainerElement.id = defaultContainer;
+        defaultContainerElement.className = 'vis-container';
+        document.body.appendChild(defaultContainerElement);
       }
+
+      defaultContainerElement.style.display = 'block';
+      asciiHearts(defaultContainer);
+      activeVisualization = { func: asciiHearts, container: defaultContainer };
+    }
   }
 }
+
+//  switch to a new random visualization
+function switchVisualization() {
+  loadRandomVisualization();
+}
+
+// switch to a new random background color
+function switchBackgroundColor() {
+  changeBackgroundColor();
+}
+
+
+
+// Add event listeners to the refresh buttons
+document.getElementById('refresh').addEventListener('click', switchVisualization);
+document.getElementById('colorwheel').addEventListener('click', switchBackgroundColor);
+
 
 // Function to change cursor on mousedown and mouseup
 function setupCustomCursor() {
@@ -104,9 +147,10 @@ function copyEmailToClipboard(event, email) {
   var copyMessage = document.getElementById("copyMessage");
 
   // Position the message
-  copyMessage.style.left = "50%";
-  copyMessage.style.top = "50%";
-  // copyMessage.style.transform = "translate(-0%, -50%)";
+  copyMessage.style.left = "25%";
+  copyMessage.style.top = "20%";
+  // copyMessage.style.transform = "translate(-0%, -100%)";
+  copyMessage.style.transform = "translate3d(0%, 25%, -15%)";
 
 
   // Show the message
@@ -124,6 +168,23 @@ function copyEmailToClipboard(event, email) {
 
 // Attach the function to the window object
 window.copyEmailToClipboard = copyEmailToClipboard;
+
+// hide text on visible click
+// Function to toggle visibility of text elements
+function toggleTextVisibility() {
+  const textElements = document.querySelectorAll('.text');
+  textElements.forEach((element) => {
+    if (element.style.display === 'none') {
+      element.style.display = '';
+    } else {
+      element.style.display = 'none';
+    }
+  });
+}
+
+// Add event listener to the visible element
+document.getElementById('visible').addEventListener('click', toggleTextVisibility);
+
 
 ////////////////////////////////////////////////////////// cursors stuff
 
