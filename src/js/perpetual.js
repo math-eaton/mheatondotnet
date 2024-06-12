@@ -233,13 +233,18 @@ function setupThreeJS() {
     renderer.setPixelRatio(window.devicePixelRatio); // Adjust for device pixel ratio
     document.getElementById(containerId).appendChild(renderer.domElement);
 
-    const controls = new OrbitControls(camera, renderer.domElement);
+    const controls = new MapControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.3;
-    controls.enableZoom = false;
     // controls.screenSpacePanning = true;
-    controls.enableRotate = true;
-    controls.enablePan = false; // Optionally disable panning if not needed
+    controls.enableRotate = false;
+
+    controls.enableZoom = true;
+    controls.zoomSpeed = 0.2;
+    // controls.minDistance = 0.05;
+    // controls.maxDistance = 5;
+    controls.enablePan = true;
+
 
 
     const fontLoader = new FontLoader();
@@ -339,6 +344,7 @@ function createMeshFromPoints(points) {
     // Update controls
     if (controls) {
         controls.update();
+
 
         // Clamp camera position within defined boundaries
         clampCameraPosition();

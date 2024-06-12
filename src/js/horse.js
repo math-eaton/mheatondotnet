@@ -27,6 +27,14 @@ export function horseLoader(containerId) {
         controls.enableDamping = true;
         controls.dampingFactor = 0.25;
         controls.enableZoom = true;
+        controls.zoomSpeed = 0.2;
+
+        controls.rotateSpeed = 0.5;
+        controls.minDistance = 0.5;
+        controls.maxDistance = 2;
+
+        controls.enablePan = true;
+    
 
         // Light
         const ambientLight = new THREE.AmbientLight(0x404040, 1);

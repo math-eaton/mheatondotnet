@@ -1,23 +1,15 @@
 ////////
 
-
-// import { asciiShader } from "./ascii_shader.js";
-
-// import { iso3D } from "./iso3D.js";
 import { asciiSwarm } from "./ascii_swarm.js";
 import { asciiHearts } from "./asciiHearts.js";
-import { contourSuccession } from "./contourSuccession.js";
+import { contourSuccession } from "./contours.js";
 import { perpetual } from "./perpetual.js";
 import { horseLoader } from "./horse.js";
-// import { terrain } from "./terrain.js";
 // import { wavetable } from "./wavetable.js";
-// import { isometricCube } from "./isometricCube.js";
-// import { sonicParameters } from "./parameters.js";
+import { noiseOverlay } from './p5_noise.js';
 
-// random background color on page load
 
-// const hexCodes = ['#959595', '#3a6ea5', '#444444', '#c25237'];
-const hexCodes = ['#3a6ea5', '#444444', '#c25237'];
+
 
 
 // Array of visualizations with their respective container IDs
@@ -34,10 +26,18 @@ const aboutVisualizations = [
   { func: asciiHearts, container: "heartsContainer1" }
 ];
 
-// Function to change the background color
+// random background color on page load
+// const hexCodes = ['#959595', '#3a6ea5', '#444444', '#c25237'];
+const hexCodes = ['#3a6ea5', '#444444', '#c25237'];
+
 function changeBackgroundColor() {
   const randomColor = hexCodes[Math.floor(Math.random() * hexCodes.length)];
   document.body.style.backgroundColor = randomColor;
+  
+  const textElements = document.querySelectorAll('.text');
+  textElements.forEach((element) => {
+    // element.style.backgroundColor = randomColor;
+  });
 }
 
 // Function to load a random visualization
@@ -86,6 +86,7 @@ window.onload = function() {
   changeBackgroundColor();
   loadRandomVisualization();
   setupCustomCursor();
+  noiseOverlay();
 }
 
 

@@ -46,7 +46,12 @@ export function asciiHearts(containerId) {
     // Controls
     controls = new OrbitControls(camera, effect.domElement);
     controls.autoRotate = true;
-    controls.enableZoom = false;
+    controls.rotateSpeed = 0.1;
+    controls.enableZoom = true;
+    controls.zoomSpeed = 0.2;
+    controls.minDistance = 0.5;
+    controls.maxDistance = 15;
+    controls.enablePan = false;
 
     // Lighting
     const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
