@@ -389,15 +389,15 @@ button {
 
   #icons {
     margin-top: 1.5em;
-    width: 5vw;
+    width: 10vw;
     top: 1vh;
-    right: 1vw;
+    right: 5vw;
     flex-direction: column;
     gap: 0;
   }
 
   #icons img {
-    width: 4vw;
+    width: 7.5vw;
     height: auto;
     }
 
