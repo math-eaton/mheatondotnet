@@ -75,6 +75,7 @@ button {
   gap: 2vh;
   margin-top: 1vh;
   padding: 1vw;
+  overflow: hidden;
 }
 
 .pointer {
@@ -135,17 +136,18 @@ button {
 #perpetualContainer1 {
   width: 0%;
   z-index: -1;
+  filter: contrast(1.25);
 }
 
 #about {
   max-height: 90vh;
-  margin-top: 33vh;
+  /* margin-top: 33vh; */
   margin-left: 33vw;
   margin-right: 33vw;
   z-index: 3;
-  color: #000000;
-  background-color: #ffff00;
-  background-blend-mode: exclusion;
+  /* color: #000000; */
+  /* background-color: #ffff00; */
+  /* background-blend-mode: exclusion; */
   padding: 0.25em;
   mix-blend-mode:exclusion;
   /* color: black; */
@@ -240,6 +242,7 @@ button {
     padding: 0.5em;
     zoom: 100%;
     font-size: large;
+    overflow-y: hidden;
   }
 
   .section {
@@ -271,13 +274,15 @@ button {
 
   #links {
     margin-top: 1em;
-    padding: 5em;
-    margin: -5em;
+    /* padding: 5em;
+    margin: -5em; */
   }
 
   #about {
-margin: 5vh;
-padding: 0.25em;
+    margin: 5vh;
+    padding: 0.25em;
+    object-fit: scale-down;
+    font-size: small;
   }
 
   #me {

@@ -15,7 +15,9 @@ import { perpetual } from "./perpetual.js";
 
 // random background color on page load
 
-const hexCodes = ['#959595', '#3a6ea5', '#444444', '#c25237'];
+// const hexCodes = ['#959595', '#3a6ea5', '#444444', '#c25237'];
+const hexCodes = ['#3a6ea5', '#444444', '#c25237'];
+
 
 // Array of visualizations with their respective container IDs
 const visualizations = [
@@ -38,7 +40,7 @@ function changeBackgroundColor() {
 
 // Function to load a random visualization
 function loadRandomVisualization() {
-  const isAboutPage = window.location.pathname.includes('about.html');
+  const isAboutPage = window.location.pathname.includes('about');
   const visualizationSet = isAboutPage ? aboutVisualizations : visualizations;
   const randomIndex = Math.floor(Math.random() * visualizationSet.length);
   const { func, container } = visualizationSet[randomIndex];

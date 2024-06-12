@@ -89,15 +89,15 @@ export function contourSuccession(containerId) {
 
   function updateDimensions() {
     // Adjust pixelation factor based on screen size
-    pixelationFactor = Math.min(window.innerWidth, window.innerHeight) < 768 ? 0.5 : 0.7;
+    pixelationFactor = Math.min(window.innerWidth, window.innerHeight) < 768 ? 0.75 : 0.7;
 
     const width = container.clientWidth;
     const height = container.clientHeight;
 
-    camera.left = width / -1.75;
-    camera.right = width / 1.75;
-    camera.top = height / 1.75;
-    camera.bottom = height / -1.75;
+    camera.left = width / -1.85;
+    camera.right = width / 1.85;
+    camera.top = height / 1.85;
+    camera.bottom = height / -1.85;
     camera.updateProjectionMatrix();
 
     // Calculate low-resolution dimensions based on the pixelation factor
@@ -147,7 +147,20 @@ export function contourSuccession(containerId) {
 
     // Set up the resize event listener
     window.addEventListener('resize', updateDimensions);
-  }
+
+    // Initialize OrbitControls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    
+    // Set maximum and minimum azimuthal and polar angles
+    controls.maxAzimuthAngle = Math.PI * 0.05; // 5% of 360 degrees
+    controls.minAzimuthAngle = -Math.PI * 0.05;
+    controls.maxPolarAngle = Math.PI * 0.5; // Restrict to top-down view
+    controls.minPolarAngle = Math.PI * 0.5;
+    
+    // Disable rotation
+    // controls.enableRotate = false;
+    controls.enablePan = false; // Optionally disable panning if not needed
+}
 
   function animate() {
     requestAnimationFrame(animate);

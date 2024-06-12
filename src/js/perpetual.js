@@ -209,7 +209,19 @@ function setupThreeJS() {
       1, 1000
     );
 
-    camera.position.set(200, 200, 200);
+    // Function to get a random value within ±5% range
+    function getRandomValue(baseValue) {
+        var variation = baseValue * 2; // N% of the base value
+        return baseValue + (Math.random() * 2 - 1) * variation;
+    }
+
+    // Set the camera position with randomized values
+    camera.position.set(
+        getRandomValue(150),  // Randomized z value
+        200,
+        getRandomValue(200)  // Randomized z value
+    );
+
     camera.lookAt(scene.position);
     camera.zoom = 10;
     // camera.minZoom = 3.0;
@@ -221,11 +233,13 @@ function setupThreeJS() {
     renderer.setPixelRatio(window.devicePixelRatio); // Adjust for device pixel ratio
     document.getElementById(containerId).appendChild(renderer.domElement);
 
-    const controls = new MapControls(camera, renderer.domElement);
+    const controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.3;
     controls.enableZoom = false;
-    controls.screenSpacePanning = true;
+    // controls.screenSpacePanning = true;
+    controls.enableRotate = true;
+    controls.enablePan = false; // Optionally disable panning if not needed
 
 
     const fontLoader = new FontLoader();
