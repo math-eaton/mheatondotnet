@@ -135,6 +135,10 @@ button {
   width: 0%;
 }
 
+/* #horseContainer1 {
+  z-index: -1;
+} */
+
 #perpetualContainer1 {
   width: 0%;
   z-index: -1;

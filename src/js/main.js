@@ -8,6 +8,7 @@ import { asciiSwarm } from "./ascii_swarm.js";
 import { asciiHearts } from "./asciiHearts.js";
 import { contourSuccession } from "./contourSuccession.js";
 import { perpetual } from "./perpetual.js";
+import { horseLoader } from "./horse.js";
 // import { terrain } from "./terrain.js";
 // import { wavetable } from "./wavetable.js";
 // import { isometricCube } from "./isometricCube.js";
@@ -24,7 +25,8 @@ const visualizations = [
   { func: asciiSwarm, container: "asciiContainer1" },
   { func: asciiHearts, container: "heartsContainer1" },
   { func: contourSuccession, container: "contourContainer1" },
-  { func: perpetual, container: "perpetualContainer1" }
+  { func: perpetual, container: "perpetualContainer1" },
+  { func: horseLoader, container: "horseContainer1" }
 ];
 
 const aboutVisualizations = [
