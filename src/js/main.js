@@ -6,7 +6,7 @@ import { contourSuccession } from "./contours.js";
 import { perpetual } from "./perpetual.js";
 import { horseLoader } from "./horse.js";
 // import { wavetable } from "./wavetable.js";
-import { noiseOverlay } from "./p5_noise.js";
+// import { noiseOverlay } from "./p5_noise.js";
 import { wavetable } from "./wavetable.js"
 
 
@@ -129,7 +129,7 @@ window.onload = function() {
   changeBackgroundColor();
   loadRandomVisualization();
   setupCustomCursor();
-  noiseOverlay();
+  // noiseOverlay();
 }
 
 
