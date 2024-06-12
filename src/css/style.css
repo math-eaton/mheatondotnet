@@ -89,7 +89,9 @@ button {
   color: #fff;
   /* padding: 5px; */
   /* border-radius: 3px; */
-  font-size: 2rem;
+  font-size: 1rem;
+  /* width: 100%; */
+  /* height: auto; */
   opacity: 1;
   transition: opacity 0.35s ease-out;
   z-index: 1000;
@@ -271,6 +273,10 @@ button {
     /* filter: contrast(0.7); */
     /* mix-blend-mode:exclusion; */
   }
+
+  /* .copy-message {
+    font-size: small;
+    } */
 
   #links {
     margin-top: 1em;
