@@ -25,7 +25,7 @@ body {
   height: 100%;
   user-select: none;
   cursor: url('../cursor/arrow.cur'), auto;
-  background: #000000;
+  background: #444444;
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
@@ -37,7 +37,7 @@ body {
   zoom: 100%;
   transition: zoom 0.3s;
   mix-blend-mode:exclusion;
-  filter: brightness(2);
+  filter: brightness(0.8) contrast(0.666);
 }
 
 .text {
@@ -150,14 +150,14 @@ button {
 }
 
 /* #horseContainer1 {
-  z-index: -1;
+  cursor: url('../cursor/point.cur'), auto;
 } */
 
 
 #perpetualContainer1 {
   width: 0%;
   z-index: -1;
-  filter: contrast(1.25);
+  filter: contrast(2);
 }
 
 #about {
@@ -301,9 +301,9 @@ button {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  filter: contrast(2) brightness(5);
-  mix-blend-mode:exclusion;
-  z-index: 9999; 
+  /* filter: contrast(2) brightness(5); */
+  /* mix-blend-mode:exclusion; */
+  z-index: 19999; 
 }
 
 @keyframes swirl {
@@ -391,14 +391,15 @@ button {
     margin-top: 1.5em;
     width: 10vw;
     top: 1vh;
-    right: 5vw;
     flex-direction: column;
     gap: 0;
   }
 
   #icons img {
-    width: 7.5vw;
+    width: 7vw;
     height: auto;
+    padding: 0.5em;
+    margin: -0.5em;
     }
 
 

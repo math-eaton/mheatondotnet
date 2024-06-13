@@ -30,7 +30,7 @@ const aboutVisualizations = [
 
 // random background color on page load
 // const hexCodes = ['#959595', '#3a6ea5', '#444444', '#c25237'];
-const hexCodes = ['#3a6ea5', '#444444', '#c25237'];
+const hexCodes = ['#3a6ea5', '#444444', '#c25237', '#524bd0'];
 
 let activeColor = null;
 
@@ -96,6 +96,8 @@ function loadRandomVisualization() {
     }
   }
 }
+
+
 
 //  switch to a new random visualization
 function switchVisualization() {

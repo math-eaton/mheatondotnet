@@ -9,7 +9,6 @@ export function contourSuccession(containerId) {
   let controls;
   let circlesGroup; 
   const isMobile = Math.min(window.innerWidth, window.innerHeight) < 768;
-  ;
   const container = document.getElementById(containerId);
 
   const noise2D = createNoise2D();
@@ -152,6 +151,7 @@ export function contourSuccession(containerId) {
     renderer = new THREE.WebGLRenderer({ alpha: true, antialias: false });
     renderer.setSize(pixelatedWidth, pixelatedHeight);
     renderer.setPixelRatio(1); 
+    renderer.setClearColor( 0xC0C0C0, 0 ); 
     container.appendChild(renderer.domElement);
 
     // Scale the canvas to fit the full browser width while keeping the pixelated effect
@@ -170,7 +170,7 @@ export function contourSuccession(containerId) {
 
 
     controls = new OrbitControls(camera, renderer.domElement);
-    controls.rotateSpeed = 0.01;
+    controls.rotateSpeed = 0.075;
     controls.zoomSpeed = 0.5;
     controls.minZoom = 0.5;
     controls.maxZoom = 5.0;
@@ -227,4 +227,7 @@ export function contourSuccession(containerId) {
 
   init();
   animate();
+
+  container._threeObjects = { scene, camera, renderer, controls, circlesGroup };
+
 }
