@@ -4,10 +4,10 @@ export function noiseOverlay() {
     function setup() {
       let canvas = createCanvas(windowWidth, windowHeight);
       canvas.style('pointer-events', 'none');
-      canvas.style('z-index', '9999');
+      canvas.style('z-index', '99999');
       canvas.parent('p5-container');
       noiseOverlay = createGraphics(windowWidth, windowHeight);
-      noiseOverlay.noiseDetail(2, 0.5); // Coarser noise
+      noiseOverlay.noiseDetail(5, 0.5); // Coarser noise
     }
   
     function draw() {
@@ -15,8 +15,8 @@ export function noiseOverlay() {
       noiseOverlay.loadPixels();
       for (let x = 0; x < noiseOverlay.width; x++) {
         for (let y = 0; y < noiseOverlay.height; y++) {
-          let noiseValue = noise(x * 0.05, y * 0.05, frameCount * 0.01); // Coarser noise
-          let colorValue = map(noiseValue, 0, 1, 0, 100); // Darker noise
+          let noiseValue = noise(x * 0.05, y * 0.05, frameCount * 0.5); // Coarser noise
+          let colorValue = map(noiseValue, 0, 1, 0, 55); // Darker noise
           noiseOverlay.set(x, y, color(colorValue, colorValue, colorValue, 255));
         }
       }

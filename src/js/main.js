@@ -10,6 +10,7 @@ import { horseLoader } from "./horse.js";
 import { wavetable } from "./wavetable.js"
 
 
+const isMobile = Math.min(window.innerWidth, window.innerHeight) < 768;
 
 
 // Array of visualizations with their respective container IDs
@@ -30,7 +31,7 @@ const aboutVisualizations = [
 
 // random background color on page load
 // const hexCodes = ['#959595', '#3a6ea5', '#444444', '#c25237'];
-const hexCodes = ['#3a6ea5', '#444444', '#c25237', '#524bd0'];
+const hexCodes = ['#3a6ea5', '#444444', '#c25237', '#524bd0', '#344242'];
 
 let activeColor = null;
 
@@ -184,7 +185,18 @@ function toggleTextVisibility() {
   });
 }
 
+window.addEventListener('resize', eyeState);
+
+function eyeState() {
+  console.log("eye state")
 // Add event listener to the visible element
+if (isMobile) {
+  document.getElementById('visible').style.display = 'block';
+} else {
+  document.getElementById('visible').style.display = 'none';
+}
+}
+
 document.getElementById('visible').addEventListener('click', toggleTextVisibility);
 
 
@@ -338,78 +350,6 @@ function removeAllCursorTrails() {
 
 
 // document.getElementById('asciiContainer1').style.display = 'block';
-
-
-
-// refresh box
-// var element = document.getElementById("refresh-button");
-// element.addEventListener("click", function() {
-//   console.log("AAA");
-//   if (element.textContent=="HELLO") element.textContent = "HI";
-//   else element.textContent = "HELLO";
-//   // Reload the page
-//   // location.reload();
-// });
-
-// turn off splash page for now
-// document.addEventListener("DOMContentLoaded", closeSplash())
-
-// document.addEventListener("DOMContentLoaded", function() {
-//   var element = document.getElementById("refresh-button");
-//   element.addEventListener("click", function() {
-//     console.log("Button clicked!");
-//     if (element.innerText === "HELLO") {
-//       element.innerText = "WHATS UP";
-//     } else if (element.innerText === "WHATS UP") {
-//       element.innerText = "NMU";
-//     } else if (element.innerText === "NMU") {
-//       element.innerText = "OK";
-//     } else if (element.innerText === "OK") {
-//       element.innerText = "\u2665 \u2665 \u2665";
-//     } else if (element.innerText === "\u2665 \u2665 \u2665")
-//       element.innerText = "HELLO";
-//   });
-// });
-
-
-// var element = document.getElementById("refresh-button-2");
-// element.addEventListener("click", function() {
-//   console.log("AAA");
-//   // Reload the page
-//   location.reload();
-// });
-
-
-
-// // jquery dragging / resizing functions
-// $(document).ready(function() {
-//   let maxZIndex = 1;
-
-//   $(".window").draggable({
-//     start: function(event, ui) {
-//       maxZIndex++;
-//       $(this).css('z-index', maxZIndex);
-//     },
-//     stop: function(event, ui) {
-//       // Keep the dragged window at the front after dragging is done
-//       $(this).css('z-index', maxZIndex);
-//     }
-//   });
-  
-//   // Make window elements resizable
-//   // $(".window").resizable({
-//   //     handles: "n, e, s, w, ne, se, sw, nw",
-//   //     minWidth: 100, // Set minimum width
-//   //     minHeight: 100, // Set minimum height
-//   //     maxWidth: window.innerWidth, // Set maximum width
-//   //     maxHeight: window.innerHeight, // Set maximum height
-//   //     resize: function(event, ui) {
-//   //         // Update lines for SVG (if needed)
-//   //         updateLines(svg, windows);
-//   //     }
-//   // });
-// });
-
 
 
 
