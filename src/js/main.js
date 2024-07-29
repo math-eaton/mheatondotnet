@@ -19,7 +19,7 @@ const visualizations = [
   { func: asciiSwarm, container: "asciiContainer1" },
   { func: asciiHearts, container: "heartsContainer1" },
   { func: contourSuccession, container: "contourContainer1" },
-  { func: perpetual, container: "perpetualContainer1" },
+  // { func: perpetual, container: "perpetualContainer1" },
   { func: horseLoader, container: "horseContainer1" },
   // { func: wavetable, container: "wavetableContainer1" },
   { func: life, container: "lifeContainer1" }, 

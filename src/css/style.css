@@ -164,7 +164,8 @@ button {
 
 #lifeContainer1 {
   filter: contrast(6) invert(0.3);
-  z-index: 0;
+  z-index: 999;
+  mix-blend-mode:exclusion;
 }
 
 

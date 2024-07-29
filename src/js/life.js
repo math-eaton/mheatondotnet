@@ -8,7 +8,29 @@ const deadColor = 55; // min
 let intervalId;
 let simulationSpeed = 75; // Speed of the simulation in milliseconds
 let isMouseDown = false; // Track mouse/touch state
+let mouseDownStartTime = 0; // Track mouse down start time
 let raycaster, mouse; // Raycaster and mouse vector
+let currentRuleIndex = 0; // Track current rule set
+
+// Different cellular automata rules
+const rules = [
+  { // Conway's Game of Life
+    survive: [2, 3],
+    birth: [3]
+  },
+  { // HighLife
+    survive: [2, 3],
+    birth: [3, 6]
+  },
+  { // Day & Night
+    survive: [3, 4, 6, 7, 8],
+    birth: [3, 6, 7, 8]
+  },
+  { // Seeds
+    survive: [],
+    birth: [2]
+  }
+];
 
 // Initialize grid with random values
 function initGrid(gridWidth, gridHeight) {
@@ -22,21 +44,23 @@ function initGrid(gridWidth, gridHeight) {
   }
 }
 
-// Compute next grid state based on Game of Life rules
+// Compute next grid state based on selected rule set
 function computeNextGrid(gridWidth, gridHeight) {
   let changes = 0;
+  const rule = rules[currentRuleIndex];
+  
   for (let y = 0; y < gridHeight; y++) {
     for (let x = 0; x < gridWidth; x++) {
       const aliveNeighbors = getAliveNeighbors(x, y, gridWidth, gridHeight);
       if (grid[y][x] === 1) {
-        if (aliveNeighbors < 2 || aliveNeighbors > 3) {
+        if (!rule.survive.includes(aliveNeighbors)) {
           nextGrid[y][x] = 0; // Cell dies
           changes++;
         } else {
           nextGrid[y][x] = 1; // Cell stays alive
         }
       } else {
-        if (aliveNeighbors === 3) {
+        if (rule.birth.includes(aliveNeighbors)) {
           nextGrid[y][x] = 1; // Cell becomes alive
           changes++;
         } else {
@@ -76,11 +100,18 @@ export function life(containerId) {
   let plane;
 
   function init() {
-
-    
     // Scene setup
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(55, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(
+        50, 
+        (window.innerWidth / window.innerHeight),
+        0.1,
+        1000,);
+
+    
+    // alt ortho version
+    // const aspectRatio = window.innerWidth / window.innerHeight;
+    // const viewSize = 50;
     // camera = new THREE.OrthographicCamera(
     //     (viewSize * aspectRatio) / -2,
     //     (viewSize * aspectRatio) / 2,
@@ -89,8 +120,7 @@ export function life(containerId) {
     //     0.1,
     //     1000
     //   );
-  
-  
+
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
 
@@ -110,7 +140,7 @@ export function life(containerId) {
     cellWidth = window.innerWidth / gridWidth;
     cellHeight = window.innerHeight / gridHeight;
 
-    camera.position.z = Math.max(gridWidth, gridHeight) / 2;
+    camera.position.z = resolutionFactor;
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.25;
@@ -159,8 +189,14 @@ export function life(containerId) {
 
   function addEventListeners() {
     canvas.addEventListener('mousedown', (event) => {
-      isMouseDown = true;
-      createAgent(event);
+      if (event.button === 2) {
+        event.preventDefault();
+        cycleRules();
+      } else {
+        isMouseDown = true;
+        mouseDownStartTime = Date.now();
+        createAgent(event, true);
+      }
     });
 
     canvas.addEventListener('mouseup', () => {
@@ -169,14 +205,16 @@ export function life(containerId) {
 
     canvas.addEventListener('mousemove', (event) => {
       if (isMouseDown) {
-        createAgent(event);
+        createAgent(event, true);
+      } else {
+        createAgent(event, false); // Create agent on mouse move
       }
-      createAgent(event); // Create agent on mouse move
     });
 
     canvas.addEventListener('touchstart', (event) => {
       isMouseDown = true;
-      createAgent(event.touches[0]);
+      mouseDownStartTime = Date.now();
+      createAgent(event.touches[0], true);
     });
 
     canvas.addEventListener('touchend', () => {
@@ -185,13 +223,17 @@ export function life(containerId) {
 
     canvas.addEventListener('touchmove', (event) => {
       if (isMouseDown) {
-        createAgent(event.touches[0]);
+        createAgent(event.touches[0], true);
+      } else {
+        createAgent(event.touches[0], false); // Create agent on touch move
       }
-      createAgent(event.touches[0]); // Create agent on touch move
     });
+
+    // Disable context menu on canvas to allow right-click detection
+    canvas.addEventListener('contextmenu', (event) => event.preventDefault());
   }
 
-  function createAgent(event) {
+  function createAgent(event, isMouseDown) {
     const rect = canvas.getBoundingClientRect();
     mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
     mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
@@ -213,10 +255,15 @@ export function life(containerId) {
       console.log(`Grid Position: (${x}, ${y})`);
 
       if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight) {
+        let clusterSize = 1;
+        if (isMouseDown) {
+          const timeHeld = Math.floor((Date.now() - mouseDownStartTime) / 1000);
+          clusterSize = Math.floor(2 * Math.pow(2, timeHeld)); // Double-ish the cluster size every second
+        }
+
         // Create a NxN cluster of living cells
-        let cluster = 9;
-        for (let dy = -cluster; dy < cluster; dy++) {
-          for (let dx = -cluster; dx < cluster; dx++) {
+        for (let dy = -clusterSize; dy < clusterSize; dy++) {
+          for (let dx = -clusterSize; dx < clusterSize; dx++) {
             const nx = x + dx;
             const ny = y + dy;
             if (nx >= 0 && nx < gridWidth && ny >= 0 && ny < gridHeight) {
@@ -226,6 +273,11 @@ export function life(containerId) {
         }
       }
     }
+  }
+
+  function cycleRules() {
+    currentRuleIndex = (currentRuleIndex + 1) % rules.length;
+    console.log(`Switched to rule set: ${currentRuleIndex}`);
   }
 
   init();
