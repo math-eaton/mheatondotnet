@@ -163,7 +163,7 @@ button {
 }
 
 #lifeContainer1 {
-  filter: contrast(5) invert(0.6);
+  filter: contrast(6) invert(0.3);
   z-index: 0;
 }
 

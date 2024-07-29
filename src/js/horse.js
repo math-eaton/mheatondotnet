@@ -22,7 +22,7 @@ export function horseLoader(containerId) {
             // console.log("MOBILE")
           } else {
             // long horse
-            camera = new THREE.PerspectiveCamera(30, (window.innerWidth / window.innerHeight)/1.25, 0.1, 1000);
+            camera = new THREE.PerspectiveCamera(70, (window.innerWidth / window.innerHeight)/11, 0.1, 1000);
             // console.log("DESKTOP")
           }      
 
@@ -104,20 +104,20 @@ export function horseLoader(containerId) {
 
         camera.lookAt(center);
 
-        // let isMobile = Math.min(window.innerWidth, window.innerHeight) < 600;
+        let isMobile = Math.min(window.innerWidth, window.innerHeight) < 600;
 
+        // initial horseientation
 
-        // if (isMobile) {
-        //     camera.position.set(-100, 5, 10000);
-        //     console.log("MOBILE")
-        //   } else {
-        //     camera.position.set(50,5,1);
-        //     console.log("DESKTOP")
-        //   }      
+        if (isMobile) {
+            camera.position.set(-100, 5, 10000);
+            console.log("MOBILE")
+          } else {
+            camera.position.set(-900, -5, 100);
+            console.log("DESKTOP")
+          }      
 
         //   camera.position.set(-100, 5, 10000);
-        // initial horseientation
-          camera.position.set(-100, 5, 10000);
+          console.log(camera.position)
 
 
     }

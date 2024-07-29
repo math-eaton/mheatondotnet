@@ -214,7 +214,7 @@ export function life(containerId) {
 
       if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight) {
         // Create a NxN cluster of living cells
-        let cluster = 2;
+        let cluster = 9;
         for (let dy = -cluster; dy < cluster; dy++) {
           for (let dx = -cluster; dx < cluster; dx++) {
             const nx = x + dx;
