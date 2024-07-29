@@ -13,9 +13,19 @@ export function horseLoader(containerId) {
         // Scene
         scene = new THREE.Scene();
         // scene.background = new THREE.Color(0xf0f0f0);
+        let isMobile = Math.min(window.innerWidth, window.innerHeight) < 600;
+
 
         // Camera
-        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        if (isMobile) {
+            // tall horse
+            camera = new THREE.PerspectiveCamera(35, (window.innerWidth / window.innerHeight)*2.5, 0.1, 1000);
+            // console.log("MOBILE")
+          } else {
+            // long horse
+            camera = new THREE.PerspectiveCamera(30, (window.innerWidth / window.innerHeight)/1.5, 0.1, 1000);
+            // console.log("DESKTOP")
+          }      
 
 
         // Renderer
@@ -95,16 +105,21 @@ export function horseLoader(containerId) {
 
         camera.lookAt(center);
 
-        let isMobile = Math.min(window.innerWidth, window.innerHeight) < 600;
+        // let isMobile = Math.min(window.innerWidth, window.innerHeight) < 600;
 
 
-        if (isMobile) {
-            camera.position.set(-100, 5, 10000);
-            console.log("MOBILE")
-          } else {
-            camera.position.set(50,5,1);
-            console.log("DESKTOP")
-          }      
+        // if (isMobile) {
+        //     camera.position.set(-100, 5, 10000);
+        //     console.log("MOBILE")
+        //   } else {
+        //     camera.position.set(50,5,1);
+        //     console.log("DESKTOP")
+        //   }      
+
+        //   camera.position.set(-100, 5, 10000);
+        // initial horseientation
+          camera.position.set(-100, 5, 10000);
+
 
     }
 
