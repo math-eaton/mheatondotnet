@@ -45,6 +45,7 @@ body {
   z-index: 9999;
   /* transform: scale(1.2, 3); */
   font-size: x-large;
+  pointer-events: auto;
 
 }
 
@@ -124,6 +125,7 @@ button {
   bottom: 10vh;
   z-index: 2;
 }
+
 
 .vis-container {
   position: fixed;
@@ -367,7 +369,7 @@ button {
   #name {
     margin-top: -5em;
     padding: 1.5em;
-    z-index: 3;
+    z-index: 666;
   }
 
   .vis-container {
@@ -434,7 +436,8 @@ button {
   }
 
   #lifeContainer1 {
-    /* filter: invert(); */
+    filter: contrast(2) invert();
+    z-index: 0;
   }
 
   

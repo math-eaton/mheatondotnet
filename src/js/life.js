@@ -3,10 +3,10 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 let grid = [];
 let nextGrid = [];
-const aliveColor = 255; // White
-const deadColor = 0;    // Black
+const aliveColor = 255; // max greyscale
+const deadColor = 55;    // min
 let intervalId;
-let simulationSpeed = 100; // Speed of the simulation in milliseconds
+let simulationSpeed = 75; // Speed of the simulation in milliseconds
 
 // Initialize grid with random values
 function initGrid(gridWidth, gridHeight) {
@@ -14,7 +14,7 @@ function initGrid(gridWidth, gridHeight) {
     grid[y] = [];
     nextGrid[y] = [];
     for (let x = 0; x < gridWidth; x++) {
-      grid[y][x] = Math.random() < 0.2 ? 1 : 0; // 20% chance of being alive
+      grid[y][x] = Math.random() < 0.05 ? 1 : 0; // N% chance of being alive -> 1 else 0
       nextGrid[y][x] = 0;
     }
   }
@@ -83,16 +83,18 @@ export function life(containerId) {
     canvas = document.createElement('canvas');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    canvas.style.zIndex = '1'; // Ensure the canvas is behind other elements
     ctx = canvas.getContext('2d');
     document.getElementById(containerId).appendChild(canvas);
 
     // Calculate grid dimensions and cell size
-    gridWidth = 100; // You can adjust this value for more or fewer cells
-    gridHeight = Math.round(gridWidth * (window.innerHeight / window.innerWidth));
+    const initialResolution = Math.min(window.innerWidth, window.innerHeight) / 150;
+    gridWidth = Math.floor(window.innerWidth / initialResolution);
+    gridHeight = Math.floor(window.innerHeight / initialResolution);
     cellWidth = window.innerWidth / gridWidth;
     cellHeight = window.innerHeight / gridHeight;
 
-    camera.position.z = 5;
+    camera.position.z = 50;
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.25;
@@ -119,11 +121,25 @@ export function life(containerId) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let y = 0; y < gridHeight; y++) {
       for (let x = 0; x < gridWidth; x++) {
-        ctx.fillStyle = grid[y][x] === 1 ? `rgb(${aliveColor},${aliveColor},${aliveColor})` : `rgb(${deadColor},${deadColor},${deadColor})`;
-        ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+        if (grid[y][x] === 1) {
+          ctx.fillStyle = `rgb(${aliveColor},${aliveColor},${aliveColor})`;
+          ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+        }
       }
     }
   }
+
+// or this version to include dead cells
+// todo: fix z-indexing of text w dead cell grid
+//   function drawGrid() {
+//     ctx.clearRect(0, 0, canvas.width, canvas.height);
+//     for (let y = 0; y < gridHeight; y++) {
+//       for (let x = 0; x < gridWidth; x++) {
+//         ctx.fillStyle = grid[y][x] === 1 ? `rgb(${aliveColor},${aliveColor},${aliveColor})` : `rgb(${deadColor},${deadColor},${deadColor})`;
+//         ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+//       }
+//     }
+//   }
 
   init();
 }
