@@ -92,6 +92,7 @@ button {
 
 .pointer {
   padding: 1em;
+  z-index: 999;
 }
 
 .copy-message {
@@ -164,7 +165,7 @@ button {
 
 #lifeContainer1 {
   filter: contrast(6) invert(0.3);
-  z-index: 999;
+  /* z-index: 999; */
   mix-blend-mode:exclusion;
 }
 
@@ -200,7 +201,6 @@ button {
   flex-direction: row;
   align-items: center;
   gap: 1vw;
-  z-index: 5;
 }
 
 #icons img {
