@@ -158,14 +158,13 @@ button {
 #perpetualContainer1 {
   width: 0%;
   z-index: -1;
-  filter: contrast(30);
+  filter: contrast(20);
 
 }
 
 #lifeContainer1 {
-  filter: contrast(2) invert();
+  filter: contrast(5) invert(0.6);
   z-index: 0;
-  filter: contrast(20);
 }
 
 
