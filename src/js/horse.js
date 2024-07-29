@@ -9,7 +9,6 @@ export function horseLoader(containerId) {
 
     function init() {
 
-    
         // Scene
         scene = new THREE.Scene();
         // scene.background = new THREE.Color(0xf0f0f0);
@@ -23,7 +22,7 @@ export function horseLoader(containerId) {
             // console.log("MOBILE")
           } else {
             // long horse
-            camera = new THREE.PerspectiveCamera(30, (window.innerWidth / window.innerHeight)/1.5, 0.1, 1000);
+            camera = new THREE.PerspectiveCamera(30, (window.innerWidth / window.innerHeight)/1.25, 0.1, 1000);
             // console.log("DESKTOP")
           }      
 

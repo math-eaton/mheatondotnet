@@ -158,8 +158,16 @@ button {
 #perpetualContainer1 {
   width: 0%;
   z-index: -1;
-  filter: contrast(2);
+  filter: contrast(30);
+
 }
+
+#lifeContainer1 {
+  filter: contrast(2) invert();
+  z-index: 0;
+  filter: contrast(20);
+}
+
 
 #about {
   max-height: 90vh;
@@ -434,10 +442,6 @@ button {
     /* mix-blend-mode:darken; */
   }
 
-  #lifeContainer1 {
-    filter: contrast(2) invert();
-    z-index: 0;
-  }
 
   
 }
