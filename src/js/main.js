@@ -8,6 +8,7 @@ import { horseLoader } from "./horse.js";
 // import { wavetable } from "./wavetable.js";
 // import { noiseOverlay } from "./p5_noise.js";
 import { wavetable } from "./wavetable.js"
+import { life } from "./life.js"
 
 
 const isMobile = Math.min(window.innerWidth, window.innerHeight) < 768;
@@ -21,6 +22,8 @@ const visualizations = [
   { func: perpetual, container: "perpetualContainer1" },
   { func: horseLoader, container: "horseContainer1" },
   // { func: wavetable, container: "wavetableContainer1" },
+  { func: life, container: "lifeContainer1" }, 
+
 ];
 
 const aboutVisualizations = [

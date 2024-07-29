@@ -25,7 +25,7 @@ body {
   height: 100%;
   user-select: none;
   cursor: url('../cursor/arrow.cur'), auto;
-  background: #444444;
+  background: #374242;
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
@@ -431,6 +431,10 @@ button {
     /* zoom: 0.85; */
     /* width: 125%; */
     /* mix-blend-mode:darken; */
+  }
+
+  #lifeContainer1 {
+    /* filter: invert(); */
   }
 
   
