@@ -116,10 +116,6 @@ function switchBackgroundColor() {
 
 
 
-// Add event listeners to the refresh buttons
-// document.getElementById('refresh').addEventListener('click', switchVisualization);
-document.getElementById('colorwheel').addEventListener('click', switchBackgroundColor);
-document.getElementById('colorwheel').addEventListener('touchstart', switchBackgroundColor);
 
 
 // Function to change cursor on mousedown and mouseup
@@ -132,13 +128,19 @@ function setupCustomCursor() {
   });
 }
 
-// Execute functions when the page loads
-window.onload = function() {
+// Execute functions when the dom loads
+document.addEventListener("DOMContentLoaded", () => {
   changeBackgroundColor();
   loadRandomVisualization();
   setupCustomCursor();
-  // noiseOverlay();
-}
+  // window.addEventListener('resize', eyeState);
+  // document.getElementById('visible').addEventListener('click', toggleTextVisibility);
+});
+
+// Add event listeners to the refresh buttons
+// document.getElementById('refresh').addEventListener('click', switchVisualization);
+document.getElementById('colorwheel').addEventListener('click', switchBackgroundColor);
+document.getElementById('colorwheel').addEventListener('touchstart', switchBackgroundColor);
 
 
 // Function to copy email to clipboard and show a temporary message
@@ -190,7 +192,6 @@ function toggleTextVisibility() {
   });
 }
 
-window.addEventListener('resize', eyeState);
 
 function eyeState() {
   console.log("eye state")
@@ -201,8 +202,6 @@ if (isMobile) {
   document.getElementById('visible').style.display = 'none';
 }
 }
-
-document.getElementById('visible').addEventListener('click', toggleTextVisibility);
 
 
 ////////////////////////////////////////////////////////// cursors stuff
