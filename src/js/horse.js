@@ -42,7 +42,7 @@ export function horseLoader(containerId) {
         controls.zoomSpeed = 0.2;
         controls.rotateSpeed = 0.5;
         controls.minDistance = 0.5;
-        controls.maxDistance = 2;
+        controls.maxDistance = 2.5;
         controls.enablePan = true;
 
         // Light
