@@ -105,9 +105,9 @@ function loadRandomVisualization() {
 
 
 //  switch to a new random visualization
-function switchVisualization() {
-  loadRandomVisualization();
-}
+// function switchVisualization() {
+//   loadRandomVisualization();
+// }
 
 // switch to a new random background color
 function switchBackgroundColor() {
@@ -117,8 +117,9 @@ function switchBackgroundColor() {
 
 
 // Add event listeners to the refresh buttons
-document.getElementById('refresh').addEventListener('click', switchVisualization);
+// document.getElementById('refresh').addEventListener('click', switchVisualization);
 document.getElementById('colorwheel').addEventListener('click', switchBackgroundColor);
+document.getElementById('colorwheel').addEventListener('touchstart', switchBackgroundColor);
 
 
 // Function to change cursor on mousedown and mouseup

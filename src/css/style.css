@@ -239,7 +239,7 @@ button {
 
 #colorwheel:hover{
 
-  filter: drop-shadow(0 0 0.75rem black) invert(0);
+  filter: drop-shadow(0 0 0.75rem black) invert(1);
 
 }
 
