@@ -3,34 +3,35 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
 export function horseLoader(containerId) {
-    let scene, camera, renderer, controls, currentShape;
+    let scene, camera, renderer, controls, pivot;
     let animationFrameId;
     let isRotationEnabled = true;
 
-    function init() {
+    const models = [
+        { url: '/obj/horse2.obj', cameraPosition: { desktop: [1, -1, -5], mobile: [-100, 5, 10000] } },
+        { url: '/obj/hand2.obj', cameraPosition: { desktop: [5, 5, 1], mobile: [-20, 15, 500] } }
+    ];
 
+    function getRandomModel() {
+        return models[Math.floor(Math.random() * models.length)];
+    }
+
+    function init() {
         // Scene
         scene = new THREE.Scene();
-        // scene.background = new THREE.Color(0xf0f0f0);
         let isMobile = Math.min(window.innerWidth, window.innerHeight) < 600;
-
 
         // Camera
         if (isMobile) {
-            // tall horse
-            camera = new THREE.PerspectiveCamera(35, (window.innerWidth / window.innerHeight)*2.5, 0.1, 1000);
-            // console.log("MOBILE")
-          } else {
-            // long horse
-            camera = new THREE.PerspectiveCamera(70, (window.innerWidth / window.innerHeight)/11, 0.1, 1000);
-            // console.log("DESKTOP")
-          }      
-
+            camera = new THREE.PerspectiveCamera(35, (window.innerWidth / window.innerHeight) * 2, 0.1, 1000);
+        } else {
+            camera = new THREE.PerspectiveCamera(35, (window.innerWidth / window.innerHeight) / 2, 0.1, 1000);
+        }
 
         // Renderer
-        renderer = new THREE.WebGLRenderer( { alpha: true } );
+        renderer = new THREE.WebGLRenderer({ alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
-        renderer.setClearColor( 0xC0C0C0, 0 ); 
+        renderer.setClearColor(0xC0C0C0, 0);
         document.getElementById(containerId).appendChild(renderer.domElement);
 
         // OrbitControls
@@ -39,13 +40,10 @@ export function horseLoader(containerId) {
         controls.dampingFactor = 0.25;
         controls.enableZoom = true;
         controls.zoomSpeed = 0.2;
-
         controls.rotateSpeed = 0.5;
         controls.minDistance = 0.5;
         controls.maxDistance = 2;
-
         controls.enablePan = true;
-    
 
         // Light
         const ambientLight = new THREE.AmbientLight(0x404040, 1);
@@ -55,8 +53,13 @@ export function horseLoader(containerId) {
         directionalLight.position.set(1, 1, 1).normalize();
         scene.add(directionalLight);
 
-        // Load the horse OBJ model
-        loadObjModel('/obj/horse2.obj', switchToObjModel, handleModelError);
+        // Create a pivot group
+        pivot = new THREE.Group();
+        scene.add(pivot);
+
+        // Load a random model
+        const model = getRandomModel();
+        loadObjModel(model.url, obj => switchToObjModel(obj, model.cameraPosition), handleModelError);
 
         // Handle window resize
         window.addEventListener('resize', onWindowResize, false);
@@ -72,7 +75,15 @@ export function horseLoader(containerId) {
                 if (child.isMesh) {
                     child.material = new THREE.MeshStandardMaterial({
                         color: 0xff0000,
-                        wireframe: false
+                        wireframe: false,
+                        depthWrite: false,
+                        stencilWrite: true,
+                        stencilZPass: THREE.InvertStencilOp,                    
+                        // blending: THREE.CustomBlending,
+                        // blendEquation: THREE.MaxEquation,
+                        // blendSrc: THREE.OneMinusSrcColorFactor,
+                        // blendDst: THREE.OneMinusConstantColorFactor
+                        
                     });
                 }
             });
@@ -84,17 +95,16 @@ export function horseLoader(containerId) {
         console.error('Error loading OBJ model:', error);
     }
 
-    function switchToObjModel(obj) {
-        if (currentShape) {
-            scene.remove(currentShape);
-            if (currentShape.geometry) currentShape.geometry.dispose();
-            if (currentShape.material) currentShape.material.dispose();
+    function switchToObjModel(obj, cameraPosition) {
+        // Clear existing shape
+        while (pivot.children.length) {
+            const child = pivot.children[0];
+            pivot.remove(child);
+            if (child.geometry) child.geometry.dispose();
+            if (child.material) child.material.dispose();
         }
 
-        currentShape = obj;
-        scene.add(currentShape);
-
-        // Center and scale the model
+        // Center and scale the original model
         const boundingBox = new THREE.Box3().setFromObject(obj);
         const center = boundingBox.getCenter(new THREE.Vector3());
         const size = boundingBox.getSize(new THREE.Vector3());
@@ -102,24 +112,40 @@ export function horseLoader(containerId) {
         obj.scale.multiplyScalar(1.0 / maxAxis);
         obj.position.sub(center.multiplyScalar(1.0 / maxAxis));
 
+        // Clone the object
+        const clone = obj.clone();
+
+        // Position the clone slightly offset from the original
+        clone.position.set(0.25, 0.15, -0.15);
+        clone.rotation.z = Math.PI / 8;
+
+        // Apply the same blending mode to the clone
+        clone.traverse(function (child) {
+            if (child.isMesh) {
+                child.material = new THREE.MeshStandardMaterial({
+                    color: 0x00ff00, // Different color for the clone
+                    wireframe: false,
+                    depthTest: false,
+                    stencilWrite: true,
+                    stencilFunc: THREE.EqualStencilFunc,
+                    stencilRef: 0                
+                    // blending: THREE.CustomBlending,
+                    // blendEquation: THREE.AddEquation,
+                    // blendSrc: THREE.OneFactor,
+                    // blendDst: THREE.OneFactor
+                });
+            }
+        });
+
+        pivot.add(obj);
+        pivot.add(clone);
+
         camera.lookAt(center);
 
         let isMobile = Math.min(window.innerWidth, window.innerHeight) < 600;
+        const position = isMobile ? cameraPosition.mobile : cameraPosition.desktop;
 
-        // initial horseientation
-
-        if (isMobile) {
-            camera.position.set(-100, 5, 10000);
-            console.log("MOBILE")
-          } else {
-            camera.position.set(-900, -5, 100);
-            console.log("DESKTOP")
-          }      
-
-        //   camera.position.set(-100, 5, 10000);
-          console.log(camera.position)
-
-
+        camera.position.set(...position);
     }
 
     function onWindowResize() {
@@ -130,12 +156,15 @@ export function horseLoader(containerId) {
 
     function animate() {
         animationFrameId = requestAnimationFrame(animate);
-        if (currentShape && isRotationEnabled) {
-            currentShape.rotation.y += 0.0025;
+        if (isRotationEnabled) {
+            pivot.rotation.y += 0.00025;
+            if (pivot.children.length > 0) {
+                pivot.children[0].rotation.y += 0.00175; // Rotate the original object
+                pivot.children[1].rotation.y -= 0.002; // Rotate the clone object in the opposite direction
+            }
         }
         controls.update();
         renderer.render(scene, camera);
-
     }
 
     function dispose() {
@@ -143,10 +172,11 @@ export function horseLoader(containerId) {
         window.removeEventListener('resize', onWindowResize);
         cancelAnimationFrame(animationFrameId);
 
-        if (currentShape) {
-            scene.remove(currentShape);
-            if (currentShape.geometry) currentShape.geometry.dispose();
-            if (currentShape.material) currentShape.material.dispose();
+        while (pivot.children.length) {
+            const child = pivot.children[0];
+            pivot.remove(child);
+            if (child.geometry) child.geometry.dispose();
+            if (child.material) child.material.dispose();
         }
 
         // Clear the container
