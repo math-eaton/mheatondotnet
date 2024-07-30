@@ -3,9 +3,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 let grid = [];
 let nextGrid = [];
-const aliveColor = 255; // max greyscale
-const deadColor = 55; // min
-let intervalId;
+const aliveColor = 55; // greyscale
+// const deadColor = 55; // min
 let simulationSpeed = 50; // Speed of the simulation in milliseconds
 let isMouseDown = false; // Track mouse/touch state
 let mouseDownStartTime = 0; // Track mouse down start time
@@ -119,7 +118,7 @@ export function life(containerId) {
     // Scene setup
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(
-        50, 
+        52, 
         (window.innerWidth / window.innerHeight),
         0.1,
         1000,);
@@ -160,7 +159,7 @@ export function life(containerId) {
     controls = new OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.25;
-    controls.enableZoom = true;
+    controls.enableZoom = false;
 
     initGrid(gridWidth, gridHeight);
 
@@ -231,6 +230,9 @@ export function life(containerId) {
       isMouseDown = true;
       mouseDownStartTime = Date.now();
       createAgent(event.touches[0], true);
+      if (event.targetTouches.length === 2) {
+        cycleRules();
+      }
     });
 
     canvas.addEventListener('touchend', () => {
@@ -257,8 +259,8 @@ export function life(containerId) {
     raycaster.setFromCamera(mouse, camera);
     const intersects = raycaster.intersectObject(plane);
 
-    console.log(`Mouse: (${mouse.x}, ${mouse.y})`);
-    console.log(`Intersects:`, intersects);
+    // console.log(`Mouse: (${mouse.x}, ${mouse.y})`);
+    // console.log(`Intersects:`, intersects);
 
     if (intersects.length > 0) {
       const intersect = intersects[0];
@@ -268,10 +270,10 @@ export function life(containerId) {
       const x = Math.floor((worldX * gridWidth) / plane.geometry.parameters.width);
       const y = Math.floor((worldY * gridHeight) / plane.geometry.parameters.height);
 
-      console.log(`Grid Position: (${x}, ${y})`);
+      // console.log(`Grid Position: (${x}, ${y})`);
 
       if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight) {
-        let clusterSize = 1;
+        let clusterSize = 2;
         if (isMouseDown) {
           const timeHeld = Math.floor((Date.now() - mouseDownStartTime) / 1000);
           clusterSize = Math.floor(2 * Math.pow(2, timeHeld)); // Double-ish the cluster size every second

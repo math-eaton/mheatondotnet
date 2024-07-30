@@ -8,8 +8,8 @@ export function horseLoader(containerId) {
     let isRotationEnabled = true;
 
     const models = [
-        { url: '/obj/horse2.obj', cameraPosition: { desktop: [-90, 0, 0], mobile: [-100, 5, 10000] } },
-        { url: '/obj/hand2.obj', cameraPosition: { desktop: [-120, 0, 0], mobile: [-20, 15, 500] } }
+        { name: 'horse', url: '/obj/horse2.obj', cameraPosition: { desktop: [-90, 0, 0], mobile: [-100, 5, 10000] } },
+        { name: 'hand', url: '/obj/hand2.obj', cameraPosition: { desktop: [-120, 0, 0], mobile: [-20, 15, 500] } }
     ];
 
     function getRandomModel() {
@@ -59,7 +59,8 @@ export function horseLoader(containerId) {
 
         // Load a random model
         const model = getRandomModel();
-        loadObjModel(model.url, obj => switchToObjModel(obj, model.cameraPosition), handleModelError);
+        console.log(model.name)
+        loadObjModel(model.url, obj => switchToObjModel(obj, model.cameraPosition, model.name), handleModelError);
 
         // Handle window resize
         window.addEventListener('resize', onWindowResize, false);
@@ -78,11 +79,12 @@ export function horseLoader(containerId) {
                         wireframe: false,
                         depthWrite: false,
                         stencilWrite: true,
-                        stencilZPass: THREE.InvertStencilOp,                    
-                        // blending: THREE.CustomBlending,
-                        // blendEquation: THREE.MaxEquation,
-                        // blendSrc: THREE.OneMinusSrcColorFactor,
-                        // blendDst: THREE.OneMinusConstantColorFactor
+                        stencilZPass: THREE.InvertStencilOp,
+                        alphaTest: 0.5,                
+                        blending: THREE.CustomBlending,
+                        blendEquation: THREE.MaxEquation,
+                        blendSrc: THREE.OneMinusSrcColorFactor,
+                        blendDst: THREE.OneMinusConstantColorFactor
                         
                     });
                 }
@@ -95,7 +97,7 @@ export function horseLoader(containerId) {
         console.error('Error loading OBJ model:', error);
     }
 
-    function switchToObjModel(obj, cameraPosition) {
+    function switchToObjModel(obj, cameraPosition, name) {
         // Clear existing shape
         while (pivot.children.length) {
             const child = pivot.children[0];
@@ -116,9 +118,20 @@ export function horseLoader(containerId) {
         const clone = obj.clone();
 
         // Position the clone slightly offset from the original
-        clone.position.set(0.4, -0.1, -0.3);
-        clone.rotation.z = Math.PI / 8;
-        clone.rotation.x = Math.PI / 2;
+        if (name == "horse"){
+            clone.position.set(0.8, 0.22, 0.55);
+            clone.rotation.x = Math.PI / -3;
+            clone.rotation.y = Math.PI / -1;
+            clone.rotation.z = Math.PI / -3;    
+
+        }
+        else if (name == "hand"){
+            clone.position.set(0.3, -0.02, -0.05);
+            clone.rotation.x = Math.PI / 9;
+            clone.rotation.y = Math.PI / 4;
+            clone.rotation.z = Math.PI / 5;    
+        }
+
 
         // Apply the same blending mode to the clone
         clone.traverse(function (child) {
@@ -128,12 +141,13 @@ export function horseLoader(containerId) {
                     wireframe: false,
                     depthTest: false,
                     stencilWrite: true,
+                    alphaTest: 0.5,
                     stencilFunc: THREE.EqualStencilFunc,
-                    stencilRef: 0                
-                    // blending: THREE.CustomBlending,
-                    // blendEquation: THREE.AddEquation,
-                    // blendSrc: THREE.OneFactor,
-                    // blendDst: THREE.OneFactor
+                    stencilRef: 0,                
+                    blending: THREE.CustomBlending,
+                    blendEquation: THREE.AddEquation,
+                    blendSrc: THREE.OneFactor,
+                    blendDst: THREE.OneFactor
                 });
             }
         });
@@ -158,10 +172,12 @@ export function horseLoader(containerId) {
     function animate() {
         animationFrameId = requestAnimationFrame(animate);
         if (isRotationEnabled) {
-            pivot.rotation.z += 0.00025;
+            pivot.rotation.y += 0.0005;
             if (pivot.children.length > 0) {
-                pivot.children[0].rotation.y += 0.001; // Rotate the original object
-                pivot.children[1].rotation.y -= 0.0015; // Rotate the clone object in the opposite direction
+                pivot.children[0].rotation.y += 0.0007; // Rotate the original object
+                pivot.children[1].rotation.y -= 0.0005; // Rotate the clone object in the opposite direction
+                // pivot.children[0].rotation.x += 0.0008; // og
+                pivot.children[1].rotation.x -= 0.0005;  // clone
             }
         }
         controls.update();
