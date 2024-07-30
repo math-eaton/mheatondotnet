@@ -6,11 +6,11 @@ let nextGrid = [];
 const aliveColor = 255; // max greyscale
 const deadColor = 55; // min
 let intervalId;
-let simulationSpeed = 75; // Speed of the simulation in milliseconds
+let simulationSpeed = 50; // Speed of the simulation in milliseconds
 let isMouseDown = false; // Track mouse/touch state
 let mouseDownStartTime = 0; // Track mouse down start time
 let raycaster, mouse; // Raycaster and mouse vector
-let currentRuleIndex = 0; // Track current rule set
+let currentRuleIndex = 2; // Track current rule set - init with day & night
 
 // Different cellular automata rules
 const rules = [
@@ -18,17 +18,33 @@ const rules = [
     survive: [2, 3],
     birth: [3]
   },
-  { // HighLife
-    survive: [2, 3],
-    birth: [3, 6]
+  { // Rule 30 (Wolfram's Rule 30 approximation for 2D)
+    survive: [],
+    birth: [1, 2]
   },
   { // Day & Night
     survive: [3, 4, 6, 7, 8],
     birth: [3, 6, 7, 8]
   },
-  { // Seeds
-    survive: [],
-    birth: [2]
+  // { // Seeds
+  //   survive: [],
+  //   birth: [2]
+  // },
+  { // Maze
+    survive: [1, 2, 3, 4, 5],
+    birth: [3]
+  },
+  { // Coral
+    survive: [4, 5, 6, 7, 8],
+    birth: [3]
+  },
+  { // Morley
+    survive: [2, 4, 5],
+    birth: [3, 6, 8]
+  },
+  { // Anneal
+    survive: [4, 6, 7, 8],
+    birth: [3, 5, 6, 7, 8]
   }
 ];
 
@@ -38,7 +54,7 @@ function initGrid(gridWidth, gridHeight) {
     grid[y] = [];
     nextGrid[y] = [];
     for (let x = 0; x < gridWidth; x++) {
-      grid[y][x] = Math.random() < 0.0666 ? 1 : 0; // N% chance of being alive -> 1 else 0
+      grid[y][x] = Math.random() < 0.3 ? 1 : 0; // N% chance of being alive -> 1 else 0
       nextGrid[y][x] = 0;
     }
   }

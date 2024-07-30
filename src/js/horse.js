@@ -8,8 +8,8 @@ export function horseLoader(containerId) {
     let isRotationEnabled = true;
 
     const models = [
-        { url: '/obj/horse2.obj', cameraPosition: { desktop: [1, -1, -5], mobile: [-100, 5, 10000] } },
-        { url: '/obj/hand2.obj', cameraPosition: { desktop: [5, 5, 1], mobile: [-20, 15, 500] } }
+        { url: '/obj/horse2.obj', cameraPosition: { desktop: [-90, 0, 0], mobile: [-100, 5, 10000] } },
+        { url: '/obj/hand2.obj', cameraPosition: { desktop: [-120, 0, 0], mobile: [-20, 15, 500] } }
     ];
 
     function getRandomModel() {
@@ -49,7 +49,7 @@ export function horseLoader(containerId) {
         const ambientLight = new THREE.AmbientLight(0x404040, 1);
         scene.add(ambientLight);
 
-        const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 5);
         directionalLight.position.set(1, 1, 1).normalize();
         scene.add(directionalLight);
 
@@ -116,14 +116,15 @@ export function horseLoader(containerId) {
         const clone = obj.clone();
 
         // Position the clone slightly offset from the original
-        clone.position.set(0.25, 0.15, -0.15);
+        clone.position.set(0.4, -0.1, -0.3);
         clone.rotation.z = Math.PI / 8;
+        clone.rotation.x = Math.PI / 2;
 
         // Apply the same blending mode to the clone
         clone.traverse(function (child) {
             if (child.isMesh) {
                 child.material = new THREE.MeshStandardMaterial({
-                    color: 0x00ff00, // Different color for the clone
+                    color: 0xffffff,
                     wireframe: false,
                     depthTest: false,
                     stencilWrite: true,
@@ -157,10 +158,10 @@ export function horseLoader(containerId) {
     function animate() {
         animationFrameId = requestAnimationFrame(animate);
         if (isRotationEnabled) {
-            pivot.rotation.y += 0.00025;
+            pivot.rotation.z += 0.00025;
             if (pivot.children.length > 0) {
-                pivot.children[0].rotation.y += 0.00175; // Rotate the original object
-                pivot.children[1].rotation.y -= 0.002; // Rotate the clone object in the opposite direction
+                pivot.children[0].rotation.y += 0.001; // Rotate the original object
+                pivot.children[1].rotation.y -= 0.0015; // Rotate the clone object in the opposite direction
             }
         }
         controls.update();

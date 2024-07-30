@@ -16,13 +16,14 @@ const isMobile = Math.min(window.innerWidth, window.innerHeight) < 768;
 
 // Array of visualizations with their respective container IDs
 const visualizations = [
+  { func: horseLoader, container: "horseContainer1" },
   { func: asciiSwarm, container: "asciiContainer1" },
   { func: asciiHearts, container: "heartsContainer1" },
   { func: contourSuccession, container: "contourContainer1" },
-  // { func: perpetual, container: "perpetualContainer1" },
-  { func: horseLoader, container: "horseContainer1" },
-  // { func: wavetable, container: "wavetableContainer1" },
   { func: life, container: "lifeContainer1" }, 
+    // todo -
+    // { func: perpetual, container: "perpetualContainer1" },
+    // { func: wavetable, container: "wavetableContainer1" },
 
 ];
 
