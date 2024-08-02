@@ -53,7 +53,7 @@ function initGrid(gridWidth, gridHeight) {
     grid[y] = [];
     nextGrid[y] = [];
     for (let x = 0; x < gridWidth; x++) {
-      grid[y][x] = Math.random() < 0.3 ? 1 : 0; // N% chance of being alive -> 1 else 0
+      grid[y][x] = Math.random() < 0.4 ? 1 : 0; // N% chance of being alive -> 1 else 0
       nextGrid[y][x] = 0;
     }
   }
@@ -273,7 +273,7 @@ export function life(containerId) {
       // console.log(`Grid Position: (${x}, ${y})`);
 
       if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight) {
-        let clusterSize = 2;
+        let clusterSize = 3;
         if (isMouseDown) {
           const timeHeld = Math.floor((Date.now() - mouseDownStartTime) / 1000);
           clusterSize = Math.floor(2 * Math.pow(2, timeHeld)); // Double-ish the cluster size every second

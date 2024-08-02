@@ -9,7 +9,7 @@ export function horseLoader(containerId) {
 
     const models = [
         { name: 'horse', url: '/obj/horse2.obj', cameraPosition: { desktop: [-90, 0, 0], mobile: [-100, 5, 10000] } },
-        { name: 'hand', url: '/obj/hand2.obj', cameraPosition: { desktop: [-120, 0, 0], mobile: [-20, 15, 500] } }
+        { name: 'hand', url: '/obj/hand2.obj', cameraPosition: { desktop: [-120, -50, 200], mobile: [-20, 15, 500] } }
     ];
 
     function getRandomModel() {
@@ -43,7 +43,7 @@ export function horseLoader(containerId) {
         controls.rotateSpeed = 0.5;
         controls.minDistance = 0.5;
         controls.maxDistance = 2.5;
-        controls.enablePan = true;
+        controls.enablePan = false;
 
         // Light
         const ambientLight = new THREE.AmbientLight(0x404040, 1);
