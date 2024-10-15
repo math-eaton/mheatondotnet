@@ -25,7 +25,6 @@ body {
   height: 100%;
   user-select: none;
   cursor: url('../cursor/arrow.cur'), auto;
-  background: #374242;
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
@@ -41,12 +40,9 @@ body {
 }
 
 .text {
-
-  z-index: 9999;
-  /* transform: scale(1.2, 3); */
   font-size: x-large;
   pointer-events: auto;
-
+  text-align: center; /* Center text within the div */
 }
 
 .plain_link {
@@ -146,6 +142,10 @@ button {
   display: none;
 }
 
+#homepage{
+  background: #c25237;
+}
+
 #heartsContainer1 {
   width: 0%;
   zoom: 1.25;
@@ -171,17 +171,33 @@ button {
 
 
 #about {
-  max-height: 90vh;
-  /* margin-top: 33vh; */
-  margin-left: 33vw;
-  margin-right: 33vw;
-  z-index: 3;
-  /* color: #000000; */
-  /* background-color: #ffff00; */
-  /* background-blend-mode: exclusion; */
-  padding: 0.25em;
-  mix-blend-mode:exclusion;
-  /* color: black; */
+  position: absolute; /* Cover the entire viewport */
+  top: 0;
+  left: 0;
+  height: 100vh; /* Full viewport height */
+  width: 100vw;  /* Full viewport width */
+  background-color: #798488e0;
+  /* background-color: rgba(45, 45, 45, 0.756);  */
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(10px); /* Frosted glass effect */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  z-index: 99;
+  mix-blend-mode: plus-lighter;
+}
+
+#about .content-wrapper {
+  /* font-weight: 350; */
+  /* background-color: rgb(255, 0, 0);  */
+  border-style:inset;
+  border-color: #cacaca90;
+  padding: 2rem; /* Add padding for space around the text */
+  max-width: 33vw; /* Limit width to keep the content tight */
+  text-align: left;
+  /* backdrop-filter: blur(9px);  */
+  box-shadow: 2px -1px 25px rgba(0, 0, 0, 0.2); 
+  mix-blend-mode: plus-lighter;
 }
 
 #me {
@@ -201,6 +217,7 @@ button {
   flex-direction: row;
   align-items: center;
   gap: 1vw;
+  z-index: 9999;
 }
 
 #icons img {
@@ -212,7 +229,7 @@ button {
 
 #visible, #refresh, #colorwheel{
   mix-blend-mode:darken;
-  z-index: 5;
+  z-index: 9999;
   display: flex;
   object-fit: contain;
   width: 2.5vw;
@@ -397,11 +414,14 @@ button {
   }
 
   #icons {
-    margin-top: 1.5em;
+    /* todo: troubleshoot mobile color changing */
+    visibility: hidden; 
+    
+    /* margin-top: 1.5em;
     width: 10vw;
     top: 1vh;
     flex-direction: column;
-    gap: 0;
+    gap: 0; */
   }
 
   #icons img {
@@ -413,10 +433,13 @@ button {
 
 
   #about {
-    margin: 5vh;
-    padding: 0.25em;
-    object-fit: scale-down;
-    font-size: small;
+    object-fit:scale-down;
+  }
+
+  #about .content-wrapper {
+    font-size: medium;
+    padding: 2rem; /* Add padding for space around the text */
+    max-width: 66vw; /* Limit width to keep the content tight */
   }
 
   #me {

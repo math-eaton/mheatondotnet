@@ -24,7 +24,7 @@ const visualizations = [
 ];
 
 const aboutVisualizations = [
-  { func: asciiSwarm, container: "asciiContainer1" },
+  // { func: asciiSwarm, container: "asciiContainer1" },
   { func: asciiHearts, container: "heartsContainer1" },
   // { func: life, container: "lifeContainer1" },
   // { func: wavetable, container: "wavetableContainer1" },
@@ -115,7 +115,7 @@ function setupCustomCursor() {
 
 // Execute functions when the DOM loads
 document.addEventListener("DOMContentLoaded", () => {
-  changeBackgroundColor();
+  // changeBackgroundColor();
   loadRandomVisualization();
   setupCustomCursor();
   // window.addEventListener('resize', eyeState);
