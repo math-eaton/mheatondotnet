@@ -433,11 +433,14 @@ button {
 
 
   #about {
-    object-fit:scale-down;
+    /* mix-blend-mode: exclusion; */
   }
 
   #about .content-wrapper {
-    font-size: medium;
+    background-color: #1c1c1c;
+    /* color: ; */
+    object-fit:scale-down;
+    font-size: small;
     padding: 2rem; /* Add padding for space around the text */
     max-width: 66vw; /* Limit width to keep the content tight */
   }
