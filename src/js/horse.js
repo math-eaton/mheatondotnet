@@ -10,7 +10,7 @@ export function horseLoader(containerId) {
     const models = [
         { name: 'horse', url: '/obj/horse2.obj', cameraPosition: { desktop: [-90, 0, 0], mobile: [-100, 5, 10000] } },
         { name: 'hand', url: '/obj/hand2.obj', cameraPosition: { desktop: [-120, -50, 200], mobile: [-20, 15, 500] } },
-        { name: 'hand', url: '/obj/rabbit.obj', cameraPosition: { desktop: [-120, -50, 200], mobile: [-20, 15, 500] } }
+        { name: 'sword', url: '/obj/sword.obj', cameraPosition: { desktop: [-10, -5, 20], mobile: [1,-1,-10] } }
 
     ];
 
@@ -25,9 +25,9 @@ export function horseLoader(containerId) {
 
         // Camera
         if (isMobile) {
-            camera = new THREE.PerspectiveCamera(35, (window.innerWidth / window.innerHeight) * 2, 0.1, 1000);
+            camera = new THREE.PerspectiveCamera(30, (window.innerWidth / window.innerHeight) * 2, 0.1, 1000);
         } else {
-            camera = new THREE.PerspectiveCamera(35, (window.innerWidth / window.innerHeight) / 2, 0.1, 1000);
+            camera = new THREE.PerspectiveCamera(20, (window.innerWidth / window.innerHeight) / 2, 0.1, 1000);
         }
 
         // Renderer
@@ -67,6 +67,8 @@ export function horseLoader(containerId) {
         // Handle window resize
         window.addEventListener('resize', onWindowResize, false);
 
+        onWindowResize();
+
         // Animation loop
         animate();
     }
@@ -78,7 +80,7 @@ export function horseLoader(containerId) {
                 if (child.isMesh) {
                     child.material = new THREE.MeshStandardMaterial({
                         color: 0xff0000,
-                        wireframe: false,
+                        wireframe: true,
                         depthWrite: false,
                         stencilWrite: true,
                         stencilZPass: THREE.InvertStencilOp,
@@ -133,6 +135,13 @@ export function horseLoader(containerId) {
             clone.rotation.y = Math.PI / 4;
             clone.rotation.z = Math.PI / 5;    
         }
+        else if (name == "sword"){
+            clone.position.set(0.1, -0.15, -0.1);
+            clone.rotation.x = Math.PI / -1;
+            clone.rotation.y = Math.PI / 4;
+            clone.rotation.z = Math.PI / -3;    
+        }
+
 
 
         // Apply the same blending mode to the clone
