@@ -394,8 +394,7 @@ button {
     flex-direction: column;
     align-items: flex-start;
     gap: 1vh;
-    margin-top: 0.5em;
-    padding: 0.5em;
+    /* padding: 0.5em; */
   }
 
   .pointer {
@@ -405,7 +404,7 @@ button {
   }
 
   #name {
-  }
+ }
 
   .vis-container {
     width: 100vw;
