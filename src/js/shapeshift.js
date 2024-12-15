@@ -17,7 +17,6 @@ export function asciiSwarm(containerId) {
   let minScale = 1.55;
   let heartCentroid = new THREE.Vector3(0, 1.25, 5);
   // let simplexNoise;
-  const objDefaultScale = new THREE.Vector3(10, 10, 10); 
   let isRotationEnabled = true;
   
 
@@ -55,7 +54,7 @@ export function asciiSwarm(containerId) {
     // scene.add(spotLight);
     
     // Camera
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 50);
+    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 50);
     camera.position.z = 2.5;
 
     // Renderer

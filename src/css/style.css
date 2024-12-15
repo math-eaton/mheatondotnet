@@ -115,7 +115,7 @@ button {
   font-size: 2rem;
   /* text-shadow: 0 25px 1px rgba(255, 255, 255, 0.6),  0 50px 1px rgba(255, 255, 255, 0.4), 0 75px 1px rgba(255, 255, 255, 0.2); */
   height: 25vh;
-  filter: drop-shadow(0 0 2px #c25237);
+  /* filter: drop-shadow(0 0 2px #c25237); */
 
 }
 
@@ -134,8 +134,10 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  filter: brightness(0.5) contrast(0.5);
+  /* scale: 125%; */
+  filter:  brightness(0.85) contrast(0.5) drop-shadow(-.25vw .5vh 0px #ff00ff) drop-shadow(.25vw -.5vh 0px #ffffff);
   image-rendering: pixelated;
+
 }
 
 #asciiContainer1, #contourContainer1, #horseContainer1, #wavetableContainer1{

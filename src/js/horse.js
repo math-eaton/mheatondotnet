@@ -25,9 +25,9 @@ export function horseLoader(containerId) {
 
         // Camera
         if (isMobile) {
-            camera = new THREE.PerspectiveCamera(30, (window.innerWidth / window.innerHeight) * 2, 0.1, 1000);
+            camera = new THREE.PerspectiveCamera(24, (window.innerWidth / window.innerHeight) * 2, 0.1, 1000);
         } else {
-            camera = new THREE.PerspectiveCamera(20, (window.innerWidth / window.innerHeight) / 2, 0.1, 1000);
+            camera = new THREE.PerspectiveCamera(12, (window.innerWidth / window.innerHeight) / 2, 0.1, 1000);
         }
 
         // Renderer
