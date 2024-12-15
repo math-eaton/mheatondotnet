@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { createNoise2D } from 'simplex-noise';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
-export function contourSuccession(containerId) {
+export function contour_degrade(containerId) {
   let scene;
   let camera;
   let renderer;

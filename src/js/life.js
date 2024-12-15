@@ -10,6 +10,7 @@ let isMouseDown = false; // Track mouse/touch state
 let mouseDownStartTime = 0; // Track mouse down start time
 let raycaster, mouse; // Raycaster and mouse vector
 let currentRuleIndex = 2; // Track current rule set - init with day & night
+let intervalId;
 
 // Different cellular automata rules
 const rules = [

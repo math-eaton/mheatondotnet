@@ -3,8 +3,6 @@ import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 import { Delaunay } from 'd3-delaunay';
 import { MapControls } from 'three/addons/controls/MapControls.js';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect.js';
 
 
 export function perpetual(containerId) {
@@ -55,7 +53,7 @@ export function perpetual(containerId) {
             new THREE.MeshBasicMaterial({ 
                 color: 0xffffff, 
                 wireframe: true,
-                transparent: true,
+                transparent: false,
                 opacity: 0 })
         );
         this.wireframeMesh.position.set(x, height / 2, z);
@@ -95,18 +93,18 @@ export function perpetual(containerId) {
         this.meshes.push(this.pointsMesh);
 
         // Add text at the base of the building
-        if (myAppFont) {
-            const textGeometry = new TextGeometry('', {
-                font: myAppFont,
-                size: 3.5, // Adjust size as needed
-                height: 0.5
-            });
-            const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-            const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-            textMesh.position.set(x, 0, z); 
-            scene.add(textMesh);
-            this.meshes.push(textMesh);
-        }
+        // if (myAppFont) {
+        //     const textGeometry = new TextGeometry('', {
+        //         font: myAppFont,
+        //         size: 3.5, // Adjust size as needed
+        //         height: 0.5
+        //     });
+        //     const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+        //     const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+        //     textMesh.position.set(x, 0, z); 
+        //     scene.add(textMesh);
+        //     this.meshes.push(textMesh);
+        // }
            
     }
 
@@ -209,9 +207,9 @@ function setupThreeJS() {
       1, 1000
     );
 
-    // Function to get a random value within ±5% range
+    // Function to get a random value within ±N% range
     function getRandomValue(baseValue) {
-        var variation = baseValue * 2; // N% of the base value
+        var variation = baseValue * 1.1; // N% of the base value
         return baseValue + (Math.random() * 2 - 1) * variation;
     }
 
@@ -228,7 +226,8 @@ function setupThreeJS() {
     // camera.maxZoom = 5.0;
     camera.updateProjectionMatrix();
 
-    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setClearColor(0x000000, 0); // fully transparent background
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio); // Adjust for device pixel ratio
     document.getElementById(containerId).appendChild(renderer.domElement);
@@ -239,11 +238,11 @@ function setupThreeJS() {
     // controls.screenSpacePanning = true;
     controls.enableRotate = false;
 
-    controls.enableZoom = true;
+    controls.enableZoom = false;
     controls.zoomSpeed = 0.2;
     // controls.minDistance = 0.05;
     // controls.maxDistance = 5;
-    controls.enablePan = true;
+    controls.enablePan = false;
 
 
 
@@ -368,6 +367,7 @@ function createMeshFromPoints(points) {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+
 
     // Clear existing text and buildings
     clearBuildings();

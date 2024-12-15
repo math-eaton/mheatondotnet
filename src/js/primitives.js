@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
-export function horseLoader(containerId) {
+export function modelLoader(containerId) {
     let scene, camera, renderer, controls, pivot;
     let animationFrameId;
     let isRotationEnabled = true;
@@ -27,7 +27,7 @@ export function horseLoader(containerId) {
         if (isMobile) {
             camera = new THREE.PerspectiveCamera(24, (window.innerWidth / window.innerHeight) * 2, 0.1, 1000);
         } else {
-            camera = new THREE.PerspectiveCamera(12, (window.innerWidth / window.innerHeight) / 2, 0.1, 1000);
+            camera = new THREE.PerspectiveCamera(18, (window.innerWidth / window.innerHeight) / 2, 0.1, 1000);
         }
 
         // Renderer

@@ -3,12 +3,11 @@ import { AsciiEffect } from 'three/examples/jsm/effects/AsciiEffect.js';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { ConvexGeometry } from 'three/examples/jsm/geometries/ConvexGeometry.js';
 import { createNoise3D } from 'simplex-noise';
-import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 
 const noise3D = createNoise3D();
 
 
-export function asciiSwarm(containerId) {
+export function shapeshift(containerId) {
   let scene, camera, renderer, controls, movingLight, effect, sphere, heart, currentShape;
   let animationFrameId;
   let scaleDirection = 1;
