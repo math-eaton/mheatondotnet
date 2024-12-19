@@ -219,6 +219,10 @@ button {
   mix-blend-mode: plus-lighter;
 }
 
+#about #heartsContainer1 {
+  filter: invert(0) blur(.5rem);
+}
+
 #me {
   max-width: 33%;
   margin-left: 33vw;
