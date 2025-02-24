@@ -9,7 +9,14 @@
     <title>cv</title>
 </head>
 <body>
-      <h1>Matthew J. Heaton</h1>
+    <h1>Matthew J. Heaton</h1>
+    
+    <!-- <div class="" id="icons">
+        <div class="section pointer">
+          <img id="colorwheel" src="img/colorwheel.png">
+        </div>
+    </div> -->
+
     <br>
     <div id="cv-text">
         <div class="section">
@@ -33,15 +40,8 @@
         </div>
 
     <script type="module">
-        import { toWords } from 'number-to-words';
-
-        const startYear = 2016;
-        const currentYear = new Date().getFullYear();
-        const experienceYears = currentYear - startYear;
-
-        const toTitleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-
-        document.getElementById('gis-experience').textContent = toTitleCase(toWords(experienceYears));
+        import { calculateExperience } from '/src/js/main.js';
+        calculateExperience();
     </script>
 
         <div class="section">

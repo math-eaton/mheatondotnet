@@ -5,6 +5,7 @@ import { contour_degrade } from "./contours.js";
 import { modelLoader } from "./primitives.js";
 import { life } from "./life.js";
 import { wavetable } from "./wavetable.js";
+import { toWords } from 'number-to-words';
 
 const isMobile = Math.min(window.innerWidth, window.innerHeight) < 768;
 
@@ -216,4 +217,16 @@ document.addEventListener("mousemove", function (e) {
 function removeAllCursorTrails() {
   const trails = document.querySelectorAll(".cursor-trail");
   trails.forEach((trail) => trail.remove());
+}
+
+export function calculateExperience(){
+  
+  const startYear = 2016;
+  const currentYear = new Date().getFullYear();
+  const experienceYears = currentYear - startYear;
+  
+  const toTitleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+  
+  document.getElementById('gis-experience').textContent = toTitleCase(toWords(experienceYears));
+  
 }

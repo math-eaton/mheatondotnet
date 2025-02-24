@@ -81,7 +81,6 @@ button {
   justify-content: space-between;
   align-items: left;
   gap: 2vh;
-  margin-top: 1vh;
   padding: 1vw;
   overflow: hidden;
 }
@@ -113,6 +112,7 @@ button {
 
 #name {
   font-size: 2rem;
+  padding-top: vh;
   /* text-shadow: 0 25px 1px rgba(255, 255, 255, 0.6),  0 50px 1px rgba(255, 255, 255, 0.4), 0 75px 1px rgba(255, 255, 255, 0.2); */
   height: 25vh;
   /* filter: drop-shadow(0 0 2px #c25237); */
@@ -301,7 +301,6 @@ button {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  margin: 1em 0;
 }
 
 .figure img {
@@ -426,8 +425,6 @@ button {
     text-align: center;
   }
 
-  #name {
- }
 
   .vis-container {
     width: 100vw;
@@ -484,7 +481,7 @@ button {
 
   .section#links {
     align-items: flex-start;
-    margin-top: 2vh; /* Adjust as needed to align with the name div */
+    margin-top: 2vh; 
   }
 
 
