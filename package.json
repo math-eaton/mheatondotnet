@@ -9,7 +9,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy" : "gh-pages -d dist"
+    "deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "gh-pages": "^6.2.0",
@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "d3-delaunay": "^6.0.4",
+    "number-to-words": "^1.2.4",
     "p5": "^1.9.4",
     "simplex-noise": "^4.0.1",
     "three": "^0.165.0"
