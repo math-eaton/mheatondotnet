@@ -37,6 +37,7 @@ body {
   transition: zoom 0.3s;
   mix-blend-mode:exclusion;
   filter: brightness(0.9) contrast(0.666);
+  line-height: 1.6;
 }
 
 .text {
@@ -81,7 +82,6 @@ button {
   justify-content: space-between;
   align-items: left;
   gap: 2vh;
-  padding: 1vw;
   overflow: hidden;
 }
 
@@ -112,7 +112,8 @@ button {
 
 #name {
   font-size: 2rem;
-  padding-top: vh;
+  padding-top: 0vh;
+  padding-left: 2vw;
   /* text-shadow: 0 25px 1px rgba(255, 255, 255, 0.6),  0 50px 1px rgba(255, 255, 255, 0.4), 0 75px 1px rgba(255, 255, 255, 0.2); */
   height: 25vh;
   /* filter: drop-shadow(0 0 2px #c25237); */
@@ -462,9 +463,6 @@ button {
     }
 
 
-  #about {
-    /* mix-blend-mode: exclusion; */
-  }
 
   #about .content-wrapper {
     background-color: #1c1c1c;
