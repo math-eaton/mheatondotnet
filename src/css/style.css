@@ -189,18 +189,18 @@ button {
 }
 
 #about {
-  position: absolute; /* Cover the entire viewport */
+  position: absolute; 
   top: 0;
   left: 0;
-  height: 100vh; /* Full viewport height */
-  width: 100vw;  /* Full viewport width */
+  height: 100vh; 
+  width: 100vw; 
   background-color: #137fa6e0;
   /* background-color: rgba(45, 45, 45, 0.756);  */
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(10px);
   display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  justify-content: center; 
+  align-items: center; 
   z-index: 99;
   mix-blend-mode: plus-lighter;
   font-size: 1rem;
@@ -407,9 +407,7 @@ button {
 /* Media query for mobile devices */
 @media (max-width: 768px) {
   body {
-    padding: 0.5em;
     zoom: 100%;
-    font-size: large;
     overflow-y: hidden;
   }
 
@@ -417,7 +415,6 @@ button {
     flex-direction: column;
     align-items: flex-start;
     gap: 1vh;
-    /* padding: 0.5em; */
   }
 
   .pointer {
@@ -430,18 +427,11 @@ button {
   .vis-container {
     width: 100vw;
     height: 100vh;
-    /* filter: contrast(0.7); */
-    /* mix-blend-mode:exclusion; */
   }
-
-  /* .copy-message {
-    font-size: small;
-    } */
 
   #links {
     margin-top: 1em;
     padding: 0.5em;
-    /* margin: -5em; */
   }
 
   #icons {
@@ -462,15 +452,22 @@ button {
     margin: -0.5em;
     }
 
+  #about p{
+    font-size: calc(0.75rem + 0.5vw);
+    margin: 0 5vw 1vh 5vw;
+  }
 
 
   #about .content-wrapper {
-    background-color: #1c1c1c;
-    /* color: ; */
-    object-fit:scale-down;
     font-size: small;
-    padding: 2rem; 
-    max-width: 66vw; 
+    background-color: #1c1c1c;
+    max-width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    padding: 2rem;
+    text-align: justify; 
   }
 
   #me {
@@ -490,10 +487,6 @@ button {
   #contourContainer1{
     top: -15vh;
     margin-top: 15vh;
-    /* transform: rotate(10deg) translateY(-15vh); */
-    /* zoom: 0.85; */
-    /* width: 125%; */
-    /* mix-blend-mode:darken; */
   }
 
 
