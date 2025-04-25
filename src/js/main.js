@@ -127,11 +127,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Add event listeners to the refresh buttons
-document.getElementById('colorwheel').addEventListener('click', switchBackgroundColor);
-colorwheel.addEventListener('touchstart', (event) => {
-  event.preventDefault();
-  switchBackgroundColor();
-});
+const colorwheelElement = document.getElementById('colorwheel');
+if (colorwheelElement) {
+  colorwheelElement.addEventListener('click', switchBackgroundColor);
+  colorwheelElement.addEventListener('touchstart', (event) => {
+    event.preventDefault();
+    switchBackgroundColor();
+  });
+} else {
+  console.warn('element not found');
+}
 
 // copy email to clipboard and show a temporary message
 function copyEmailToClipboard(event, email) {
@@ -219,14 +224,23 @@ function removeAllCursorTrails() {
   trails.forEach((trail) => trail.remove());
 }
 
-export function calculateExperience(){
-  
+export function calculateExperience() {
   const startYear = 2016;
   const currentYear = new Date().getFullYear();
   const experienceYears = currentYear - startYear;
-  
+
   const toTitleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-  
-  document.getElementById('gis-experience').textContent = toTitleCase(toWords(experienceYears));
-  
+
+  try {
+      const gisExperienceElement = document.getElementById('gis-experience');
+      if (gisExperienceElement) {
+          const experienceText = toWords ? toWords(experienceYears) : experienceYears.toString();
+          gisExperienceElement.textContent = toTitleCase(experienceText);
+          console.log(`Experience: ${experienceYears} years`);
+      } else {
+          console.error('Element with id "gis-experience" not found.');
+      }
+  } catch (error) {
+      console.error('Error calculating experience:', error);
+  }
 }

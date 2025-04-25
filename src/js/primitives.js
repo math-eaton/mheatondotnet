@@ -10,7 +10,7 @@ export function modelLoader(containerId) {
     const models = [
         { name: 'horse', url: '/obj/horse2.obj', cameraPosition: { desktop: [-90, 0, 0], mobile: [-100, 5, 10000] } },
         { name: 'hand', url: '/obj/hand2.obj', cameraPosition: { desktop: [-120, -50, 200], mobile: [-20, 15, 500] } },
-        { name: 'sword', url: '/obj/sword.obj', cameraPosition: { desktop: [-10, -5, 20], mobile: [1,-1,-10] } }
+        // { name: 'sword', url: '/obj/sword.obj', cameraPosition: { desktop: [-10, -5, 20], mobile: [1,-1,-10] } }
 
     ];
 
@@ -80,7 +80,7 @@ export function modelLoader(containerId) {
                 if (child.isMesh) {
                     child.material = new THREE.MeshStandardMaterial({
                         color: 0xff0000,
-                        wireframe: true,
+                        // wireframe: true,
                         depthWrite: false,
                         stencilWrite: true,
                         stencilZPass: THREE.InvertStencilOp,
