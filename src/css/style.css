@@ -111,15 +111,21 @@ button {
 }
 
 #name {
+  position: fixed; 
+  /* max-width: 15vw; */
+  top: 1rem;
+  left: 1rem;
   font-size: 2rem;
-  padding-top: 0vh;
-  padding-left: 2vw;
-  /* text-shadow: 0 25px 1px rgba(255, 255, 255, 0.6),  0 50px 1px rgba(255, 255, 255, 0.4), 0 75px 1px rgba(255, 255, 255, 0.2); */
-  height: 25vh;
-  /* filter: drop-shadow(0 0 2px #c25237); */
-
+  padding: 0.5rem; 
+  z-index: 1000; 
+  cursor: pointer; 
+  text-decoration: none;
+  color: #ececec;
 }
 
+#name:hover {
+  color: #c0c0c0; 
+}
 #links {
   position: absolute;
   bottom: 10vh;
@@ -211,6 +217,7 @@ button {
   /* font-weight: 350; */
   /* background-color: rgb(255, 0, 0);  */
   /* border-style:inset; */
+  margin-top: 4rem;;
   border-color: #cacaca90;
   padding: 2rem; 
   max-width: 50vw; 

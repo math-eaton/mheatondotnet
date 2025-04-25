@@ -72,14 +72,23 @@ strong {
 }
 
 #name {
-    position: fixed;
+    position: fixed; 
     max-width: 15vw;
+    top: 1rem; 
+    left: 1rem; 
+    font-size: 2rem; 
+    padding: 0.5rem;
+    z-index: 1000; 
+    cursor: pointer; 
+    text-decoration: none; 
     background-color: #3a6ea5;
-    text-align: left;
-    z-index: 1000;
-    padding-left: 2vw;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
+  }
+  
+  #name:hover {
+    color: #c0c0c0; /* Change color on hover for better UX */
+  }
+
 
 #cv-text {
     padding-left: 20vw;
@@ -109,8 +118,6 @@ strong {
 
     #name {
         max-width: 90vw;
-        padding-left: 4vw;
-        margin-top: -4vh;
     }
 
     #cv-text {
