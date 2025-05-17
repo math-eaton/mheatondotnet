@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "gh-pages": "^6.2.0",
-    "vite": "^5.2.0"
+    "vite": "^6.3.5"
   },
   "dependencies": {
     "d3-delaunay": "^6.0.4",
