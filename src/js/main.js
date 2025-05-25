@@ -196,7 +196,6 @@ document.addEventListener("mousemove", function (e) {
   }
 
   let elementUnderCursor = document.elementFromPoint(e.clientX, e.clientY);
-  if (hasClass(elementUnderCursor, "crosshair")) return;
 
   let trail = document.createElement("div");
   trail.className = "cursor-trail";

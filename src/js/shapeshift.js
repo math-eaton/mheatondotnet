@@ -415,7 +415,7 @@ function createSwarm() {
 
 
 // const objFiles = [
-//   '3D/horse2.obj',
+//   '3D/horse_d.obj',
 //   '3D/cow.obj',
 //   '3D/internetExplorer.obj',
 //   '3D/untitled.obj'
