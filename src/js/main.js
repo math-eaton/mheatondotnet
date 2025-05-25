@@ -46,15 +46,27 @@ function getVisualizationSet() {
   }
 }
 
-// change the background color
+// change the overlay color and homepage background
 function changeBackgroundColor() {
   let randomColor;
   do {
     randomColor = hexCodes[Math.floor(Math.random() * hexCodes.length)];
   } while (randomColor === activeColor);
 
-  document.body.style.backgroundColor = randomColor;
+  const overlay = document.getElementById('overlay');
+  if (overlay) {
+    // Apply color to overlay with 50% opacity for blend effect
+    overlay.style.backgroundColor = `${randomColor}50`; // Adding 70 for 70% alpha
+  }
+
+  const homepage = document.getElementById('homepage');
+  if (homepage) {
+    // Update the homepage background color directly
+    homepage.style.backgroundColor = randomColor;
+  }
+  
   activeColor = randomColor;
+  console.log(`Background color changed to: ${randomColor}`);
 }
 
 // load a random visualization
@@ -103,6 +115,9 @@ function loadRandomVisualization() {
   containerElement.style.display = 'block';
   func(container);
   activeVisualization = { func, container };
+
+  // Show/hide GUI toggle based on whether primitives.js (modelLoader) is active
+  updateGUIToggleVisibility(func);
 }
 
 // switch to a new random background color
@@ -120,8 +135,25 @@ function setupCustomCursor() {
   });
 }
 
+// Initialize default background colors
+function initializeBackgroundColors() {
+  const defaultColor = '#c25237';
+  activeColor = defaultColor;
+  
+  const overlay = document.getElementById('overlay');
+  if (overlay) {
+    overlay.style.backgroundColor = `${defaultColor}50`; // 70% alpha
+  }
+
+  const homepage = document.getElementById('homepage');
+  if (homepage) {
+    homepage.style.backgroundColor = defaultColor;
+  }
+}
+
 // Execute functions when the DOM loads
 document.addEventListener("DOMContentLoaded", () => {
+  initializeBackgroundColors();
   loadRandomVisualization();
   setupCustomCursor();
 });
@@ -135,7 +167,19 @@ if (colorwheelElement) {
     switchBackgroundColor();
   });
 } else {
-  console.warn('element not found');
+  console.warn('colorwheel element not found');
+}
+
+// Add event listener for GUI toggle
+const guiToggleElement = document.getElementById('gui-toggle');
+if (guiToggleElement) {
+  guiToggleElement.addEventListener('click', toggleGUIPanel);
+  guiToggleElement.addEventListener('touchstart', (event) => {
+    event.preventDefault();
+    toggleGUIPanel();
+  });
+} else {
+  console.warn('gui-toggle element not found');
 }
 
 // copy email to clipboard and show a temporary message
@@ -165,6 +209,35 @@ function copyEmailToClipboard(event, email) {
 
 // Attach the the window object
 window.copyEmailToClipboard = copyEmailToClipboard;
+
+// Toggle GUI panel visibility
+function toggleGUIPanel() {
+  const guiWrapper = document.getElementById('gui-wrapper');
+  if (guiWrapper) {
+    if (guiWrapper.style.display === 'none' || guiWrapper.style.display === '') {
+      guiWrapper.style.display = 'block';
+    } else {
+      guiWrapper.style.display = 'none';
+    }
+  }
+}
+
+// Show/hide GUI toggle icon based on active visualization
+function updateGUIToggleVisibility(currentVisualizationFunc) {
+  const guiToggleElement = document.getElementById('gui-toggle');
+  if (guiToggleElement) {
+    if (currentVisualizationFunc === modelLoader) {
+      guiToggleElement.style.display = 'block';
+    } else {
+      guiToggleElement.style.display = 'none';
+      // Also hide the GUI panel if it's open
+      const guiWrapper = document.getElementById('gui-wrapper');
+      if (guiWrapper) {
+        guiWrapper.style.display = 'none';
+      }
+    }
+  }
+}
 
 // toggle visibility of text elements
 function toggleTextVisibility() {

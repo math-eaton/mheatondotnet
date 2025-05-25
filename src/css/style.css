@@ -1,6 +1,3 @@
-* {
-  cursor: url('../cursor/arrow.cur'), auto;
-}
 
 *:mouseDown:hover {
   cursor: url('../cursor/arrow.cur'), auto;
@@ -33,9 +30,13 @@ body {
   position: relative;
   zoom: 100%;
   transition: zoom 0.3s;
-  mix-blend-mode:exclusion;
-  filter: brightness(0.9) contrast(0.666);
+  /* filter: brightness(0.9) contrast(0.666); */
   line-height: 1.6;
+}
+
+/* Apply exclusion blend mode to all direct children except gui-toggle and overlay */
+body > *:not(#gui-toggle):not(#overlay) {
+  mix-blend-mode: exclusion;
 }
 
 .text {
@@ -85,7 +86,6 @@ button {
 
 .pointer {
   padding: 1em;
-  z-index: 999;
 }
 
 .copy-message {
@@ -100,7 +100,7 @@ button {
   height: auto;
   opacity: 1;
   transition: opacity 0.35s ease-out;
-  z-index: 1000;
+  z-index: 2;
   /* transform: scale(2, 5); */
 }
 
@@ -115,7 +115,7 @@ button {
   left: 1rem;
   font-size: 2rem;
   padding: 0.5rem; 
-  z-index: 1000; 
+  z-index: 3; 
   cursor: pointer; 
   text-decoration: none;
   color: #ececec;
@@ -127,23 +127,11 @@ button {
 #links {
   position: absolute;
   bottom: 10vh;
-  z-index: 2;
+  z-index: 4;
   filter: drop-shadow(0 0 2px #c2533783);
-
 }
 
 
-.vis-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  /* scale: 125%; */
-  filter:  brightness(0.85) drop-shadow(.25vw -.5vh 0px #ffffff) contrast(0.5) drop-shadow(-.25vw .5vh 0px #ff00ff) ;
-  image-rendering: pixelated;
-
-}
 
 #asciiContainer1, #contourContainer1, #horseContainer1, #wavetableContainer1{
   cursor: url('../cursor/point.cur'), auto;
@@ -151,10 +139,6 @@ button {
   /* width: 100%;
   height: 100%; */
   display: none;
-}
-
-#homepage{
-  background: #c25237;
 }
 
 #heartsContainer1 {
@@ -177,8 +161,9 @@ button {
 #lifeContainer1 {
   /* filter: contrast(6) invert(0.3); */
   /* z-index: 999; */
-  mix-blend-mode:exclusion;
+  /* mix-blend-mode:exclusion; */
   z-index: -1;
+  filter: drop-shadow(.25vw -.5vh 0rem rgb(198, 198, 198)) drop-shadow(-.25vw .5vh 0rem #ff00ff);
 }
 
 #cv-vis{
@@ -188,7 +173,7 @@ button {
 }
 
 #cv-text{
-  z-index: 1;
+  z-index: 0;
   position: absolute;
 }
 
@@ -205,7 +190,7 @@ button {
   display: flex;
   justify-content: center; 
   align-items: center; 
-  z-index: 99;
+  z-index: 5;
   mix-blend-mode: plus-lighter;
   font-size: 1rem;
   overflow: hidden;
@@ -251,7 +236,7 @@ button {
   flex-direction: row;
   align-items: center;
   gap: 1vw;
-  z-index: 99999;
+  z-index: 6;
 }
 
 #icons img {
@@ -261,9 +246,8 @@ button {
 }
 
 
-#visible, #refresh, #colorwheel{
-  mix-blend-mode:darken;
-  z-index: 9999;
+#visible, #refresh, #colorwheel, #gui-toggle{
+  z-index: 7;
   display: flex;
   object-fit: contain;
   width: 2.5vw;
@@ -274,9 +258,13 @@ button {
   filter: drop-shadow(0 0 0.25rem white) invert(0);
 }
 
+#gui-toggle {
+  display: none; /* Hidden by default, shown only when primitives.js is active */
+}
+
 #icons #backbutton{
   position: fixed;
-  z-index: 9999999;
+  z-index: 8;
   top: 2vh;
   left: 2vw;
 }
@@ -286,8 +274,12 @@ button {
 
 }
 
+#gui-toggle{
+  filter: drop-shadow(0 0 0.25rem white) invert(1);
+}
 
-#visible:hover, #refresh:hover, #colorwheel:hover{
+
+#visible:hover, #refresh:hover, #colorwheel:hover, #gui-toggle:hover{
   mix-blend-mode:difference;
   /* background-color: #ffffff; */
   background-size: cover;
@@ -301,38 +293,13 @@ button {
 
 }
 
+#gui-toggle:hover{
+  filter: drop-shadow(0 0 0.75rem black) invert(1);
+}
 
-#visible:active, #refresh:active, #colorwheel:active{
+
+#visible:active, #refresh:active, #colorwheel:active, #gui-toggle:active{
   scale: 0.95;
-}
-
-
-.figure {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.figure img {
-  max-width: 100%;
-  max-height: 50vh;
-  object-fit: scale-down;
-  display: block;
-}
-
-.figure .interactive {
-  z-index: -1;
-  overflow: hidden;
-  pointer-events: none;
-  object-fit: scale-down;
-  display: block;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
 }
 
 
@@ -344,7 +311,7 @@ button {
   pointer-events: none;
   animation: fadeOut 1s forwards;
   mix-blend-mode: luminosity;
-  z-index: 9999999999;
+  z-index: 9;
 }
 
 .default-cursor-trail {
@@ -370,10 +337,10 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
+  /* cursor: url('../cursor/point.cur'), auto; */
   pointer-events: none;
   /* filter: contrast(2) brightness(5); */
-  /* mix-blend-mode:exclusion; */
-  z-index: 19999; 
+  /* z-index: 19999;  */
 }
 
 @keyframes swirl {
@@ -509,4 +476,28 @@ button {
 }
 
 
+.vis-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  /* mix-blend-mode: exclusion; */
+  /* scale: 125%; */
+  filter:  brightness(0.85) drop-shadow(.25vw -.5vh 0px #ffffff) contrast(0.5) drop-shadow(-.25vw .5vh 0px #ff00ff) ;
+  image-rendering: pixelated;
 
+}
+
+#overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(84, 84, 84, 0.5);
+  mix-blend-mode: exclusion;
+  pointer-events: none; /* Allow clicks to pass through */
+  z-index: 11; /* Just below icons but above most other content */
+}

@@ -142,6 +142,7 @@ flex-direction: row;
 align-items: center;
 gap: 1vw;
 z-index: 99999;
+mix-blend-mode: normal; 
 }
 
 #icons img {
@@ -163,6 +164,12 @@ padding: 0em 0.25em 0em 0.25em;
 filter: drop-shadow(0 0 0.25rem white) invert(0);
 }
 
+#gui-toggle {
+display: none; /* Hidden by default, shown only when primitives.js is active */
+mix-blend-mode: normal !important; /* Override any inherited blend modes */
+filter: drop-shadow(0 0 0.5rem black) brightness(0) invert(1);
+}
+
 #icons #backbutton{
 position: fixed;
 z-index: 9999999;
@@ -175,8 +182,12 @@ filter: drop-shadow(0 0 0.25rem white) invert(1);
 
 }
 
+#gui-toggle{
+filter: drop-shadow(0 0 0.25rem white) invert(1);
+}
 
-#visible:hover, #refresh:hover, #colorwheel:hover{
+
+#visible:hover, #refresh:hover, #colorwheel:hover, #gui-toggle:hover{
 mix-blend-mode:difference;
 /* background-color: #ffffff; */
 background-size: cover;
@@ -190,7 +201,11 @@ filter: drop-shadow(0 0 0.75rem black) invert(1);
 
 }
 
+#gui-toggle:hover{
+filter: drop-shadow(0 0 0.75rem black) invert(1);
+}
 
-#visible:active, #refresh:active, #colorwheel:active{
+
+#visible:active, #refresh:active, #colorwheel:active, #gui-toggle:active{
 scale: 0.95;
 }
