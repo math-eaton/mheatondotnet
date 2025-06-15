@@ -471,6 +471,9 @@ button {
     margin-top: 15vh;
   }
 
+  #lifeContainer1 {
+  filter: drop-shadow(.125vw -.25vh 0rem rgb(198, 198, 198)) drop-shadow(-.125vw .25vh 0rem #ff00ff);
+  }
 
   
 }

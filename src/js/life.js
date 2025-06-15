@@ -148,8 +148,17 @@ export function life(containerId) {
     ctx = canvas.getContext('2d');
     document.getElementById(containerId).appendChild(canvas);
 
-    // Calculate grid dimensions and cell size
-    let resolutionFactor = 250; // greater number = higher res grid
+    // Calculate grid dimensions and cell size with responsive resolution
+    const isMobile = Math.min(window.innerWidth, window.innerHeight) < 768;
+    let resolutionFactor;
+    
+    if (isMobile) {
+      // Lower resolution factor for mobile = larger cells
+      resolutionFactor = 80; // Larger cells on mobile for better visibility
+    } else {
+      resolutionFactor = 250; // Higher resolution on desktop
+    }
+    
     const initialResolution = Math.min(window.innerWidth, window.innerHeight) / resolutionFactor;
     gridWidth = Math.floor(window.innerWidth / initialResolution);
     gridHeight = Math.floor(window.innerHeight / initialResolution);
@@ -179,6 +188,10 @@ export function life(containerId) {
   }
 
   function animate() {
+    // Adjust simulation speed based on device type for better performance
+    const isMobile = Math.min(window.innerWidth, window.innerHeight) < 768;
+    const adaptiveSpeed = isMobile ? 75 : simulationSpeed; // Slightly slower on mobile for better performance
+    
     intervalId = setInterval(() => {
       const changes = computeNextGrid(gridWidth, gridHeight);
       drawGrid();
@@ -188,7 +201,7 @@ export function life(containerId) {
       }
 
       controls.update();
-    }, simulationSpeed);
+    }, adaptiveSpeed);
   }
 
   function drawGrid() {
@@ -250,6 +263,19 @@ export function life(containerId) {
 
     // Disable context menu on canvas to allow right-click detection
     canvas.addEventListener('contextmenu', (event) => event.preventDefault());
+
+    // Handle window resize for responsive behavior
+    window.addEventListener('resize', () => {
+      // Clear existing interval
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+      
+      // Reinitialize with new dimensions
+      setTimeout(() => {
+        init();
+      }, 100); // Small delay to ensure window has finished resizing
+    });
   }
 
   function createAgent(event, isMouseDown) {
@@ -274,10 +300,12 @@ export function life(containerId) {
       // console.log(`Grid Position: (${x}, ${y})`);
 
       if (x >= 0 && x < gridWidth && y >= 0 && y < gridHeight) {
-        let clusterSize = 3;
+        const isMobile = Math.min(window.innerWidth, window.innerHeight) < 768;
+        let clusterSize = isMobile ? 2 : 3; // Smaller default cluster on mobile due to larger cells
+        
         if (isMouseDown) {
           const timeHeld = Math.floor((Date.now() - mouseDownStartTime) / 1000);
-          clusterSize = Math.floor(2 * Math.pow(2, timeHeld)); // Double-ish the cluster size every second
+          clusterSize = Math.floor((isMobile ? 1.5 : 2) * Math.pow(2, timeHeld)); // Adjust growth rate for mobile
         }
 
         // Create a NxN cluster of living cells
