@@ -22,9 +22,9 @@ export function modelLoader(containerId) {
         directionalLightZ: 1,
         
         // Model controls
-        originalModelColor: '#ff0000',
-        originalModelOpacity: 1.0,
-        originalModelWireframe: false,
+        primaryModelColor: '#ff0000',
+        primaryModelOpacity: 1.0,
+        primaryModelWireframe: false,
         
         // Clone controls
         cloneModelColor: '#ffffff',
@@ -119,10 +119,10 @@ export function modelLoader(containerId) {
         lightingFolder.add(guiParams, 'directionalLightZ', -5, 5, 0.1).onChange(updateLighting);
 
         // Original model controls
-        const originalFolder = gui.addFolder('Original Model');
-        originalFolder.addColor(guiParams, 'originalModelColor').onChange(updateMaterials);
-        originalFolder.add(guiParams, 'originalModelOpacity', 0, 1, 0.1).onChange(updateMaterials);
-        originalFolder.add(guiParams, 'originalModelWireframe').onChange(updateMaterials);
+        const originalFolder = gui.addFolder('primary model');
+        originalFolder.addColor(guiParams, 'primaryModelColor').onChange(updateMaterials);
+        originalFolder.add(guiParams, 'primaryModelOpacity', 0, 1, 0.1).onChange(updateMaterials);
+        originalFolder.add(guiParams, 'primaryModelWireframe').onChange(updateMaterials);
 
         // Clone model controls
         const cloneFolder = gui.addFolder('Clone Model');
@@ -156,19 +156,19 @@ export function modelLoader(containerId) {
         cameraFolder.add(guiParams, 'cameraAutoRotateSpeed', 0.1, 5, 0.1).onChange(updateCameraControls);
 
         // Blend mode controls
-        const blendFolder = gui.addFolder('Blend Modes');
+        const blendFolder = gui.addFolder('Blend');
         const blendModes = ['NormalBlending', 'AddEquation', 'SubtractEquation', 'MaxEquation', 'MinEquation'];
         blendFolder.add(guiParams, 'originalBlendMode', blendModes).onChange(updateMaterials);
         blendFolder.add(guiParams, 'cloneBlendMode', blendModes).onChange(updateMaterials);
 
         // Effects controls
-        const effectsFolder = gui.addFolder('Effects');
-        effectsFolder.add(guiParams, 'enableDepthTest').onChange(updateMaterials);
-        effectsFolder.add(guiParams, 'enableStencil').onChange(updateMaterials);
-        effectsFolder.add(guiParams, 'alphaTest', 0, 1, 0.1).onChange(updateMaterials);
+        // const effectsFolder = gui.addFolder('Effects');
+        // effectsFolder.add(guiParams, 'enableDepthTest').onChange(updateMaterials);
+        // effectsFolder.add(guiParams, 'enableStencil').onChange(updateMaterials);
+        // effectsFolder.add(guiParams, 'alphaTest', 0, 1, 0.1).onChange(updateMaterials);
 
         // Model selection
-        const modelFolder = gui.addFolder('Model Selection');
+        const modelFolder = gui.addFolder('model');
         const modelNames = ['random', ...models.map(m => m.name)];
         modelFolder.add(guiParams, 'selectedModel', modelNames).onChange(loadSelectedModel);
 
@@ -176,7 +176,6 @@ export function modelLoader(containerId) {
         const actionsFolder = gui.addFolder('Actions');
         actionsFolder.add({ resetCamera: resetCamera }, 'resetCamera').name('Reset Camera');
         actionsFolder.add({ loadRandomModel: loadRandomModel }, 'loadRandomModel').name('Load Random Model');
-        actionsFolder.add({ toggleGUI: toggleGUI }, 'toggleGUI').name('Hide/Show GUI');
 
         // Close some folders by default to save space
         backgroundFolder.close();
@@ -184,7 +183,7 @@ export function modelLoader(containerId) {
         clonePositionFolder.close();
         cloneRotationFolder.close();
         blendFolder.close();
-        effectsFolder.close();
+        // effectsFolder.close();
         modelFolder.close();
         actionsFolder.close();
     }
@@ -214,10 +213,10 @@ export function modelLoader(containerId) {
         if (originalObject) {
             originalObject.traverse(function (child) {
                 if (child.isMesh) {
-                    child.material.color.setHex(guiParams.originalModelColor.replace('#', '0x'));
-                    child.material.opacity = guiParams.originalModelOpacity;
-                    child.material.transparent = guiParams.originalModelOpacity < 1;
-                    child.material.wireframe = guiParams.originalModelWireframe;
+                    child.material.color.setHex(guiParams.primaryModelColor.replace('#', '0x'));
+                    child.material.opacity = guiParams.primaryModelOpacity;
+                    child.material.transparent = guiParams.primaryModelOpacity < 1;
+                    child.material.wireframe = guiParams.primaryModelWireframe;
                     child.material.depthTest = guiParams.enableDepthTest;
                     child.material.depthWrite = !guiParams.enableDepthTest;
                     child.material.stencilWrite = guiParams.enableStencil;
@@ -409,8 +408,8 @@ export function modelLoader(containerId) {
             obj.traverse(function (child) {
                 if (child.isMesh) {
                     child.material = new THREE.MeshStandardMaterial({
-                        color: guiParams.originalModelColor,
-                        wireframe: guiParams.originalModelWireframe,
+                        color: guiParams.primaryModelColor,
+                        wireframe: guiParams.primaryModelWireframe,
                         depthWrite: !guiParams.enableDepthTest,
                         stencilWrite: guiParams.enableStencil,
                         stencilZPass: THREE.InvertStencilOp,

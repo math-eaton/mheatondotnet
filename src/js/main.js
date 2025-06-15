@@ -170,18 +170,6 @@ if (colorwheelElement) {
   console.warn('colorwheel element not found');
 }
 
-// Add event listener for GUI toggle
-const guiToggleElement = document.getElementById('gui-toggle');
-if (guiToggleElement) {
-  guiToggleElement.addEventListener('click', toggleGUIPanel);
-  guiToggleElement.addEventListener('touchstart', (event) => {
-    event.preventDefault();
-    toggleGUIPanel();
-  });
-} else {
-  console.warn('gui-toggle element not found');
-}
-
 // copy email to clipboard and show a temporary message
 function copyEmailToClipboard(event, email) {
   var tempTextArea = document.createElement("textarea");
@@ -222,20 +210,30 @@ function toggleGUIPanel() {
   }
 }
 
-// Show/hide GUI toggle icon based on active visualization
+// Show/hide GUI toggle based on active visualization and setup right-click
 function updateGUIToggleVisibility(currentVisualizationFunc) {
-  const guiToggleElement = document.getElementById('gui-toggle');
-  if (guiToggleElement) {
-    if (currentVisualizationFunc === modelLoader) {
-      guiToggleElement.style.display = 'block';
-    } else {
-      guiToggleElement.style.display = 'none';
-      // Also hide the GUI panel if it's open
-      const guiWrapper = document.getElementById('gui-wrapper');
-      if (guiWrapper) {
-        guiWrapper.style.display = 'none';
-      }
+  // Remove any existing right-click listeners
+  document.removeEventListener('contextmenu', handleRightClick);
+  
+  if (currentVisualizationFunc === modelLoader) {
+    // Add right-click listener when primitives visualization is active
+    document.addEventListener('contextmenu', handleRightClick);
+    console.log('Right-click anywhere to toggle GUI controls for 3D model');
+  } else {
+    // Hide the GUI panel if it's open when switching away from primitives
+    const guiWrapper = document.getElementById('gui-wrapper');
+    if (guiWrapper) {
+      guiWrapper.style.display = 'none';
     }
+  }
+}
+
+// Handle right-click to toggle GUI
+function handleRightClick(event) {
+  // Only toggle GUI if primitives visualization is active
+  if (activeVisualization && activeVisualization.func === modelLoader) {
+    event.preventDefault(); // Prevent context menu
+    toggleGUIPanel();
   }
 }
 

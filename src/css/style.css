@@ -39,6 +39,22 @@ body > *:not(#gui-toggle):not(#overlay) {
   mix-blend-mode: exclusion;
 }
 
+/* Exclude dat.gui color picker preview from blend modes */
+#gui-wrapper .c,
+#gui-wrapper .color-picker,
+#gui-wrapper .color-preview,
+.dg .c,
+.dg .color-picker,
+.dg .color-preview,
+.dg li.color .c,
+.dg .color input[type=text],
+.dg .color .button,
+.color-field,
+.color-alpha,
+.color-selector {
+  mix-blend-mode: normal !important;
+}
+
 .text {
   font-size: x-large;
   pointer-events: auto;
@@ -246,7 +262,7 @@ button {
 }
 
 
-#visible, #refresh, #colorwheel, #gui-toggle{
+#visible, #refresh, #colorwheel{
   z-index: 7;
   display: flex;
   object-fit: contain;
@@ -258,10 +274,6 @@ button {
   filter: drop-shadow(0 0 0.25rem white) invert(0);
 }
 
-#gui-toggle {
-  display: none; /* Hidden by default, shown only when primitives.js is active */
-}
-
 #icons #backbutton{
   position: fixed;
   z-index: 8;
@@ -271,15 +283,10 @@ button {
 
 #colorwheel{
   filter: drop-shadow(0 0 0.25rem white) invert(1);
-
-}
-
-#gui-toggle{
-  filter: drop-shadow(0 0 0.25rem white) invert(1);
 }
 
 
-#visible:hover, #refresh:hover, #colorwheel:hover, #gui-toggle:hover{
+#visible:hover, #refresh:hover, #colorwheel:hover{
   mix-blend-mode:difference;
   /* background-color: #ffffff; */
   background-size: cover;
@@ -288,17 +295,10 @@ button {
 }
 
 #colorwheel:hover{
-
-  filter: drop-shadow(0 0 0.75rem black) invert(1);
-
-}
-
-#gui-toggle:hover{
   filter: drop-shadow(0 0 0.75rem black) invert(1);
 }
 
-
-#visible:active, #refresh:active, #colorwheel:active, #gui-toggle:active{
+#visible:active, #refresh:active, #colorwheel:active{
   scale: 0.95;
 }
 
