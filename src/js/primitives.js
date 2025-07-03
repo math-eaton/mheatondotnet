@@ -2,6 +2,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js';
 import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js';
+import { mergeVertices } from 'three/examples/jsm/utils/BufferGeometryUtils.js';
 
 export function modelLoader(containerId) {
     let scene, camera, renderer, controls, pivot;
@@ -343,6 +344,14 @@ export function modelLoader(containerId) {
         }
     }
 
+    function simplifyGeometry(geometry) {
+        if (geometry.isBufferGeometry) {
+            geometry = mergeVertices(geometry);
+            geometry.computeVertexNormals();
+        }
+        return geometry;
+    }
+
     function init() {
         // Scene
         scene = new THREE.Scene();
@@ -357,6 +366,8 @@ export function modelLoader(containerId) {
 
         // Renderer
         renderer = new THREE.WebGLRenderer({ alpha: true });
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap; // Lower quality shadow map
         renderer.setSize(window.innerWidth, window.innerHeight);
         renderer.setClearColor(guiParams.backgroundColor, guiParams.backgroundOpacity);
         document.getElementById(containerId).appendChild(renderer.domElement);
@@ -407,6 +418,7 @@ export function modelLoader(containerId) {
         loader.load(url, obj => {
             obj.traverse(function (child) {
                 if (child.isMesh) {
+                    child.geometry = simplifyGeometry(child.geometry);
                     child.material = new THREE.MeshStandardMaterial({
                         color: guiParams.primaryModelColor,
                         wireframe: guiParams.primaryModelWireframe,
@@ -542,8 +554,6 @@ export function modelLoader(containerId) {
     }
 
     function animate() {
-        animationFrameId = requestAnimationFrame(animate);
-        
         if (guiParams.enableRotation && pivot && pivot.children.length > 0) {
             // Rotate pivot
             pivot.rotation.y += guiParams.pivotRotationSpeed;
@@ -562,6 +572,11 @@ export function modelLoader(containerId) {
         
         controls.update();
         renderer.render(scene, camera);
+
+        // Only request a new frame if rotation is enabled
+        if (guiParams.enableRotation) {
+            animationFrameId = requestAnimationFrame(animate);
+        }
     }
 
     function dispose() {
