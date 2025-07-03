@@ -63,7 +63,6 @@ strong {
 }
 
 .section ul {
-    /* list-style-type: none; */
     padding-left: 3vw;
 }
 
@@ -87,7 +86,7 @@ strong {
   }
   
   #name:hover {
-    color: #c0c0c0; /* Change color on hover for better UX */
+    color: #c0c0c0; 
   }
 
 
