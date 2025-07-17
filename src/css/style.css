@@ -206,6 +206,7 @@ button {
   z-index: 5;
   font-size: 1rem;
   overflow: hidden;
+  padding-top: 1rem; /* Add some top padding to the entire about section */
 }
 
 
@@ -216,6 +217,7 @@ button {
   /* margin-top: 4rem; */
   border-color: #cacaca90;
   padding: 2vh 2vw; 
+  padding-top: 4rem; /* Add extra padding at the top to avoid overlap with name */
   max-width: 50vw; 
   text-align: left;
   /* box-shadow: 2px -1px 25px rgba(0, 0, 0, 0.2);  */
@@ -224,6 +226,7 @@ button {
   flex-direction: column;
   justify-content: flex-end;
   height: auto;
+  margin-top: 1rem; /* Additional margin to create space below name */
 }
 
 #about .content-wrapper a {
@@ -443,7 +446,9 @@ button {
     flex-direction: column;
     justify-content: flex-end;
     text-align: left;
-    overflow: hidden;
+    padding-top: 4rem; /* Add padding to avoid overlap with name on mobile */
+    margin-top: 1rem; /* Keep consistent with desktop spacing */
+    /* overflow: hidden; */
     /* -webkit-backdrop-filter: blur(12px); */
     /* backdrop-filter: blur(12px); */
     /* background-color: white; */
