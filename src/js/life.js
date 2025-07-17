@@ -3,7 +3,7 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 let grid = [];
 let nextGrid = [];
-const aliveColor = 55; // greyscale
+const aliveColor = 0; // greyscale
 // const deadColor = 55; // min
 let simulationSpeed = 50; // Speed of the simulation in milliseconds
 let isMouseDown = false; // Track mouse/touch state
@@ -148,6 +148,14 @@ export function life(containerId) {
     ctx = canvas.getContext('2d');
     document.getElementById(containerId).appendChild(canvas);
 
+    setupGrid();
+
+    // Initial grid with random values if this is the first initialization
+    if (!grid.length || !grid[0].length) {
+      initGrid(gridWidth, gridHeight);
+    }
+
+  function setupGrid() {
     // Calculate grid dimensions and cell size with responsive resolution
     const isMobile = Math.min(window.innerWidth, window.innerHeight) < 768;
     let resolutionFactor;
@@ -159,35 +167,95 @@ export function life(containerId) {
       resolutionFactor = 250; // Higher resolution on desktop
     }
     
-    const initialResolution = Math.min(window.innerWidth, window.innerHeight) / resolutionFactor;
-    gridWidth = Math.floor(window.innerWidth / initialResolution);
-    gridHeight = Math.floor(window.innerHeight / initialResolution);
-    cellWidth = window.innerWidth / gridWidth;
-    cellHeight = window.innerHeight / gridHeight;
-
+    // Use square cells for a 1:1 aspect ratio
+    const cellSize = Math.min(window.innerWidth, window.innerHeight) / resolutionFactor;
+    
+    // Calculate grid dimensions based on cell size
+    const newGridWidth = Math.floor(window.innerWidth / cellSize);
+    const newGridHeight = Math.floor(window.innerHeight / cellSize);
+    
+    // Calculate cell dimensions to ensure even distribution and maintain 1:1 ratio
+    cellWidth = window.innerWidth / newGridWidth;
+    cellHeight = window.innerHeight / newGridHeight;
+    
+    // Create a plane for raycasting if it doesn't exist
+    if (!plane) {
+      const planeGeometry = new THREE.PlaneGeometry(newGridWidth, newGridHeight);
+      const planeMaterial = new THREE.MeshBasicMaterial({ visible: false });
+      plane = new THREE.Mesh(planeGeometry, planeMaterial);
+      plane.position.set(0, 0, 0);
+      scene.add(plane);
+    } else {
+      // Update plane dimensions
+      plane.geometry.dispose();
+      plane.geometry = new THREE.PlaneGeometry(newGridWidth, newGridHeight);
+    }
+    
     camera.position.z = resolutionFactor;
-    controls = new OrbitControls(camera, renderer.domElement);
-    controls.enableDamping = true;
-    controls.dampingFactor = 0.25;
-    controls.enableZoom = false;
-
-    initGrid(gridWidth, gridHeight);
-
-    // Create a plane for raycasting
-    const planeGeometry = new THREE.PlaneGeometry(gridWidth, gridHeight);
-    const planeMaterial = new THREE.MeshBasicMaterial({ visible: false });
-    plane = new THREE.Mesh(planeGeometry, planeMaterial);
-    plane.position.set(0, 0, 0);
-    scene.add(plane);
-
-    raycaster = new THREE.Raycaster();
-    mouse = new THREE.Vector2();
+    
+    // If grid dimensions have changed, resize the grid while preserving the existing pattern
+    if (gridWidth !== newGridWidth || gridHeight !== newGridHeight) {
+      const oldGrid = grid.map(row => [...row]); // Deep copy of current grid
+      const oldGridWidth = gridWidth;
+      const oldGridHeight = gridHeight;
+      
+      // Update grid dimensions
+      gridWidth = newGridWidth;
+      gridHeight = newGridHeight;
+      
+      // If we already have a grid, resize it instead of reinitializing
+      if (oldGrid.length > 0) {
+        resizeGrid(oldGrid, oldGridWidth, oldGridHeight);
+      }
+    } else {
+      // If dimensions haven't changed, just update the grid references
+      gridWidth = newGridWidth;
+      gridHeight = newGridHeight;
+    }
+    
+    // Setup controls
+    if (!controls) {
+      controls = new OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.25;
+      controls.enableZoom = false;
+    }
+    
+    raycaster = raycaster || new THREE.Raycaster();
+    mouse = mouse || new THREE.Vector2();
+  }
+  
+  // Resize the grid while preserving as much of the pattern as possible
+  function resizeGrid(oldGrid, oldWidth, oldHeight) {
+    // Create new grid arrays
+    grid = [];
+    nextGrid = [];
+    
+    for (let y = 0; y < gridHeight; y++) {
+      grid[y] = [];
+      nextGrid[y] = [];
+      for (let x = 0; x < gridWidth; x++) {
+        // If within bounds of old grid, copy the value
+        if (x < oldWidth && y < oldHeight) {
+          grid[y][x] = oldGrid[y][x];
+        } else {
+          grid[y][x] = 0; // Set new cells to dead
+        }
+        nextGrid[y][x] = 0;
+      }
+    }
+  }
 
     addEventListeners(); // Add event listeners for mouse and touch events
     animate();
   }
 
   function animate() {
+    // Clear any existing interval to avoid multiple simulations
+    if (intervalId) {
+      clearInterval(intervalId);
+    }
+    
     // Adjust simulation speed based on device type for better performance
     const isMobile = Math.min(window.innerWidth, window.innerHeight) < 768;
     const adaptiveSpeed = isMobile ? 75 : simulationSpeed; // Slightly slower on mobile for better performance
@@ -210,7 +278,8 @@ export function life(containerId) {
       for (let x = 0; x < gridWidth; x++) {
         if (grid[y][x] === 1) {
           ctx.fillStyle = `rgb(${aliveColor},${aliveColor},${aliveColor})`;
-          ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth, cellHeight);
+          // Add a small overlap (0.5px) to eliminate gridlines
+          ctx.fillRect(x * cellWidth, y * cellHeight, cellWidth + 0.5, cellHeight + 0.5);
         }
       }
     }
@@ -266,15 +335,22 @@ export function life(containerId) {
 
     // Handle window resize for responsive behavior
     window.addEventListener('resize', () => {
-      // Clear existing interval
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
+      // Update canvas size
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
       
-      // Reinitialize with new dimensions
-      setTimeout(() => {
-        init();
-      }, 100); // Small delay to ensure window has finished resizing
+      // Update renderer size
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      
+      // Update camera aspect ratio
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      
+      // Recalculate grid
+      setupGrid();
+      
+      // No need to reinitialize the grid or clear the interval
+      // This preserves the current simulation state
     });
   }
 

@@ -74,9 +74,32 @@ export function shapeshift(containerId) {
         block: true,
     };  
 
+    // Store original getContext method
+    const originalGetContext = HTMLCanvasElement.prototype.getContext;
+    
+    // Override getContext to add willReadFrequently for 2d contexts
+    HTMLCanvasElement.prototype.getContext = function(contextType, contextAttributes) {
+        if (contextType === '2d') {
+            contextAttributes = contextAttributes || {};
+            contextAttributes.willReadFrequently = true;
+        }
+        return originalGetContext.call(this, contextType, contextAttributes);
+    };
+
     // AsciiEffect with custom parameters
     effect = new AsciiEffect(renderer, customCharSet, asciiOptions);
     effect.setSize(window.innerWidth, window.innerHeight);
+
+    // Restore original getContext method
+    HTMLCanvasElement.prototype.getContext = originalGetContext;
+
+    // Fix canvas willReadFrequently warning by setting the attribute on the ASCII effect's canvas
+    if (effect.domElement && effect.domElement.querySelector && effect.domElement.querySelector('canvas')) {
+        const canvas = effect.domElement.querySelector('canvas');
+        if (canvas.getContext) {
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        }
+    }
 
     // Adjust text color and background color
     // effect.domElement.style.color = 'black'; // Adjust text color as needed

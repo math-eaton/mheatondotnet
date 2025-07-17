@@ -56,14 +56,14 @@ function changeBackgroundColor() {
   const overlay = document.getElementById('overlay');
   if (overlay) {
     // Apply color to overlay with 50% opacity for blend effect
-    overlay.style.backgroundColor = `${randomColor}50`; // Adding 70 for 70% alpha
+    overlay.style.backgroundColor = `${randomColor}`; // Adding 70 for 70% alpha
   }
 
-  const homepage = document.getElementById('homepage');
-  if (homepage) {
-    // Update the homepage background color directly
-    homepage.style.backgroundColor = randomColor;
-  }
+  // const homepage = document.getElementById('homepage');
+  // if (homepage) {
+  //   // Update the homepage background color directly
+  //   homepage.style.backgroundColor = randomColor;
+  // }
   
   activeColor = randomColor;
   console.log(`Background color changed to: ${randomColor}`);
@@ -137,6 +137,8 @@ function setupCustomCursor() {
 
 // Initialize default background colors
 function initializeBackgroundColors() {
+  // TEMPORARILY COMMENTED OUT FOR RECOMPOSITION
+  /*
   const defaultColor = '#c25237';
   activeColor = defaultColor;
   
@@ -149,6 +151,7 @@ function initializeBackgroundColors() {
   if (homepage) {
     homepage.style.backgroundColor = defaultColor;
   }
+  */
 }
 
 // Execute functions when the DOM loads

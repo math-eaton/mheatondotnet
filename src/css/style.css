@@ -3,6 +3,8 @@
   cursor: url('../cursor/arrow.cur'), auto;
 }
 
+
+
 html {
   height: 100%;
   text-transform: lowercase;
@@ -16,7 +18,9 @@ mousedown.grabbing {
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: #ececec;
+  /* color: #ececec; */
+  background-color: #c25237;
+  color: black;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -30,35 +34,16 @@ body {
   position: relative;
   zoom: 100%;
   transition: zoom 0.3s;
-  /* filter: brightness(0.9) contrast(0.666); */
+  filter: contrast(0.9);
   line-height: 1.6;
-}
-
-/* Apply exclusion blend mode to all direct children except gui-toggle and overlay */
-body > *:not(#gui-toggle):not(#overlay) {
-  mix-blend-mode: exclusion;
-}
-
-/* Exclude dat.gui color picker preview from blend modes */
-#gui-wrapper .c,
-#gui-wrapper .color-picker,
-#gui-wrapper .color-preview,
-.dg .c,
-.dg .color-picker,
-.dg .color-preview,
-.dg li.color .c,
-.dg .color input[type=text],
-.dg .color .button,
-.color-field,
-.color-alpha,
-.color-selector {
-  mix-blend-mode: normal !important;
 }
 
 .text {
   font-size: x-large;
   pointer-events: auto;
   text-align: center; /* Center text within the div */
+  position: relative;
+  z-index: 50;
 }
 
 .plain_link {
@@ -68,7 +53,6 @@ body > *:not(#gui-toggle):not(#overlay) {
 
 a {
   color: #00ff00;
-  mix-blend-mode:exclusion;
   /* text-decoration: none; */
 }
 
@@ -133,7 +117,6 @@ button {
   padding: 0.5rem; 
   z-index: 3; 
   cursor: pointer; 
-  text-decoration: none;
   color: #ececec;
   filter: hue-rotate(180deg) contrast(1.5) brightness(1.2);
 }
@@ -141,11 +124,13 @@ button {
 #name:hover {
   color: #c0c0c0; 
 }
+
 #links {
   position: absolute;
   bottom: 10vh;
   z-index: 4;
   filter: drop-shadow(0 0 2px #c2533783);
+  pointer-events: auto;
 }
 
 
@@ -156,11 +141,22 @@ button {
   /* width: 100%;
   height: 100%; */
   display: none;
+  z-index: 1;
 }
 
 #heartsContainer1 {
-  width: 0%;
-  zoom: 1.25;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  zoom: 1.5;
+  z-index: 1 !important;
+  background-color: transparent !important;
+  cursor: url('../cursor/point.cur'), auto !important;
+  user-select: none;
+  pointer-events: auto !important;
+  overflow: hidden;
 }
 
 /* #horseContainer1 {
@@ -176,11 +172,10 @@ button {
 }
 
 #lifeContainer1 {
-  /* filter: contrast(6) invert(0.3); */
-  /* z-index: 999; */
-  /* mix-blend-mode:exclusion; */
-  z-index: -1;
-  filter: drop-shadow(.25vw -.5vh 0rem rgb(198, 198, 198)) drop-shadow(-.25vw .5vh 0rem #ff00ff);
+  z-index: 1;
+  user-select: auto;
+  filter: drop-shadow(.125vw -.25vh 0rem rgb(198, 198, 198)) drop-shadow(-.125vw .25vh 0rem #ff00ff);
+  cursor: url('../cursor/arrow.cur'), auto;
 }
 
 #cv-vis{
@@ -195,20 +190,20 @@ button {
 }
 
 #about {
+  color: #ffffff;
   position: absolute; 
   top: 0;
   left: 0;
   height: 100vh; 
   width: 100vw; 
-  background-color: #137fa6e0;
+  /* background-color: #137fa6e0; */
   /* background-color: rgba(45, 45, 45, 0.756);  */
-  backdrop-filter: blur(9px);
-  -webkit-backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(10px); */
   display: flex;
   justify-content: center; 
   align-items: center; 
   z-index: 5;
-  mix-blend-mode: plus-lighter;
   font-size: 1rem;
   overflow: hidden;
 }
@@ -223,9 +218,12 @@ button {
   padding: 2vh 2vw; 
   max-width: 50vw; 
   text-align: left;
-  box-shadow: 2px -1px 25px rgba(0, 0, 0, 0.2); 
-  mix-blend-mode: plus-lighter;
+  /* box-shadow: 2px -1px 25px rgba(0, 0, 0, 0.2);  */
   border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: auto;
 }
 
 #about .content-wrapper a {
@@ -233,7 +231,7 @@ button {
 }
 
 #about #heartsContainer1 {
-  filter: invert(0) blur(.5rem);
+  filter: blur(.5rem);
 }
 
 #me {
@@ -288,7 +286,6 @@ button {
 
 
 #visible:hover, #refresh:hover, #colorwheel:hover{
-  mix-blend-mode:difference;
   /* background-color: #ffffff; */
   background-size: cover;
   filter: drop-shadow(0 0 0.75rem black) invert(1);
@@ -311,7 +308,6 @@ button {
   background-size: cover;
   pointer-events: none;
   animation: fadeOut 1s forwards;
-  mix-blend-mode: luminosity;
   z-index: 9;
 }
 
@@ -332,6 +328,7 @@ button {
   filter: invert();
 }
 
+/* 
 #p5-container {
   position: fixed;
   top: 0;
@@ -339,11 +336,8 @@ button {
   width: 100%;
   height: 100%;
   cursor: url('../cursor/point.cur'), auto;
-
   pointer-events: none;
-  /* filter: contrast(2) brightness(5); */
-  /* z-index: 19999;  */
-}
+} */
 
 @keyframes swirl {
   0% { background-position: 0% 0%; }
@@ -436,22 +430,23 @@ button {
 
   #about p{
     font-size: calc(0.85rem + 0.4vw);
-    margin: 0 0 0.8vh 0;
-    line-height: 1.3;
+    margin: 0 0 5vh 0;
+    line-height: 1.25rem;
   }
 
 
   #about .content-wrapper {
-    /* font-size: small; */
+    font-size: small;
     max-width: 90vw;
     height: auto;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     text-align: left;
     overflow: hidden;
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    /* -webkit-backdrop-filter: blur(12px); */
+    /* backdrop-filter: blur(12px); */
+    /* background-color: white; */
   }
 
   #me {
@@ -471,6 +466,9 @@ button {
   #contourContainer1{
     top: -15vh;
     margin-top: 15vh;
+    transform: translate(25%, -5%);
+    scale: 1.5;
+    /* zoom: 200%; */
   }
 
   /* #lifeContainer1 {
@@ -501,8 +499,17 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(84, 84, 84, 0.5);
+  pointer-events: none;
+  background-color: #c25237;
   mix-blend-mode: exclusion;
-  pointer-events: none; /* Allow clicks to pass through */
-  z-index: 11; /* Just below icons but above most other content */
+  z-index: 9999;
+  cursor: url('../cursor/arrow.cur'), auto;
+  /* display: none; */
 }
+
+* {
+  cursor: url('../cursor/arrow.cur'), auto;
+  cursor: url('../cursor/arrow.cur'), move;
+
+}
+

@@ -33,7 +33,7 @@ export function contour_degrade(containerId) {
 
   // const initialOvalHeight = 750;
   // const decrement = 7;
-  let decrement = isMobile ? 15 : 10;
+  let decrement = isMobile ? 30 : 10; // change this for more/fewer rings
 
   function createDeformedOval(diameter, noiseOffset = 0, segments = 50) {
     const radius = diameter / 2;
@@ -188,7 +188,7 @@ export function contour_degrade(containerId) {
 
     let noiseOffset = 0;
     setInterval(() => {
-      noiseOffset += 0.1; // Increment the noise offset for each update
+      noiseOffset += 0.2; // Increment the noise offset for each update
       updateContours(noiseOffset); // Update contours with the new noise offset
     }, 50); // Update N times per second (e.g. 100 = 10fps)
 

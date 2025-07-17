@@ -20,7 +20,7 @@ export function asciiHearts(containerId) {
     // Renderer
     renderer = new THREE.WebGLRenderer( { alpha: true } );
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setClearColor( 0xC0C0C0, 0 ); // the default
+    renderer.setClearColor( 0x000000, 0 ); // Transparent background
 
     // AsciiEffect
     const customCharSet = ' ♡❣♥☺x6☹%&*⛆@#❤☺☻'
@@ -29,16 +29,52 @@ export function asciiHearts(containerId) {
         resolution: 0.35, // Adjust for more or less detail
         scale: 1,       // Adjust based on display requirements
         color: false,  
-        block: true,
+        block: false,  // Changed to false for better transparency
     };  
+
+    // Store original getContext method
+    const originalGetContext = HTMLCanvasElement.prototype.getContext;
+    
+    // Override getContext to add willReadFrequently for 2d contexts
+    HTMLCanvasElement.prototype.getContext = function(contextType, contextAttributes) {
+        if (contextType === '2d') {
+            contextAttributes = contextAttributes || {};
+            contextAttributes.willReadFrequently = true;
+        }
+        return originalGetContext.call(this, contextType, contextAttributes);
+    };
 
     // AsciiEffect with custom parameters
     effect = new AsciiEffect(renderer, customCharSet, asciiOptions);
     effect.setSize(window.innerWidth, window.innerHeight);
 
+    // Restore original getContext method
+    HTMLCanvasElement.prototype.getContext = originalGetContext;
+
+    // Fix canvas willReadFrequently warning by setting the attribute on the ASCII effect's canvas
+    if (effect.domElement && effect.domElement.querySelector && effect.domElement.querySelector('canvas')) {
+        const canvas = effect.domElement.querySelector('canvas');
+        if (canvas.getContext) {
+            const ctx = canvas.getContext('2d', { willReadFrequently: true });
+        }
+    }
+
+    // Set ASCII effect styling for transparent background and white text
+    effect.domElement.style.color = 'white';
+    effect.domElement.style.backgroundColor = 'transparent';
+    effect.domElement.style.cursor = 'url("../cursor/point.cur"), auto';
+    effect.domElement.style.userSelect = 'none';
+    effect.domElement.style.position = 'absolute';
+    effect.domElement.style.top = '0';
+    effect.domElement.style.left = '0';
+    effect.domElement.style.width = '100%';
+    effect.domElement.style.height = '100%';
+
     const container = document.getElementById(containerId);
     container.appendChild(effect.domElement);
-    container.style.background = '#C0C0C0'; // Set the ASCII effect container background color
+    container.style.background = 'transparent'; // Ensure container is transparent
+    container.style.cursor = 'url("../cursor/point.cur"), auto';
+    container.style.userSelect = 'none';
   
 
     // document.getElementById(containerId).appendChild(effect.domElement);
