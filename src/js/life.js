@@ -162,9 +162,9 @@ export function life(containerId) {
     
     if (isMobile) {
       // Lower resolution factor for mobile = larger cells
-      resolutionFactor = 80; // Larger cells on mobile for better visibility
+      resolutionFactor = 250; // Larger cells on mobile for better visibility
     } else {
-      resolutionFactor = 250; // Higher resolution on desktop
+      resolutionFactor = 350; // Higher resolution on desktop
     }
     
     // Use square cells for a 1:1 aspect ratio
@@ -294,6 +294,25 @@ export function life(containerId) {
         isMouseDown = true;
         mouseDownStartTime = Date.now();
         createAgent(event, true);
+      }
+    });
+
+    // Add two-finger tap detection for touch devices
+    let touchStartTime = 0;
+    canvas.addEventListener('touchstart', (event) => {
+      if (event.touches.length === 2) {
+        touchStartTime = Date.now();
+        event.preventDefault();
+      }
+    });
+
+    canvas.addEventListener('touchend', (event) => {
+      if (event.changedTouches.length === 2 && touchStartTime > 0) {
+        const touchDuration = Date.now() - touchStartTime;
+        if (touchDuration < 300) { // Quick tap (less than 300ms)
+          cycleRules();
+        }
+        touchStartTime = 0;
       }
     });
 

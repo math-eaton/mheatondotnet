@@ -121,10 +121,10 @@ export function asciiHearts(containerId) {
   scene.add(brightLight);
 
     // Additional lights
-    const numberOfLights = 20; // You can adjust the number of lights
+    const numberOfLights = 20;
     for (let i = 0; i < numberOfLights; i++) {
       const intensity = Math.random() * 50; // Random intensity between 0 and 1.5
-      const lightColor = 0xffffff; // White light, you can change to different colors if needed
+      const lightColor = 0xffffff; 
   
       const light = new THREE.PointLight(lightColor, intensity, 50); // Adjust the last parameter for the light's influence range
   
@@ -213,7 +213,7 @@ function animate() {
         color: 0xFFFFFF,
         specular: 0xffffff,
         shininess: 200,
-        side: THREE.DoubleSide,
+        side: THREE.FrontSide,
         wireframe: false,
     });
   

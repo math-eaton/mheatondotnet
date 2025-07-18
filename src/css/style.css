@@ -89,19 +89,19 @@ button {
 }
 
 .copy-message {
-  position: absolute;
+  position: fixed;
   display: none;
-  /* background-color: #333; */
   color: #fff;
-  /* padding: 5px; */
-  /* border-radius: 3px; */
   font-size: 1.5rem;
-  /* width: 100%; */
   height: auto;
   opacity: 1;
   transition: opacity 0.35s ease-out;
-  z-index: 2;
-  /* transform: scale(2, 5); */
+  z-index: -1;
+  overflow: auto;
+  transform-origin: left top;
+  max-width: 25vw;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .copy-message.show {
@@ -150,7 +150,7 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  zoom: 1.5;
+  zoom: 1.25;
   z-index: 1 !important;
   background-color: transparent !important;
   cursor: url('../cursor/point.cur'), auto !important;
@@ -206,7 +206,7 @@ button {
   z-index: 5;
   font-size: 1rem;
   overflow: hidden;
-  padding-top: 1rem; /* Add some top padding to the entire about section */
+  padding-top: calc(1rem + 2.5rem); /* Account for name height (2rem font + 0.5rem padding) */
 }
 
 
@@ -217,8 +217,8 @@ button {
   /* margin-top: 4rem; */
   border-color: #cacaca90;
   padding: 2vh 2vw; 
-  padding-top: 4rem; /* Add extra padding at the top to avoid overlap with name */
-  max-width: 50vw; 
+  padding-top: 3rem; /* Reduced from 4rem to account for overall padding */
+  max-width: 55vw; /* Slightly increased to allow more content space */
   text-align: left;
   /* box-shadow: 2px -1px 25px rgba(0, 0, 0, 0.2);  */
   border-radius: 4px;
@@ -226,7 +226,18 @@ button {
   flex-direction: column;
   justify-content: flex-end;
   height: auto;
-  margin-top: 1rem; /* Additional margin to create space below name */
+  max-height: calc(90vh - 3.5rem); /* Account for name height */
+  margin-top: 0; /* Removed margin since we added padding to parent */
+  overflow-y: auto; /* Allow scrolling for very tall content */
+}
+
+#about .content-wrapper p {
+  margin-bottom: 2vh; 
+  text-align: justify; 
+}
+
+#about .content-wrapper p:last-child {
+  margin-bottom: 0; /* Remove margin from last paragraph */
 }
 
 #about .content-wrapper a {
@@ -234,7 +245,7 @@ button {
 }
 
 #about #heartsContainer1 {
-  filter: blur(.5rem);
+  filter: blur(0.5rem);
 }
 
 #me {
@@ -432,11 +443,15 @@ button {
   }
 
   #about p{
-    font-size: calc(0.85rem + 0.4vw);
-    margin: 0 0 5vh 0;
+    font-size: calc(0.8rem + 0.2vw);
+    margin: 0 0 3vh 0; /* Adjusted from 5vh to 3vh for better spacing */
     line-height: 1.25rem;
+    transition: all 0.3s ease; /* Smooth transition when changing orientations */
+    text-align: justify; /* Justify text for better appearance */
+    hyphens: auto; /* Enable hyphenation for better text flow */
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
   }
-
 
   #about .content-wrapper {
     font-size: small;
@@ -446,12 +461,11 @@ button {
     flex-direction: column;
     justify-content: flex-end;
     text-align: left;
-    padding-top: 4rem; /* Add padding to avoid overlap with name on mobile */
-    margin-top: 1rem; /* Keep consistent with desktop spacing */
-    /* overflow: hidden; */
-    /* -webkit-backdrop-filter: blur(12px); */
-    /* backdrop-filter: blur(12px); */
-    /* background-color: white; */
+    padding-top: 3rem; 
+    margin-top: 0;
+    max-height: calc(85vh - 3rem); 
+    overflow-y: auto;
+    padding-bottom: 2vh;
   }
 
   #me {
@@ -471,7 +485,7 @@ button {
   #contourContainer1{
     top: -15vh;
     margin-top: 15vh;
-    transform: translate(25%, -5%);
+    /* transform: translate(25%, -5%); */
     scale: 1.5;
     /* zoom: 200%; */
   }
@@ -479,8 +493,83 @@ button {
   /* #lifeContainer1 {
   filter: drop-shadow(.125vw -.25vh 0rem rgb(198, 198, 198)) drop-shadow(-.125vw .25vh 0rem #ff00ff);
   } */
+}
 
+/* Media query for landscape orientation on mobile devices */
+@media (max-width: 768px) and (orientation: landscape) {
+  #about {
+    padding-top: 0; /* Reduce padding in landscape */
+    align-items: flex-start; /* Align content more toward top */
+    padding-top: 8vh; /* Push content down slightly from top */
+  }
   
+  #about .content-wrapper {
+    max-height: 70vh; /* Slightly taller to fit more content */
+    padding-top: 0.5rem; /* Minimized padding to save vertical space */
+    max-width: 90vw; /* Use more width in landscape */
+    padding-left: 1vw;
+    padding-right: 1vw;
+    flex-direction: row; /* Change to horizontal layout */
+    flex-wrap: wrap; /* Allow wrapping to multiple rows */
+    align-items: flex-start; /* Align content to top */
+    justify-content: flex-start; /* Start alignment for better readability */
+    column-gap: 2vw; /* Gap between columns */
+  }
+  
+  #about .content-wrapper p {
+    width: calc(50% - 2vw); /* Two columns with gap consideration */
+    margin-bottom: 1vh; /* Minimal vertical spacing */
+    font-size: calc(0.7rem + 0.2vw); /* Smaller font */
+    line-height: 1.2; /* Tighter line height */
+    text-align: justify; /* Justified text for better column appearance */
+    padding-right: 1vw; /* Add a bit of padding for better column separation */
+  }
+  
+  #name {
+    font-size: 1.25rem; /* Smaller name in landscape */
+    top: 0.5rem; /* Position closer to top */
+  }
+}
+
+/* Media query for very small screens */
+@media (max-width: 480px) {
+  #about .content-wrapper {
+    max-width: 95vw; /* Use almost full width on very small screens */
+    padding: 1vh 2vw;
+    padding-top: 3rem;
+  }
+}
+
+/* Media query for very short height screens (any orientation) */
+@media (max-height: 500px) {
+  #about {
+    align-items: flex-start;
+    padding-top: 5vh;
+  }
+  
+  #about .content-wrapper {
+    max-height: 80vh;
+    padding-top: 0.5rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items:flex-end;
+    justify-content: flex-start;
+    column-gap: 1vw;
+  }
+  
+  #about .content-wrapper p {
+    width: calc(50% - 2vw);
+    margin-bottom: 1vh;
+    font-size: calc(0.7rem + 0.2vw);
+    line-height: 1.2;
+    text-align: justify;
+    padding-right: 1vw;
+  }
+  
+  #name {
+    font-size: 1.2rem;
+    top: 0.5rem;
+  }
 }
 
 
@@ -493,7 +582,7 @@ button {
   z-index: 10;
   /* mix-blend-mode: exclusion; */
   /* scale: 125%; */
-  filter:  brightness(0.85) drop-shadow(.25vw -.5vh 0px #ffffff) contrast(0.5) drop-shadow(-.25vw .5vh 0px #ff00ff) ;
+  filter: brightness(0.85) drop-shadow(.25vw -.5vh 0px #ffffff) contrast(0.5) drop-shadow(-.25vw .5vh 0px #ff00ff) contrast(0.9);
   image-rendering: pixelated;
 
 }

@@ -175,27 +175,21 @@ if (colorwheelElement) {
 
 // copy email to clipboard and show a temporary message
 function copyEmailToClipboard(event, email) {
-  var tempTextArea = document.createElement("textarea");
-  tempTextArea.value = email;
-  document.body.appendChild(tempTextArea);
-  tempTextArea.select();
-  document.execCommand("copy");
-  document.body.removeChild(tempTextArea);
+  navigator.clipboard.writeText(email).then(function() {
+    var copyMessage = document.getElementById("copyMessage");
 
-  var copyMessage = document.getElementById("copyMessage");
-  copyMessage.style.left = "25%";
-  copyMessage.style.top = "20%";
-  copyMessage.style.transform = "translate3d(0%, 25%, -15%)";
+    copyMessage.classList.add("show");
 
-  copyMessage.classList.add("show");
-
-  setTimeout(function () {
-    copyMessage.style.opacity = "0";
     setTimeout(function () {
-      copyMessage.classList.remove("show");
-      copyMessage.style.opacity = "1";
-    }, 500);
-  }, 1000);
+      copyMessage.style.opacity = "0";
+      setTimeout(function () {
+        copyMessage.classList.remove("show");
+        copyMessage.style.opacity = "1";
+      }, 500);
+    }, 1000);
+  }).catch(function(err) {
+    console.error('Failed to copy email: ', err);
+  });
 }
 
 // Attach the the window object
