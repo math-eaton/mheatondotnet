@@ -6,6 +6,7 @@ export interface Props {
   includeBackNav?: boolean;
   backNavLink?: string;
   backNavText?: string;
+  allowScroll?: boolean; // New prop to enable scrolling
 }
 
 const { 
@@ -13,7 +14,8 @@ const {
   bodyId = "page", 
   includeBackNav = false, 
   backNavLink = "/", 
-  backNavText = "← back" 
+  backNavText = "← back",
+  allowScroll = false
 } = Astro.props;
 ---
 
@@ -38,6 +40,19 @@ const {
       text-decoration: none;
       font-size: 1.2rem;
     }
+    
+    /* Override overflow settings when scrolling is needed */
+    ${allowScroll ? `
+    body#${bodyId} {
+      overflow-y: auto;
+      height: auto;
+      min-height: 100vh;
+    }
+    
+    html {
+      overflow-y: auto;
+    }
+    ` : ''}
   </style>
 </head>
 <body id={bodyId}>
