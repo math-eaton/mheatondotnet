@@ -1,0 +1,148 @@
+---
+// Selected works grid page
+const works = [
+  {
+    title: "Remote Sensing",
+    description: "Computational design practices capstone project exploring digital and analog infrastructures",
+    link: "https://gsapp-cdp.github.io/archive/projects/2024/remote-sensing/",
+    image: "/img/question.svg", // placeholder, you can add actual project images
+    type: "external"
+  },
+  {
+    title: "GRID3 Cartography",
+    description: "National-scale malaria intervention mapping and atlas production",
+    link: "/works/grid3",
+    image: "/img/question.svg",
+    type: "internal"
+  },
+  {
+    title: "Audio/Video Synthesis",
+    description: "Experimental audio and video work",
+    link: "https://www.ninaprotocol.com/releases/video-skin-on-preterition",
+    image: "/img/question.svg",
+    type: "external"
+  },
+  {
+    title: "Ten Tremors Records",
+    description: "Independent record label and music curation",
+    link: "https://www.ninaprotocol.com/hubs/ten-tremors",
+    image: "/img/question.svg",
+    type: "external"
+  },
+  {
+    title: "Photography",
+    description: "Alternative process photography and printmaking",
+    link: "https://www.instagram.com/math_eaton/",
+    image: "/img/question.svg",
+    type: "external"
+  },
+  {
+    title: "Data Visualization",
+    description: "Interactive installations and public exhibitions",
+    link: "/works/dataviz",
+    image: "/img/question.svg",
+    type: "internal"
+  }
+];
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="/src/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>selected work - mheaton.net</title>
+  <style>
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .work-item {
+      border: 1px solid #00ff00;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+      background: rgba(0, 0, 0, 0.1);
+    }
+    
+    .work-item:hover {
+      background: rgba(0, 255, 0, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .work-item h3 {
+      margin: 0 0 1rem 0;
+      color: #00ff00;
+    }
+    
+    .work-item p {
+      margin: 0 0 1rem 0;
+      line-height: 1.4;
+    }
+    
+    .work-item img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      margin-bottom: 1rem;
+      opacity: 0.8;
+    }
+    
+    .back-nav {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      z-index: 100;
+    }
+    
+    .back-nav a {
+      color: #00ff00;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+    
+    .page-title {
+      text-align: center;
+      margin: 2rem 0;
+      color: #00ff00;
+      font-size: 2rem;
+    }
+  </style>
+</head>
+<body id="works">
+    <!-- Color overlay for blend effects -->
+    <div id="overlay"></div>
+    
+    <div class="back-nav">
+      <a href="/">← back</a>
+    </div>
+    
+    <h1 class="page-title">selected work</h1>
+    
+    <div class="works-grid">
+      {works.map(work => (
+        <div class="work-item">
+          <img src={work.image} alt={work.title} />
+          <h3>{work.title}</h3>
+          <p>{work.description}</p>
+          <a 
+            href={work.link} 
+            class="plain_link"
+            target={work.type === 'external' ? '_blank' : '_self'}
+            rel={work.type === 'external' ? 'noopener noreferrer' : ''}
+          >
+            view project →
+          </a>
+        </div>
+      ))}
+    </div>
+  
+  <script type="module" src="/src/js/main.js" defer></script>
+</body>
+</html>

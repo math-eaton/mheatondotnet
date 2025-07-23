@@ -1,0 +1,57 @@
+---
+// Base layout for all pages
+export interface Props {
+  title: string;
+  bodyId?: string;
+  includeBackNav?: boolean;
+  backNavLink?: string;
+  backNavText?: string;
+}
+
+const { 
+  title, 
+  bodyId = "page", 
+  includeBackNav = false, 
+  backNavLink = "/", 
+  backNavText = "← back" 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/img/favicon.png"/>
+  <link rel="stylesheet" type="text/css" href="/src/css/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <style>
+    .back-nav {
+      position: fixed;
+      top: 2rem;
+      left: 2rem;
+      z-index: 100;
+    }
+    
+    .back-nav a {
+      color: #00ff00;
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body id={bodyId}>
+    <!-- Color overlay for blend effects -->
+    <div id="overlay"></div>
+    
+    {includeBackNav && (
+      <div class="back-nav">
+        <a href={backNavLink}>{backNavText}</a>
+      </div>
+    )}
+    
+    <slot />
+  
+  <script type="module" src="/src/js/main.js" defer></script>
+</body>
+</html>
