@@ -1,48 +1,82 @@
 ---
-// Selected works grid page
 const works = [
   {
-    title: "Remote Sensing",
-    description: "Computational design practices capstone project exploring digital and analog infrastructures",
-    link: "https://gsapp-cdp.github.io/archive/projects/2024/remote-sensing/",
-    image: "/img/question.svg", // placeholder, you can add actual project images
-    type: "external"
-  },
-  {
-    title: "GRID3 Cartography",
-    description: "National-scale malaria intervention mapping and atlas production",
+    title: "maps & atlases",
+    description: "cartographic design for public health operations & more",
     link: "/works/grid3",
     image: "/img/question.svg",
-    type: "internal"
+    type: "internal",
+    year: "2018-",
+    // docLink: "https://asd.com/grid3-docs"
   },
   {
-    title: "Audio/Video Synthesis",
-    description: "Experimental audio and video work",
-    link: "https://www.ninaprotocol.com/releases/video-skin-on-preterition",
+    title: "\"Remote Sensing\"",
+    description: "performable spatial data sonification interface to represent signal, loss, & noise. gsapp computational design practices capstone.",
+    link: "https://math-eaton.github.io/remotesensing/",
+    image: "/img/question.svg", 
+    type: "external",
+    year: "2024",
+    docLink: "https://gsapp-cdp.github.io/archive/projects/2024/remote-sensing/"
+  },
+  {
+    title: "Rhythmanalysis",
+    description: "ML-inferred realtime diary of sonic events outside my window",
+    link: "https://math-eaton.github.io/rhythmanalysis/",
     image: "/img/question.svg",
-    type: "external"
+    type: "external",
+    year: "2025",
+    docLink: "https://github.com/math-eaton/rhythmanalysis"
   },
-  {
-    title: "Ten Tremors Records",
-    description: "Independent record label and music curation",
-    link: "https://www.ninaprotocol.com/hubs/ten-tremors",
+    {
+    title: "Eternal return phase",
+    description: "in-browser phase loop representation",
+    link: "https://math-eaton.github.io/sound-species/",
     image: "/img/question.svg",
-    type: "external"
+    type: "external",
+    year: "2025"
   },
   {
-    title: "Photography",
-    description: "Alternative process photography and printmaking",
-    link: "https://www.instagram.com/math_eaton/",
+    title: "Orbital",
+    description: "3d simulation of earth's satellites using norad orbital ephemerides",
+    link: "https://math-eaton.github.io/orbital/",
     image: "/img/question.svg",
-    type: "external"
+    type: "external",
+    year: "2024"
+    // docLink: "https://github.com/math-eaton/orbital"
   },
   {
-    title: "Data Visualization",
-    description: "Interactive installations and public exhibitions",
+    title: "towers",
+    description: "explorations into radio networking infrastructure",
     link: "/works/dataviz",
     image: "/img/question.svg",
-    type: "internal"
-  }
+    type: "internal",
+    year: "2022"
+  },
+    {
+    title: "Where I've Gone / Where I'm Going",
+    description: "self-surveillance exercise",
+    link: "/works/dataviz",
+    image: "/img/question.svg",
+    type: "internal",
+    year: "2025"
+  },
+    {
+    title: "wfhdj",
+    description: "max/msp installation to elapse a piece of music throughout the workday",
+    link: "/works/dataviz",
+    image: "/img/question.svg",
+    type: "internal",
+    year: "2022"
+  },
+  {
+    title: "photo",
+    description: "",
+    link: "https://www.instagram.com/math_eaton/",
+    image: "/img/question.svg",
+    type: "external",
+    // year: ""
+  },
+
 ];
 ---
 
@@ -60,26 +94,43 @@ const works = [
     <!-- Color overlay for blend effects -->
     <div id="overlay"></div>
     
-    <div class="back-nav">
-      <a href="/">← back</a>
-    </div>
+    <a href="/" id="name">matthew j. heaton</a>
     
-    <h1 class="page-title">selected work</h1>
+    <!-- <h1 class="page-title">selected work</h1> -->
     
     <div class="works-grid">
       {works.map(work => (
         <div class="work-item">
-          <img src={work.image} alt={work.title} />
-          <h3>{work.title}</h3>
-          <p>{work.description}</p>
           <a 
             href={work.link} 
-            class="plain_link"
+            class="work-image-link"
             target={work.type === 'external' ? '_blank' : '_self'}
             rel={work.type === 'external' ? 'noopener noreferrer' : ''}
           >
-            view project →
+            <img src={work.image} alt={work.title} />
           </a>
+          <a 
+            href={work.link} 
+            class="work-title-link"
+            target={work.type === 'external' ? '_blank' : '_self'}
+            rel={work.type === 'external' ? 'noopener noreferrer' : ''}
+          >
+            <h3>{work.title}</h3>
+          </a>
+          <p>{work.description}</p>
+          <div class="work-footer">
+            <span class="work-year">{work.year}</span>
+            {work.docLink && (
+              <a 
+                href={work.docLink} 
+                class="doc-link"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                documentation →
+              </a>
+            )}
+          </div>
         </div>
       ))}
     </div>

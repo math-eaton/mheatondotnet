@@ -1,4 +1,3 @@
-
 body {
     font-family: Helvetica, Arial, sans-serif;
     line-height: 1.6;
@@ -80,7 +79,6 @@ strong {
     padding: 0.5rem;
     z-index: 1000; 
     cursor: pointer; 
-    /* text-decoration: none;  */
     background-color: #3a6ea5;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     cursor: url('../cursor/point.cur'), auto;
@@ -95,7 +93,6 @@ strong {
     padding-left: 20vw;
 }
 
-/* Responsive styles for mobile */
 @media (max-width: 768px) {
     body {
         padding-left: 2vw;
@@ -167,8 +164,8 @@ filter: drop-shadow(0 0 0.25rem white) invert(0);
 }
 
 #gui-toggle {
-display: none; /* Hidden by default, shown only when primitives.js is active */
-mix-blend-mode: normal !important; /* Override any inherited blend modes */
+display: none; 
+mix-blend-mode: normal !important; 
 filter: drop-shadow(0 0 0.5rem black) brightness(0) invert(1);
 }
 
@@ -191,7 +188,6 @@ filter: drop-shadow(0 0 0.25rem white) invert(1);
 
 #visible:hover, #refresh:hover, #colorwheel:hover, #gui-toggle:hover{
 mix-blend-mode:difference;
-/* background-color: #ffffff; */
 background-size: cover;
 filter: drop-shadow(0 0 0.75rem black) invert(1);
 cursor: url('../cursor/point.cur'), auto;

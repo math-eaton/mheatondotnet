@@ -1,24 +1,21 @@
-
 *:mouseDown:hover {
   cursor: url('../cursor/arrow.cur'), auto;
 }
-
-
 
 html {
   height: 100%;
   text-transform: lowercase;
   cursor: url('../cursor/arrow.cur'), auto;
+  cursor: url('../cursor/arrow.cur'), move;
   overflow: hidden;
 }
 
 mousedown.grabbing {
-  cursor: grabbing;
+  cursor: url('../cursor/point.cur'), auto;
 }
 
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  /* color: #ececec; */
   background-color: #c25237;
   color: black;
   margin: 0;
@@ -41,7 +38,7 @@ body {
 .text {
   font-size: x-large;
   pointer-events: auto;
-  text-align: center; /* Center text within the div */
+  text-align: center;
   position: relative;
   z-index: 50;
 }
@@ -53,7 +50,6 @@ body {
 
 a {
   color: #00ff00;
-  /* text-decoration: none; */
 }
 
 a:visited {
@@ -63,7 +59,6 @@ a:visited {
 
 a:hover {
   color: #c0c0c0;
-  /* text-decoration: none; */
   cursor: url('../cursor/point.cur'), auto;
 }
 
@@ -132,13 +127,12 @@ button {
 
 #name {
   position: fixed; 
-  /* max-width: 15vw; */
   top: 1rem;
   left: 1rem;
   font-size: 2rem;
   padding: 0.5rem; 
   z-index: 3; 
-  cursor: pointer; 
+  cursor: url('../cursor/point.cur'), auto;
   color: #ececec;
   filter: hue-rotate(180deg) contrast(1.5) brightness(1.2);
 }
@@ -154,8 +148,6 @@ button {
   filter: drop-shadow(0 0 2px #c2533783);
   pointer-events: auto;
 }
-
-
 
 #asciiContainer1, #contourContainer1, #horseContainer1{
   cursor: url('../cursor/point.cur'), auto;
@@ -197,23 +189,23 @@ button {
   z-index: 5;
   font-size: 1rem;
   overflow: hidden;
-  padding-top: calc(1rem + 2.5rem); /* Account for name height (2rem font + 0.5rem padding) */
+  padding-top: calc(1rem + 2.5rem);
 }
 
 #about .content-wrapper {
   border-color: #cacaca90;
   padding: 2vh 2vw; 
-  padding-top: 3rem; /* Reduced from 4rem to account for overall padding */
-  max-width: 55vw; /* Slightly increased to allow more content space */
+  padding-top: 3rem;
+  max-width: 55vw;
   text-align: left;
   border-radius: 4px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   height: auto;
-  max-height: calc(90vh - 3.5rem); /* Account for name height */
-  margin-top: 0; /* Removed margin since we added padding to parent */
-  overflow-y: auto; /* Allow scrolling for very tall content */
+  max-height: calc(90vh - 3.5rem);
+  margin-top: 0;
+  overflow-y: auto;
 }
 
 #about .content-wrapper p {
@@ -222,7 +214,7 @@ button {
 }
 
 #about .content-wrapper p:last-child {
-  margin-bottom: 0; /* Remove margin from last paragraph */
+  margin-bottom: 0;
 }
 
 #about .content-wrapper a {
@@ -287,7 +279,6 @@ button {
   }
 }
 
-/* Media query for mobile devices */
 @media (max-width: 768px) {
   body {
     zoom: 100%;
@@ -319,14 +310,7 @@ button {
   }
 
   #icons {
-    /* todo: troubleshoot mobile color changing */
     visibility: hidden; 
-    
-    /* margin-top: 1.5em;
-    width: 10vw;
-    top: 1vh;
-    flex-direction: column;
-    gap: 0; */
   }
 
   #icons img {
@@ -343,11 +327,11 @@ button {
 
   #about p{
     font-size: calc(0.8rem + 0.2vw);
-    margin: 0 0 3vh 0; /* Adjusted from 5vh to 3vh for better spacing */
+    margin: 0 0 3vh 0;
     line-height: 1.25rem;
-    transition: all 0.3s ease; /* Smooth transition when changing orientations */
-    text-align: justify; /* Justify text for better appearance */
-    hyphens: auto; /* Enable hyphenation for better text flow */
+    transition: all 0.3s ease;
+    text-align: justify;
+    hyphens: auto;
     -webkit-hyphens: auto;
     -ms-hyphens: auto;
   }
@@ -379,52 +363,49 @@ button {
   }
 }
 
-/* Media query for landscape orientation on mobile devices */
 @media (max-width: 768px) and (orientation: landscape) {
   #about {
-    padding-top: 0; /* Reduce padding in landscape */
-    align-items: flex-start; /* Align content more toward top */
-    padding-top: 8vh; /* Push content down slightly from top */
+    padding-top: 0;
+    align-items: flex-start;
+    padding-top: 8vh;
   }
   
   #about .content-wrapper {
-    max-height: 70vh; /* Slightly taller to fit more content */
-    padding-top: 0.5rem; /* Minimized padding to save vertical space */
-    max-width: 90vw; /* Use more width in landscape */
+    max-height: 70vh;
+    padding-top: 0.5rem;
+    max-width: 90vw;
     padding-left: 1vw;
     padding-right: 1vw;
-    flex-direction: row; /* Change to horizontal layout */
-    flex-wrap: wrap; /* Allow wrapping to multiple rows */
-    align-items: flex-start; /* Align content to top */
-    justify-content: flex-start; /* Start alignment for better readability */
-    column-gap: 2vw; /* Gap between columns */
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+    column-gap: 2vw;
   }
   
   #about .content-wrapper p {
-    width: calc(50% - 2vw); /* Two columns with gap consideration */
-    margin-bottom: 1vh; /* Minimal vertical spacing */
-    font-size: calc(0.7rem + 0.2vw); /* Smaller font */
-    line-height: 1.2; /* Tighter line height */
-    text-align: justify; /* Justified text for better column appearance */
-    padding-right: 1vw; /* Add a bit of padding for better column separation */
+    width: calc(50% - 2vw);
+    margin-bottom: 1vh;
+    font-size: calc(0.7rem + 0.2vw);
+    line-height: 1.2;
+    text-align: justify;
+    padding-right: 1vw;
   }
   
   #name {
-    font-size: 1.25rem; /* Smaller name in landscape */
-    top: 0.5rem; /* Position closer to top */
+    font-size: 1.25rem;
+    top: 0.5rem;
   }
 }
 
-/* Media query for very small screens */
 @media (max-width: 480px) {
   #about .content-wrapper {
-    max-width: 95vw; /* Use almost full width on very small screens */
+    max-width: 95vw;
     padding: 1vh 2vw;
     padding-top: 3rem;
   }
 }
 
-/* Media query for very short height screens (any orientation) */
 @media (max-height: 500px) {
   #about {
     align-items: flex-start;
@@ -464,8 +445,6 @@ button {
   width: 100%;
   height: 100%;
   z-index: -1;
-  /* mix-blend-mode: exclusion; */
-  /* scale: 125%; */
   filter: brightness(0.85) drop-shadow(.25vw -.5vh 0px #ffffff) contrast(0.5) drop-shadow(-.25vw .5vh 0px #ff00ff) contrast(0.9);
   image-rendering: pixelated;
 
@@ -483,12 +462,4 @@ button {
   mix-blend-mode: exclusion;
   z-index: 9999;
   cursor: url('../cursor/arrow.cur'), auto;
-  /* display: none; */
 }
-
-* {
-  cursor: url('../cursor/arrow.cur'), auto;
-  cursor: url('../cursor/arrow.cur'), move;
-
-}
-
