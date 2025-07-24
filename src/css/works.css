@@ -1,8 +1,9 @@
 html {
-  overflow-y: auto !important;
+    overflow-y: auto !important;
     height: auto !important;
+    text-transform: none;
     cursor: url('../cursor/arrow.cur'), auto;
-  cursor: url('../cursor/arrow.cur'), move;
+    cursor: url('../cursor/arrow.cur'), move;
 }
 
 body#works,
@@ -11,16 +12,16 @@ body#dataviz-project {
     height: auto !important;
     min-height: 100vh;
     position: static !important;
-    background-color: #475349;
-    filter: contrast(0.7)5;
+    background-color: #FFEA00;
 }
 
 #name {
-  color: #00ff00;
+    max-width: 15vw;
 }
 
 #name:hover {
-  color: #c0c0c0;
+    color: #ff0000;
+    filter: invert();
 }
 
 .back-nav {
@@ -41,17 +42,12 @@ body#dataviz-project {
   color: #c0c0c0;
 }
 
-.page-title,
 .project-title {
   text-align: center;
   margin: 2rem 0;
   color: #00ff00;
-  font-size: 2rem;
-  padding-top: 2rem;
-}
-
-.project-title {
   font-size: 2.5rem;
+  padding-top: 2rem;
 }
 
 .works-grid {
@@ -60,9 +56,11 @@ body#dataviz-project {
   gap: 2rem;
   padding: 2rem;
   max-width: 1200px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: 2rem;
   padding-top: 10vh;
   padding-bottom: 4rem;
+  padding-left: 20vw;
 }
 
 .work-image-link,
@@ -219,7 +217,10 @@ body#dataviz-project {
     grid-template-columns: 1fr;
     padding: 1rem;
     gap: 1rem;
-    padding-top: 10vh;
+    padding-top: 15vh;
+    margin: 0 auto;
+    padding-left: 1rem;
+    max-width: none;
   }
 
   .work-item {
@@ -231,7 +232,6 @@ body#dataviz-project {
     padding-bottom: 3rem;
   }
 
-  .page-title,
   .project-title {
     font-size: 1.5rem;
     padding-top: 1rem;
@@ -244,6 +244,11 @@ body#dataviz-project {
 
   .back-nav a {
     font-size: 1rem;
+  }
+
+  #name {
+    top: 1rem;
+    max-width: 25vw;
   }
 }
 

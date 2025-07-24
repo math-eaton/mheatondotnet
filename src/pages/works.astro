@@ -1,8 +1,8 @@
 ---
 const works = [
   {
-    title: "maps & atlases",
-    description: "cartographic design for public health operations & more",
+    title: "Maps & Atlases",
+    description: "Cartographic design for public health operations & more",
     link: "/works/grid3",
     image: "/img/question.svg",
     type: "internal",
@@ -11,7 +11,7 @@ const works = [
   },
   {
     title: "\"Remote Sensing\"",
-    description: "performable spatial data sonification interface to represent signal, loss, & noise. gsapp computational design practices capstone.",
+    description: "Performable spatial data sonification interface to represent signal, loss, & noise. gsapp computational design practices capstone.",
     link: "https://math-eaton.github.io/remotesensing/",
     image: "/img/question.svg", 
     type: "external",
@@ -28,8 +28,8 @@ const works = [
     docLink: "https://github.com/math-eaton/rhythmanalysis"
   },
     {
-    title: "Eternal return phase",
-    description: "in-browser phase loop representation",
+    title: "Eternal Return Phase",
+    description: "In-browser phase loop representation",
     link: "https://math-eaton.github.io/sound-species/",
     image: "/img/question.svg",
     type: "external",
@@ -45,8 +45,8 @@ const works = [
     // docLink: "https://github.com/math-eaton/orbital"
   },
   {
-    title: "towers",
-    description: "explorations into radio networking infrastructure",
+    title: "Towers",
+    description: "Explorations into radio networking infrastructure",
     link: "/works/dataviz",
     image: "/img/question.svg",
     type: "internal",
@@ -54,22 +54,22 @@ const works = [
   },
     {
     title: "Where I've Gone / Where I'm Going",
-    description: "self-surveillance exercise",
+    description: "An exercise in self-surveillance",
     link: "/works/dataviz",
     image: "/img/question.svg",
     type: "internal",
     year: "2025"
   },
     {
-    title: "wfhdj",
-    description: "max/msp installation to elapse a piece of music throughout the workday",
+    title: "WFHDJ",
+    description: "Max/MSP installation to elapse a piece of music throughout the workday",
     link: "/works/dataviz",
     image: "/img/question.svg",
     type: "internal",
     year: "2022"
   },
   {
-    title: "photo",
+    title: "Photo",
     description: "",
     link: "https://www.instagram.com/math_eaton/",
     image: "/img/question.svg",
@@ -94,16 +94,16 @@ const works = [
     <!-- Color overlay for blend effects -->
     <div id="overlay"></div>
     
-    <a href="/" id="name">matthew j. heaton</a>
+    <a href="/" class="pointer" id="name">matthew j. heaton</a>
     
-    <!-- <h1 class="page-title">selected work</h1> -->
-    
+    <!-- <div class="page-title">selected work</div> -->
+        
     <div class="works-grid">
       {works.map(work => (
         <div class="work-item">
           <a 
             href={work.link} 
-            class="work-image-link"
+            class="work-image-link pointer"
             target={work.type === 'external' ? '_blank' : '_self'}
             rel={work.type === 'external' ? 'noopener noreferrer' : ''}
           >
@@ -111,7 +111,7 @@ const works = [
           </a>
           <a 
             href={work.link} 
-            class="work-title-link"
+            class="work-title-link pointer"
             target={work.type === 'external' ? '_blank' : '_self'}
             rel={work.type === 'external' ? 'noopener noreferrer' : ''}
           >
@@ -123,7 +123,7 @@ const works = [
             {work.docLink && (
               <a 
                 href={work.docLink} 
-                class="doc-link"
+                class="doc-link pointer"
                 target="_blank"
                 rel="noopener noreferrer"
               >

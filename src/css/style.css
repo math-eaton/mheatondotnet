@@ -97,12 +97,8 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: left;
-  gap: 2vh;
+  gap: 3rem;
   overflow: hidden;
-}
-
-.pointer {
-  padding: 1em;
 }
 
 .copy-message {
@@ -128,7 +124,7 @@ button {
 #name {
   position: fixed; 
   top: 1rem;
-  left: 1rem;
+  left: 2rem;
   font-size: 2rem;
   padding: 0.5rem; 
   z-index: 3; 
@@ -141,8 +137,22 @@ button {
   color: #c0c0c0; 
 }
 
+.page-title {
+  position: fixed;
+  top: 8rem;
+  left: 1rem;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+  z-index: 3;
+  color: #ececec;
+  filter: hue-rotate(180deg) contrast(1.5) brightness(1.2);
+  margin: 0;
+  text-transform: lowercase;
+}
+
 #links {
   position: absolute;
+  left: 2rem;
   bottom: 10vh;
   z-index: 4;
   filter: drop-shadow(0 0 2px #c2533783);
@@ -178,6 +188,7 @@ button {
 
 #about {
   color: #ffffff;
+  text-transform: none;
   position: absolute; 
   top: 0;
   left: 0;
@@ -189,7 +200,6 @@ button {
   z-index: 5;
   font-size: 1rem;
   overflow: hidden;
-  padding-top: calc(1rem + 2.5rem);
 }
 
 #about .content-wrapper {
@@ -289,13 +299,7 @@ button {
   .section {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1vh;
-  }
-
-  .pointer {
-    width: 100%;
-    padding: 1.5em;
-    text-align: center;
+    gap: 2vh;
   }
 
 
@@ -323,6 +327,11 @@ button {
   #name {
     font-size: 1.5rem;
     top: 1rem;
+  }
+
+  .page-title {
+    font-size: 1rem;
+    top: 3.5rem;
   }
 
   #about p{
@@ -396,6 +405,11 @@ button {
     font-size: 1.25rem;
     top: 0.5rem;
   }
+  
+  .page-title {
+    font-size: 0.9rem;
+    top: 3rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -434,6 +448,11 @@ button {
   #name {
     font-size: 1.2rem;
     top: 0.5rem;
+  }
+  
+  .page-title {
+    font-size: 0.9rem;
+    top: 2.75rem;
   }
 }
 
