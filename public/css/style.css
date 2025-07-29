@@ -166,7 +166,7 @@ button {
   pointer-events: auto;
 }
 
-#asciiContainer1, #contourContainer1, #horseContainer1{
+#asciiContainer1, #contourContainer1, #horseContainer1, #shapeshiftContainer1 {
   cursor: url('../cursor/point.cur'), auto;
   user-select: none;
   /* display: none; */
@@ -192,6 +192,14 @@ button {
   width: 0%;
   z-index: -1;
 }
+
+#lifeContainer1 {
+  z-index: 1;
+  user-select: auto;
+  filter: drop-shadow(.125vw -.25vh 0rem rgb(198, 198, 198)) drop-shadow(-.125vw .25vh 0rem #ff00ff);
+  cursor: url('../cursor/arrow.cur'), auto;
+}
+
 
 #about {
   color: #ffffff;

@@ -4,7 +4,8 @@ const components = [
   () => import('./lifeVis.jsx'),
   () => import('./AsciiHearts.jsx'),
   () => import('./ModelLoader.jsx'),
-  () => import('./contourVis.jsx')
+  () => import('./contourVis.jsx'),
+  () => import('./shapeshiftVis.jsx')
 ];
 
 export default function RandomVisualization() {
