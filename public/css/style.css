@@ -103,18 +103,25 @@ button {
 
 .copy-message {
   position: fixed;
+  inset: 0;
+  margin: auto;
   display: none;
   color: #fff;
-  font-size: 1.5rem;
-  height: auto;
+  font-size: x-large;
+  height: fit-content;
+  width: fit-content;
+  max-width: 80vw;
+  max-height: 40vh;
   opacity: 1;
   transition: opacity 0.35s ease-out;
-  z-index: -1;
+  z-index: 10000;
   overflow: auto;
-  transform-origin: left top;
-  max-width: 25vw;
   word-wrap: break-word;
   white-space: pre-wrap;
+  text-align: left;
+  padding: 1rem 2rem;
+  background-color: #000000;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.8);
 }
 
 .copy-message.show {

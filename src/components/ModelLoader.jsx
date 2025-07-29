@@ -1,4 +1,3 @@
-// File: ModelLoader.jsx
 import { useEffect } from 'react';
 import { modelLoader } from '../js/primitives.js';
 

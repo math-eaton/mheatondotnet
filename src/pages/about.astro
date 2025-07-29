@@ -1,4 +1,5 @@
 ---
+import AsciiHearts from '../components/AsciiHearts.jsx';
 // About page
 ---
 
@@ -14,18 +15,8 @@
   <body id="about">
     <!-- Color overlay for blend effects -->
     <div id="overlay"></div>
-    
-    <a href="/" id="name">matthew j. heaton</a>    
-    <div class="section">
-      <div class="figure interactive" style="z-index: -1;">
-        <div id="asciiContainer1" class="vis-container" style="display: none;"></div>
-        <div id="heartsContainer1" class="vis-container" style="display: none;"></div>
-        <div id="contourContainer1" class="vis-container" style="display: none;"></div>
-        <div id="perpetualContainer1" class="vis-container" style="display: none;"></div>
-        <div id="horseContainer1" class="vis-container" style="display: none;"></div>
-        <!-- <div id="lifeContainer1" class="vis-container" style="display: none;"></div> -->
-      </div>
-    </div>
+    <AsciiHearts client:load containerId="heartsContainer1" />
+    <a href="/" id="name">matthew j. heaton</a>
     <div class="" id="icons">
       <!-- <div class="section pointer" id="backButton">
         <a class="plain_link" href="index.html">&lt;---- back</a>
