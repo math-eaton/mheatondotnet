@@ -152,6 +152,7 @@ export function contour_degrade(containerId) {
     renderer.setSize(pixelatedWidth, pixelatedHeight);
     renderer.setPixelRatio(1); 
     renderer.setClearColor( 0xC0C0C0, 0 ); 
+    renderer.domElement.classList.add('pointer');
     container.appendChild(renderer.domElement);
 
     // Scale the canvas to fit the full browser width while keeping the pixelated effect

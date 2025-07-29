@@ -60,6 +60,7 @@ export function asciiHearts(containerId) {
     }
 
     // Set ASCII effect styling for transparent background and white text
+    effect.domElement.classList.add('pointer');
     effect.domElement.style.color = 'white';
     effect.domElement.style.backgroundColor = 'transparent';
     effect.domElement.style.cursor = 'url("../cursor/point.cur"), auto';

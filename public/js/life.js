@@ -144,6 +144,7 @@ export function life(containerId) {
     canvas = document.createElement('canvas');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
+    canvas.classList.add('pointer');
     canvas.style.zIndex = '1'; // Ensure the canvas is behind other elements
     ctx = canvas.getContext('2d');
     document.getElementById(containerId).appendChild(canvas);

@@ -5,7 +5,7 @@ import { contour_degrade } from "./contours.js";
 import { modelLoader } from "./primitives.js";
 import { life } from "./life.js";
 import { wavetable } from "./wavetable.js";
-import { toWords } from 'number-to-words';
+// import { toWords } from 'number-to-words';
 
 const isMobile = Math.min(window.innerWidth, window.innerHeight) < 768;
 
@@ -291,23 +291,23 @@ function removeAllCursorTrails() {
   trails.forEach((trail) => trail.remove());
 }
 
-export function calculateExperience() {
-  const startYear = 2016;
-  const currentYear = new Date().getFullYear();
-  const experienceYears = currentYear - startYear;
+// export function calculateExperience() {
+//   const startYear = 2016;
+//   const currentYear = new Date().getFullYear();
+//   const experienceYears = currentYear - startYear;
 
-  const toTitleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+//   const toTitleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-  try {
-      const gisExperienceElement = document.getElementById('gis-experience');
-      if (gisExperienceElement) {
-          const experienceText = toWords ? toWords(experienceYears) : experienceYears.toString();
-          gisExperienceElement.textContent = toTitleCase(experienceText);
-          console.log(`Experience: ${experienceYears} years`);
-      } else {
-          console.error('Element with id "gis-experience" not found.');
-      }
-  } catch (error) {
-      console.error('Error calculating experience:', error);
-  }
-}
+//   try {
+//       const gisExperienceElement = document.getElementById('gis-experience');
+//       if (gisExperienceElement) {
+//           const experienceText = toWords ? toWords(experienceYears) : experienceYears.toString();
+//           gisExperienceElement.textContent = toTitleCase(experienceText);
+//           console.log(`Experience: ${experienceYears} years`);
+//       } else {
+//           console.error('Element with id "gis-experience" not found.');
+//       }
+//   } catch (error) {
+//       console.error('Error calculating experience:', error);
+//   }
+// }
