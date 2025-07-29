@@ -1,25 +1,22 @@
 import { useEffect, useState } from 'react';
-import LifeVisualization from './lifeVis.jsx';
-import AsciiHearts from './AsciiHearts.jsx';
-import ModelLoader from './ModelLoader.jsx';
-import contour_degrade from './contourVis.jsx';
 
-const visualizations = [
-  LifeVisualization,
-  AsciiHearts,
-  ModelLoader,
-  contour_degrade
+const components = [
+  () => import('./lifeVis.jsx'),
+  () => import('./AsciiHearts.jsx'),
+  () => import('./ModelLoader.jsx'),
+  () => import('./contourVis.jsx')
 ];
 
 export default function RandomVisualization() {
   const [Component, setComponent] = useState(null);
 
   useEffect(() => {
-    const index = Math.floor(Math.random() * visualizations.length);
-    setComponent(() => visualizations[index]);
+    const pick = Math.floor(Math.random() * components.length);
+    components[pick]().then((mod) => {
+      setComponent(() => mod.default);
+    });
   }, []);
 
   if (!Component) return null;
-
   return <Component />;
 }
