@@ -1,5 +1,5 @@
 ---
-// CV page
+import CalculateExperience from '../components/calculateExperience.jsx';
 ---
 
 <!DOCTYPE html>
@@ -36,44 +36,44 @@
         <div class="section">
             <h2>Skills</h2>
             <ul>
-            <li><strong>Geographic Information Systems: Nine years of experience using ESRI ArcGIS suite for cartography and advanced spatial analysis. Experience in cartography, data visualization, ArcPy, model building, georeferencing, 3D data analysis, site suitability analysis, network analysis, and management of vector and raster data.</li>
-            <li><strong>Technical:</strong> ESRI ArcGIS Pro 3.x/ArcMap 10.x, ArcGIS Online SDK, QGIS, Microsoft Office, Adobe CS, Python, HTML/CSS/JS, SQL, Max/MSP, Rhino 3D and Grasshopper, C++ for Arduino/IoT, circuit design</li>
+            <li><strong>Geographic Information Systems:</strong> <CalculateExperience startYear={2016} /> years of experience using ESRI ArcGIS suite for cartography and advanced spatial analysis. Proficient in print cartography, web mapping and tile production, static and dynamic data visualization, automation of spatial data processing pipelines in Python, and management of vector and raster data for shared workflows. Experience in georeferencing, site suitability analysis, 3D modeling, and network analysis. Experience in developing, publishing, and managing bespoke in-house spatial data as well as sourcing and post-processing third party datasets, including OpenStreetMap, Overture Maps, U.S. federal, state, and municipal clearinghouse data.</li>
+            <li><strong>Technical:</strong> ESRI ArcGIS Pro 3.x/ArcMap 10.x, ArcGIS Online Services/SDK/StoryMaps, QGIS 3.x, Python, HTML/CSS/JS, PostGIS, SQL, Max/MSP, C++ for Arduino/IoT, Microsoft Excel, Adobe Photoshop/Illustrator/Indesign/Premiere, Git, circuit design, and human-computer interfacing.</li>
             </ul>
         </div>
 
-    <script type="module">
-        import { calculateExperience } from '/src/js/main.js';
-        calculateExperience();
-    </script>
 
         <div class="section">
             <h2>Experience</h2>
 
             <h3>Associate Officer of Research, Geospatial Applications Division</h3>
-            <p><strong>CIESIN in the Climate School at Columbia University</strong> | July 2024 – Present</p>
+            <p><strong>Columbia University Center for Integrated Earth System Information (CIESIN)</strong> | July 2024 – Present</p>
             <ul>
-                <li>Developed, managed, and scaled an enterprise-level map production pipeline including dozens of complex print-format map templates for national-scale routine immunization microplanning and health fieldwork operations as the GRID3 project's principal cartographer.</li>
+                <li>Developed, managed, and scaled an enterprise-level map production pipeline including dozens of complex print-format map templates for national-scale routine immunization microplanning and health fieldwork operations as the GRID3 project’s principal cartographer.</li>
                 <li>Established visual specifications for project-wide digital and print cartography, data visualizations, and public-facing communications material.</li>
                 <li>Optimized output products for simultaneous transmission of thousands of detailed atlas pages over unpredictable internet connections.</li>
-                <li>Published frontend ArcGIS Online applications for the NASA Socioeconomic Data and Applications Center and GRID3 data hub portal.</li>
+                <li>Collaborated with remote printing presses for optimal production of print atlases for field operations.</li>
+                <li>Prepared, cleaned, and generalized spatial and textual data for multi-scalar and -language atlas compatibility.</li>
+                <li>Published front-end ArcGIS Online applications for the NASA Socioeconomic Data and Applications Center and GRID3 data hub portal.</li>
                 <li>Designed and instructed a three-day cartography workshop in Maputo, Mozambique, to transfer map production methodology to the Mozambican national mapping agency, Agência Nacional de Desenvolvimento Geo-Espacial.</li>
                 <li>Guest lectured annually on cartographic methods and design for undergraduate students at the Columbia Climate School.</li>
-                <li>Co-authored paper "Developing High-Resolution Population and Settlement Data for Impactful Malaria Interventions in Zambia" (2022) published in the Journal of Environmental and Public Health. Presented paper at the 30th International Cartographic Conference in Florence, Italy.</li>
+                <li>Contributed visualizations for Climate Adaptation Support Activity (CASA) project in collaboration with USAID. Results of the project selected for publication in Nature’s npj Urban Sustainability issue, pending 2025.</li>
+                <li>Co-authored paper “Developing High-Resolution Population and Settlement Data for Impactful Malaria Interventions in Zambia” (2022) published in the Journal of Environmental and Public Health. Presented paper at the 30th International Cartographic Conference in Florence, Italy.</li>
                 <li>Contributed data visualizations for publication in Environment & Urbanization on Low-Elevation Coastal Zones in collaboration with CUNY Baruch College.</li>
-                <li>Selected to publish "Modelled Composite Travel Time to Health Facilities, Gwembe District, Zambia" in the Esri Map Book Volume 37 and 2022 Esri User Conference Plenary gallery.</li>
+                <li>Selected to publish “Modelled Composite Travel Time to Health Facilities, Gwembe District, Zambia” in the Esri Map Book Volume 37 and 2022 Esri User Conference Plenary gallery.</li>
                 <li>Exhibited interactive installations for the public at Lamont-Doherty Open House and American Museum of Natural History events.</li>
+                <li>Trained colleagues to apply internal visual specifications to their own work.</li>
                 <li>Trained external GRID3 consultants on technical cartographic workflows and conventions.</li>
                 <li>Contributed ad hoc review and criticism of maps and visualizations produced by other GRID3 staff and partners.</li>
             </ul>
 
             <h3>Senior Research Staff Assistant, Geospatial Applications Division</h3>
-            <p><strong>CIESIN in the Climate School at Columbia University</strong> | Feb. 2019 – July 2024</p>
+            <p><strong>CIESIN</strong> | Feb. 2019 – July 2024</p>
             <ul>
                 <li>idem</li>
             </ul>
 
             <h3>Non-student Casual Employee</h3>
-            <p><strong>CIESIN in the Climate School at Columbia University</strong> | Nov. 2018 – Feb. 2019</p>
+            <p><strong>CIESIN</strong> | Nov. 2018 – Feb. 2019</p>
             <ul>
                 <li>Consolidated an alpha version of settlement and health facility geospatial layers in the Democratic Republic of the Congo.</li>
                 <li>Created handbook detailing settlement validation procedure used by field validators.</li>
@@ -114,37 +114,58 @@
         <div class="section">
             <h2>Selected Presentations</h2>
             <ul>
-                <li>Heaton, Matthew. "Three-Day Cartography Workshop." Agência Nacional de Desenvolvimento Geo-Espacial, 18-20 Apr. 2023, Maputo, Mozambique. Workshop Presentation.</li>
-                <li>Heaton, Matthew. "Cartographic Methods and Design." Columbia University Climate School, Spring 2023-25, New York, NY. Guest Lectures.</li>
-                <li>Heaton, Matthew. "Creating a Dynamic Map Template for National Scale Malaria Treatment Planning in Zambia." 30th International Cartographic Conference, 14–18 Dec. 2021, Florence, Italy. Paper Presentation.</li>
-                <li>Levy, Marc, Linda Pistolesi, Matthew Heaton, and Anela Layugan. "Sustainable World Showcase." Esri User Conference, 8–12 July 2019, San Diego, CA. Poster Presentation.</li>
-                <li>Heaton, Matthew. "Scraping Twitter for Evidence of Social Influence in the United States." American Association of Geographers Middle States Conference, 20-21 Oct. 2017, Geneseo, NY. Poster Presentation.</li>
-                <li>Rogalsky, Jennifer, and Matthew Heaton. "Using Photographic Inquiry and Story Maps to Understand Community Assets in the Face of Gentrification in Red Hook, Brooklyn." American Association of Geographers Middle States Conference, 20-21 Oct. 2017, Geneseo, NY. Paper Presentation.</li>
+            <li><strong>Heaton, Matthew.</strong> “Three-Day Cartography Workshop.” Agência Nacional de Desenvolvimento Geo-Espacial, 18–20 Apr. 2023, Maputo, Mozambique. Workshop Presentation.</li>
+            <li><strong>Heaton, Matthew.</strong> “Cartographic Methods and Design.” Columbia University Climate School, Spring 2023–25, New York, NY. Guest Lectures.</li>
+            <li><strong>Heaton, Matthew.</strong> “Creating a Dynamic Map Template for National Scale Malaria Treatment Planning in Zambia.” 30th International Cartographic Conference, 14–18 Dec. 2021, Florence, Italy. Paper Presentation.</li>
+            <li><strong>Levy, Marc; Linda Pistolesi; Matthew Heaton; and Anela Layugan.</strong> “Sustainable World Showcase.” Esri User Conference, 8–12 July 2019, San Diego, CA. Poster Presentation.</li>
+            <li><strong>Heaton, Matthew.</strong> “Scraping Twitter for Evidence of Social Influence in the United States.” American Association of Geographers Middle States Conference, 20–21 Oct. 2017, Geneseo, NY. Poster Presentation.</li>
+            <li><strong>Rogalsky, Jennifer; and Matthew Heaton.</strong> “Using Photographic Inquiry and Story Maps to Understand Community Assets in the Face of Gentrification in Red Hook, Brooklyn.” American Association of Geographers Middle States Conference, 20–21 Oct. 2017, Geneseo, NY. Paper Presentation.</li>
             </ul>
         </div>
 
         <div class="section">
             <h2>Selected Publications & Features</h2>
             <ul>
-                <li>Borkovska, Olena, et al. "Developing High-Resolution Population and Settlement Data for Impactful Malaria Interventions in Zambia." Journal of Environmental and Public Health, 2022.</li>
-                <li>Featured in "Seeking to Eradicate Malaria, Zambia Turns to Geospatial Data." ArcNews, 2023.</li>
-                <li>Featured in "'X' Marks the Spot: Officials Map a Route Out of the Pandemic." The New York Times, 2021.</li>
-                <li>Sobel, Corey, et al. "Harmonising Subnational Boundaries." GRID3 Whitepaper, 2020.</li>
+            <li><strong>Thomson, Data, et al.</strong> “Global cities dataset reveals urban poor are exposed to compounding social, environmental and climate risks.” <em>npj Climate Change and Cities</em>, pending 2025.</li>
+            <li><strong>Borkovska, Olena, et al.</strong> “Developing High-Resolution Population and Settlement Data for Impactful Malaria Interventions in Zambia.” <em>Journal of Environmental and Public Health</em>, 2022.</li>
+            <li>Featured in “Seeking to Eradicate Malaria, Zambia Turns to Geospatial Data.” <em>ArcNews</em>, 2023.</li>
+            <li>Featured in “‘X’ Marks the Spot: Officials Map a Route Out of the Pandemic.” <em>The New York Times</em>, 2021.</li>
+            <li><strong>Sobel, Corey, et al.</strong> “Harmonising Subnational Boundaries.” <em>GRID3 Whitepaper</em>, 2020.</li>
             </ul>
         </div>
 
         <div class="section">
             <h2>References</h2>
-            <ul>
-                <li><strong>Paola Kim-Blanco</strong><br>Senior Research Associate, Center for International Earth Science Information Network<br>61 Rte 9W, Palisades, NY 10964<br>845.365.8988 (ext. 8950)<br><a href="mailto:pblanco@ciesin.columbia.edu">pblanco@ciesin.columbia.edu</a><br>Principal Investigator, GRID3</li>
-
-                <li><strong>Linda Pistolesi</strong><br>Senior Geographic Information Specialist, Center for International Earth Science Information Network<br>61 Rte 9W, Palisades, NY 10964<br>845.365.8799 (ext. 8799)<br><a href="mailto:lpistole@ciesin.columbia.edu">lpistole@ciesin.columbia.edu</a><br>Supervisor, CIESIN</li>
-
-                <li><strong>Dr. Jennifer Rogalsky</strong><br>Associate Professor of Geography, SUNY Geneseo<br>Bailey Hall, Bank St, Geneseo, NY 14454<br>585.245.6197<br><a href="mailto:rogalsky@geneseo.edu">rogalsky@geneseo.edu</a><br>Research Advisor, SUNY Geneseo</li>
-            </ul>
+            <p><em>Available upon <span class="pointer" id="request-email" style="text-decoration:underline;cursor:pointer;" onclick="copyEmailToClipboard(event, 'matthew.j.heaton@gmail.com')">request</span>.<span id="requestCopyMessage" class="copy-message">email copied to clipboard : &#41;	</span></em></p>
         </div>
     </div>
   
-<script type="module" src="/js/main.js" defer></script>
+<script>
+  // copy email to clipboard and show a temporary message
+  function copyEmailToClipboard(event: MouseEvent, email: string) {
+    navigator.clipboard.writeText(email).then(function() {
+      var copyMessage = document.getElementById("copyMessage") || document.getElementById("requestCopyMessage");
+      if (event.target && (event.target as HTMLElement).id === "request-email") {
+        copyMessage = document.getElementById("requestCopyMessage");
+      }
+      if (copyMessage) {
+        copyMessage.classList.add("show");
+        setTimeout(function () {
+          if (copyMessage) copyMessage.style.opacity = "0";
+          setTimeout(function () {
+            if (copyMessage) {
+              copyMessage.classList.remove("show");
+              copyMessage.style.opacity = "1";
+            }
+          }, 500);
+        }, 1000);
+      }
+    }).catch(function(err) {
+      console.error('Failed to copy email: ', err);
+    });
+  }
+  // @ts-ignore
+    window.copyEmailToClipboard = copyEmailToClipboard;
+</script>
 </body>
 </html>

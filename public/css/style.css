@@ -7,7 +7,7 @@ html {
   text-transform: lowercase;
   cursor: url('../cursor/arrow.cur'), auto;
   cursor: url('../cursor/arrow.cur'), move;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 mousedown.grabbing {
@@ -21,13 +21,13 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  user-select: none;
+  
   cursor: url('../cursor/arrow.cur'), auto;
   background-size: cover;
   background-position: center;
   background-repeat: repeat;
   background-attachment: fixed;
-  overflow: hidden;
+  /* overflow: hidden; */
   position: relative;
   zoom: 100%;
   transition: zoom 0.3s;
@@ -98,7 +98,7 @@ button {
   justify-content: space-between;
   align-items: left;
   gap: 3rem;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .copy-message {
@@ -119,7 +119,7 @@ button {
   word-wrap: break-word;
   white-space: pre-wrap;
   text-align: left;
-  padding: 1rem 2rem;
+  padding: 1rem;
   background-color: #000000;
   box-shadow: 0 4px 16px rgba(0,0,0,0.8);
 }
@@ -168,7 +168,7 @@ button {
 
 #asciiContainer1, #contourContainer1, #horseContainer1, #shapeshiftContainer1 {
   cursor: url('../cursor/point.cur'), auto;
-  user-select: none;
+  
   /* display: none; */
   z-index: 1;
 }
@@ -183,9 +183,8 @@ button {
   z-index: 1 !important;
   background-color: transparent !important;
   cursor: url('../cursor/point.cur'), auto !important;
-  user-select: none;
   pointer-events: auto !important;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 #perpetualContainer1 {
@@ -214,7 +213,7 @@ button {
   align-items: center; 
   z-index: 5;
   font-size: 1rem;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 #about .content-wrapper {
@@ -307,7 +306,7 @@ button {
 @media (max-width: 768px) {
   body {
     zoom: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     height: 100%;
   }
 

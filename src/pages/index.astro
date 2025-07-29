@@ -42,29 +42,39 @@ import RandomVisualization from '../components/RandomVisualization.jsx';
         </div>
     </div>
     <script>
-      // copy email to clipboard and show a temporary message
-      function copyEmailToClipboard(event, email) {
-        navigator.clipboard.writeText(email).then(function() {
-          var copyMessage = document.getElementById("copyMessage");
+    // copy email to clipboard and show a temporary message
+    function copyEmailToClipboard(event: MouseEvent, email: string) {
+      navigator.clipboard.writeText(email).then(function() {
+        var copyMessage = document.getElementById("copyMessage") || document.getElementById("requestCopyMessage");
+        if (event.target && (event.target as HTMLElement).id === "request-email") {
+          copyMessage = document.getElementById("requestCopyMessage");
+        }
+        if (copyMessage) {
           copyMessage.classList.add("show");
           setTimeout(function () {
-            copyMessage.style.opacity = "0";
+            if (copyMessage) copyMessage.style.opacity = "0";
             setTimeout(function () {
-              copyMessage.classList.remove("show");
-              copyMessage.style.opacity = "1";
+              if (copyMessage) {
+                copyMessage.classList.remove("show");
+                copyMessage.style.opacity = "1";
+              }
             }, 500);
           }, 1000);
-        }).catch(function(err) {
-          console.error('Failed to copy email: ', err);
-        });
-      }
-
+        }
+      }).catch(function(err) {
+        console.error('Failed to copy email: ', err);
+      });
+    }
+      // @ts-ignore
       window.copyEmailToClipboard = copyEmailToClipboard;
 
       document.getElementById('colorwheel')?.addEventListener('click', () => {
         const hexCodes = ['#3a6ea5', '#444444', '#c25237', '#524bd0', '#344242'];
         const randomColor = hexCodes[Math.floor(Math.random() * hexCodes.length)];
-        document.getElementById('overlay').style.backgroundColor = randomColor;
+        const overlay = document.getElementById('overlay');
+        if (overlay) {
+          overlay.style.backgroundColor = randomColor;
+        }
       });
     </script>
 </body>
