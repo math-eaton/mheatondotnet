@@ -1,5 +1,5 @@
 {
-  "name": "remotesensing",
+  "name": "mheaton.net",
   "description": "matthew j heaton personal website",
   "homepage": "https://www.mheaton.net/",
   "private": false,
@@ -17,10 +17,16 @@
     "vite": "^6.3.5"
   },
   "dependencies": {
+    "@astrojs/node": "^9.3.1",
+    "@astrojs/react": "^4.3.0",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
     "astro": "^5.12.3",
     "d3-delaunay": "^6.0.4",
     "number-to-words": "^1.2.4",
     "p5": "^1.9.4",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "simplex-noise": "^4.0.1",
     "three": "^0.165.0"
   }

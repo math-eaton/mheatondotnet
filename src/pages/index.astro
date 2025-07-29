@@ -1,5 +1,5 @@
 ---
-// You can add any server-side logic here
+import RandomVisualization from '../components/RandomVisualization.jsx';
 ---
 
 <!doctype html>
@@ -15,6 +15,7 @@
     <!-- Color overlay for blend effects -->
     <div id="overlay"></div>
     <div class="figure interactive pointer">
+      <RandomVisualization client:load />
     </div>
     <!-- <div id="p5-container"></div> -->
     <div class="section pointer" id="name">
@@ -40,6 +41,12 @@
           <img id="colorwheel" src="/img/colorwheel.png">
         </div>
     </div>
-  <script type="module" src="/js/main.js" defer></script>
+    <script>
+      document.getElementById('colorwheel')?.addEventListener('click', () => {
+        const hexCodes = ['#3a6ea5', '#444444', '#c25237', '#524bd0', '#344242'];
+        const randomColor = hexCodes[Math.floor(Math.random() * hexCodes.length)];
+        document.getElementById('overlay').style.backgroundColor = randomColor;
+      });
+    </script>
 </body>
 </html>

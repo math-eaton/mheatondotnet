@@ -320,7 +320,7 @@ export function modelLoader(containerId) {
 
     function loadRandomModel() {
         const model = getRandomModel();
-        console.log('Loading model:', model.name);
+        console.log('Loading model:', model.name, model.url);
         loadObjModel(model.url, obj => switchToObjModel(obj, model.cameraPosition, model.name), handleModelError);
     }
 

@@ -162,7 +162,7 @@ button {
 #asciiContainer1, #contourContainer1, #horseContainer1{
   cursor: url('../cursor/point.cur'), auto;
   user-select: none;
-  display: none;
+  /* display: none; */
   z-index: 1;
 }
 
