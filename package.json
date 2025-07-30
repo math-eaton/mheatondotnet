@@ -23,6 +23,7 @@
     "@types/react-dom": "^19.1.7",
     "astro": "^5.12.3",
     "d3-delaunay": "^6.0.4",
+    "node": "^20.19.4",
     "number-to-words": "^1.2.4",
     "p5": "^1.9.4",
     "react": "^19.1.1",

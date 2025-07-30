@@ -7,7 +7,7 @@ html {
   text-transform: lowercase;
   cursor: url('../cursor/arrow.cur'), auto;
   cursor: url('../cursor/arrow.cur'), move;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 mousedown.grabbing {
@@ -27,7 +27,7 @@ body {
   background-position: center;
   background-repeat: repeat;
   background-attachment: fixed;
-  /* overflow: hidden; */
+  overflow: hidden;
   position: relative;
   zoom: 100%;
   transition: zoom 0.3s;
@@ -98,7 +98,7 @@ button {
   justify-content: space-between;
   align-items: left;
   gap: 3rem;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .copy-message {
@@ -184,7 +184,7 @@ button {
   background-color: transparent !important;
   cursor: url('../cursor/point.cur'), auto !important;
   pointer-events: auto !important;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 #perpetualContainer1 {
@@ -213,7 +213,7 @@ button {
   align-items: center; 
   z-index: 5;
   font-size: 1rem;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 #about .content-wrapper {
@@ -306,7 +306,7 @@ button {
 @media (max-width: 768px) {
   body {
     zoom: 100%;
-    /* overflow: hidden; */
+    overflow: hidden;
     height: 100%;
   }
 
