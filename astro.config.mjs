@@ -14,9 +14,7 @@ export default defineConfig({
     assetsInclude: ['**/*.obj', '**/*.cur', '**/*.typeface.json']
   },
 
-  adapter: node({
-    mode: 'standalone'
-  }),
+
 
   integrations: [react()]
 });
