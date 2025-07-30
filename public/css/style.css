@@ -57,11 +57,18 @@ a:visited {
   text-decoration: none;
 }
 
-a:hover {
-  color: #c0c0c0;
-  filter: hue-rotate(45deg) contrast(1.25) brightness(1.2) !important;
+#name:hover {
+  filter: hue-rotate(-45deg) brightness(2.2) !important;
   cursor: url('../cursor/point.cur'), auto;
 }
+
+
+.nav:hover {
+  color: #c0c0c0;
+  filter: invert(1) contrast(0.25) brightness(3.2) !important;
+  cursor: url('../cursor/point.cur'), auto;
+}
+
 
 a:active {
   text-decoration: none;
@@ -129,6 +136,7 @@ button {
 .copy-message.show {
   display: block;
 }
+
 @media (max-width: 768px) {
   .copy-message {
     font-size: 1rem;
