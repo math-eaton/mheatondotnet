@@ -115,47 +115,7 @@ export function life(containerId) {
   let cellWidth, cellHeight;
   let plane;
 
-  function init() {
-    // Scene setup
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(
-        52, 
-        (window.innerWidth / window.innerHeight),
-        0.1,
-        1000,);
-
-    
-    // alt ortho version
-    // const aspectRatio = window.innerWidth / window.innerHeight;
-    // const viewSize = 50;
-    // camera = new THREE.OrthographicCamera(
-    //     (viewSize * aspectRatio) / -2,
-    //     (viewSize * aspectRatio) / 2,
-    //     viewSize / 2,
-    //     viewSize / -2,
-    //     0.1,
-    //     1000
-    //   );
-
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-
-    // Canvas setup
-    canvas = document.createElement('canvas');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    canvas.classList.add('pointer');
-    canvas.style.zIndex = '1'; // Ensure the canvas is behind other elements
-    ctx = canvas.getContext('2d');
-    document.getElementById(containerId).appendChild(canvas);
-
-    setupGrid();
-
-    // Initial grid with random values if this is the first initialization
-    if (!grid.length || !grid[0].length) {
-      initGrid(gridWidth, gridHeight);
-    }
-
+  // Move setupGrid and resizeGrid outside init so they are accessible everywhere in life()
   function setupGrid() {
     // Calculate grid dimensions and cell size with responsive resolution
     const isMobile = Math.min(window.innerWidth, window.innerHeight) < 768;
@@ -225,7 +185,7 @@ export function life(containerId) {
     raycaster = raycaster || new THREE.Raycaster();
     mouse = mouse || new THREE.Vector2();
   }
-  
+
   // Resize the grid while preserving as much of the pattern as possible
   function resizeGrid(oldGrid, oldWidth, oldHeight) {
     // Create new grid arrays
@@ -246,6 +206,46 @@ export function life(containerId) {
       }
     }
   }
+
+  function init() {
+    // Scene setup
+    scene = new THREE.Scene();
+    camera = new THREE.PerspectiveCamera(
+        52, 
+        (window.innerWidth / window.innerHeight),
+        0.1,
+        1000,);
+
+    // alt ortho version
+    // const aspectRatio = window.innerWidth / window.innerHeight;
+    // const viewSize = 50;
+    // camera = new THREE.OrthographicCamera(
+    //     (viewSize * aspectRatio) / -2,
+    //     (viewSize * aspectRatio) / 2,
+    //     viewSize / 2,
+    //     viewSize / -2,
+    //     0.1,
+    //     1000
+    //   );
+
+    renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    // Canvas setup
+    canvas = document.createElement('canvas');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    canvas.classList.add('pointer');
+    canvas.style.zIndex = '1'; // Ensure the canvas is behind other elements
+    ctx = canvas.getContext('2d');
+    document.getElementById(containerId).appendChild(canvas);
+
+    setupGrid();
+
+    // Initial grid with random values if this is the first initialization
+    if (!grid.length || !grid[0].length) {
+      initGrid(gridWidth, gridHeight);
+    }
 
     addEventListeners(); // Add event listeners for mouse and touch events
     animate();
@@ -369,8 +369,6 @@ export function life(containerId) {
       // Recalculate grid
       setupGrid();
       
-      // No need to reinitialize the grid or clear the interval
-      // This preserves the current simulation state
     });
   }
 

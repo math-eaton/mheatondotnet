@@ -129,6 +129,28 @@ button {
 .copy-message.show {
   display: block;
 }
+@media (max-width: 768px) {
+  .copy-message {
+    font-size: 1rem;
+    max-width: 95vw;
+    max-height: 30vh;
+    padding: 0.75rem;
+    word-break: break-word;
+    text-align: center;
+    left: 2vw;
+    right: 2vw;
+    top: 2vh;
+    bottom: 2vh;
+  }
+}
+@media (max-width: 480px) {
+  .copy-message {
+    font-size: 0.9rem;
+    max-width: 98vw;
+    max-height: 25vh;
+    padding: 0.5rem;
+  }
+}
 
 #name {
   position: fixed; 
@@ -192,6 +214,7 @@ button {
 }
 
 #lifeContainer1 {
+  font-size: 0.1rem;
   z-index: 1;
   user-select: auto;
   filter: drop-shadow(.125vw -.25vh 0rem rgb(198, 198, 198)) drop-shadow(-.125vw .25vh 0rem #ff00ff);
@@ -382,7 +405,7 @@ button {
     margin-top: 0;
     max-height: calc(85vh - 3rem); 
     overflow-y: auto;
-    padding-bottom: 2vh;
+    padding-bottom: 3rem;
   }
 
   .section#links {
@@ -394,6 +417,19 @@ button {
     top: -15vh;
     margin-top: 15vh;
     scale: 1.5;
+  }
+
+  .copy-message {
+    font-size: 1rem;
+    max-width: 95vw;
+    max-height: 30vh;
+    padding: 0.75rem;
+    word-break: break-word;
+    text-align: center;
+    left: 2vw;
+    right: 2vw;
+    top: 2vh;
+    bottom: 2vh;
   }
 }
 
@@ -442,6 +478,13 @@ button {
     max-width: 95vw;
     padding: 1vh 2vw;
     padding-top: 3rem;
+  }
+
+  .copy-message {
+    font-size: 0.9rem;
+    max-width: 98vw;
+    max-height: 25vh;
+    padding: 0.5rem;
   }
 }
 
