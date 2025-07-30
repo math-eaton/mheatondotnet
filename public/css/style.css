@@ -59,6 +59,7 @@ a:visited {
 
 a:hover {
   color: #c0c0c0;
+  filter: hue-rotate(45deg) contrast(1.25) brightness(1.2) !important;
   cursor: url('../cursor/point.cur'), auto;
 }
 
@@ -66,6 +67,7 @@ a:active {
   text-decoration: none;
   scale: 0.95;
 }
+
 
 button {
   cursor: url('../cursor/point.cur'), auto;
@@ -137,12 +139,9 @@ button {
   z-index: 3; 
   cursor: url('../cursor/point.cur'), auto;
   color: #ececec;
-  filter: hue-rotate(180deg) contrast(1.5) brightness(1.2);
+  filter: hue-rotate(180deg) contrast(1.5) brightness(2.2);
 }
 
-#name:hover {
-  color: #c0c0c0; 
-}
 
 .page-title {
   position: fixed;
@@ -180,7 +179,7 @@ button {
   width: 100%;
   height: 100%;
   zoom: 1.25;
-  z-index: 1 !important;
+  z-index: -1 !important;
   background-color: transparent !important;
   cursor: url('../cursor/point.cur'), auto !important;
   pointer-events: auto !important;
@@ -214,6 +213,18 @@ button {
   z-index: 5;
   font-size: 1rem;
   overflow: hidden;
+  mix-blend-mode: exclusion;
+  background-color: #524bd0 !important;
+}
+
+#aboutOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
 }
 
 #about .content-wrapper {
