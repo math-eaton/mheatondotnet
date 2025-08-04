@@ -6,7 +6,7 @@ const components = [
   () => import('./ModelLoader.jsx'),
   () => import('./contourVis.jsx'),
   () => import('./shapeshiftVis.jsx'),
-  () => import('./globe.jsx'),
+  // () => import('./globe.jsx'),
 ];
 
 export default function RandomVisualization() {
