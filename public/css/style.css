@@ -216,6 +216,19 @@ button {
   overflow: hidden;
 }
 
+#globeContainer1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 2;
+  cursor: url('../cursor/point.cur'), auto;
+  background: transparent;
+  pointer-events: auto;
+  filter: invert(1);
+}
+
 #perpetualContainer1 {
   width: 0%;
   z-index: -1;

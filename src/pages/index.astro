@@ -68,12 +68,13 @@ import RandomVisualization from '../components/RandomVisualization.jsx';
       // @ts-ignore
       window.copyEmailToClipboard = copyEmailToClipboard;
 
+      const hexCodes = ['#344242', '#3a6ea5', '#444444', '#524bd0', '#c25237'].sort();
+      let colorIndex = 0;
       document.getElementById('colorwheel')?.addEventListener('click', () => {
-        const hexCodes = ['#3a6ea5', '#444444', '#c25237', '#524bd0', '#344242'];
-        const randomColor = hexCodes[Math.floor(Math.random() * hexCodes.length)];
         const overlay = document.getElementById('overlay');
         if (overlay) {
-          overlay.style.backgroundColor = randomColor;
+          overlay.style.backgroundColor = hexCodes[colorIndex];
+          colorIndex = (colorIndex + 1) % hexCodes.length;
         }
       });
     </script>
