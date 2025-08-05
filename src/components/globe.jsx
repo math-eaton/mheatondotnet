@@ -1,4 +1,3 @@
-
 import { useEffect } from 'react';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
@@ -16,7 +15,11 @@ export default function GlobeVis() {
     const styleResponse = await fetch('/json/bright.json');
     const styleJson = await styleResponse.json();
     // Use a different API key for dev vs prod
-    let apiKey = import.meta.env.PUBLIC_MAPTILER_KEY;
+    let apiKey = import.meta.env.PUBLIC_MAPTILER_KEY || 'xHRm7K23zzCN4h6B9V8s';
+    if (!apiKey) {
+      console.error("MapTiler API key is missing or invalid.");
+      return;
+    }
     const devKey = import.meta.env.PUBLIC_MAPTILER_KEY_DEV;
     const isDev = typeof window !== 'undefined' &&
       (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1');
@@ -25,22 +28,25 @@ export default function GlobeVis() {
     }
     if (apiKey && styleJson.sources && styleJson.sources.openmaptiles && styleJson.sources.openmaptiles.url) {
       styleJson.sources.openmaptiles.url = styleJson.sources.openmaptiles.url
-        .replace('maptiler_api_key', apiKey)
+      .replace('maptiler_api_key', apiKey)
     }
     if (apiKey && styleJson.glyphs && typeof styleJson.glyphs === 'string') {
       styleJson.glyphs = styleJson.glyphs
-        .replace('maptiler_api_key', apiKey)
+      .replace('maptiler_api_key', apiKey)
     }
     if (apiKey && styleJson.sprite && typeof styleJson.sprite === 'string') {
       styleJson.sprite = styleJson.sprite
-        .replace('maptiler_api_key', apiKey)
+      .replace('maptiler_api_key', apiKey)
     }
     map = new maplibregl.Map({
       container: globeId,
       style: styleJson,
       zoom: 3.5,
+      // bearing: -90,
       center: [-74.006, 40.7128],
-      maxPitch: 80,
+      maxPitch: 45,
+      minZoom: 2,
+      maxZoom: 15,
       pitch: 0,
       canvasContextAttributes: { antialias: false },
       attributionControl: false
@@ -60,7 +66,7 @@ export default function GlobeVis() {
           this.scene = new THREE.Scene();
           // Define earth radius and altitude for lights (in arbitrary units, e.g., 1 = globe radius)
           const earthRadius = 1;
-          const altitude = 3; // 2x earth radius above surface
+          const altitude = 3; // Nx earth radius above surface
 
           // Helper to convert lat/lon/alt to Cartesian coordinates
           function latLonAltToXYZ(lat, lon, radius) {
@@ -78,13 +84,15 @@ export default function GlobeVis() {
           oceanLight.position.set(ix, iy, iz);
           oceanLight.castShadow = true;
           this.scene.add(oceanLight);  
-            
+
           // South Pole
           const [sx, sy, sz] = latLonAltToXYZ(-90, 0, earthRadius + altitude);
-          const southPoleLight = new THREE.DirectionalLight(0x00ffcc, 50);
+          const southPoleLight = new THREE.SpotLight(0x00ffcc, 50, 100, Math.PI / 6, 0.5, 100);
           southPoleLight.position.set(sx, sy, sz);
           southPoleLight.castShadow = true;
+          southPoleLight.target.position.set(0, 0, 0); // Point toward globe center
           this.scene.add(southPoleLight);
+          this.scene.add(southPoleLight.target);
 
           // Equator at 0° longitude
           const [ex1, ey1, ez1] = latLonAltToXYZ(0, 0, earthRadius + altitude);
@@ -135,3 +143,5 @@ export default function GlobeVis() {
     ></div>
   );
 }
+
+console.log("MapTiler API Key:", import.meta.env.PUBLIC_MAPTILER_KEY);
