@@ -60,11 +60,36 @@ export default function GlobeVis() {
         map.setProjection({ type: 'globe' });
       });
 
-      // Function to simulate Earth's rotation by panning the camera
       const rotateEarth = () => {
         if (isMounted && !isUserInteracting) {
           const currentCenter = map.getCenter();
-          const newLongitude = (currentCenter.lng + 0.01) % 360; // Adjust rotation speed here
+          const currentZoom = map.getZoom();
+
+          // const minZoom = 2;
+          const fastCutoff = 4;   // up to this zoom keep it fast
+          const slowCutoff = 8;  // at and above this zoom, essentially stop
+
+          let speedMultiplier;
+          if (currentZoom >= slowCutoff) {
+        // effectively stop 
+        speedMultiplier = 0.0001;
+          } else if (currentZoom <= fastCutoff) {
+        // slightly speed up when very zoomed out
+        speedMultiplier = 1.1;
+          } else {
+        // heavy falloff between fastCutoff..slowCutoff using a high-power curve
+        const t = (currentZoom - fastCutoff) / (slowCutoff - fastCutoff); // 0..1
+        speedMultiplier = Math.max(0.00001, Math.pow(1 - t, 6));
+          }
+
+          const baseSpeed = 0.01; // base panning step when fully fast
+          const adjustedSpeed = baseSpeed * speedMultiplier;
+
+          // Keep longitude in [-180, 180] to avoid huge numbers over time
+          let newLongitude = currentCenter.lng + adjustedSpeed;
+          if (newLongitude > 180) newLongitude = ((newLongitude + 180) % 360) - 180;
+          if (newLongitude < -180) newLongitude = ((newLongitude - 180) % 360) + 180;
+
           map.setCenter([newLongitude, currentCenter.lat]);
           animationFrameId = requestAnimationFrame(rotateEarth);
         }
@@ -111,5 +136,3 @@ export default function GlobeVis() {
     ></div>
   );
 }
-
-console.log("MapTiler API Key:", import.meta.env.PUBLIC_MAPTILER_KEY);
