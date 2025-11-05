@@ -56,6 +56,10 @@ export default function GlobeVis() {
       // Add attribution control in compact (collapsed) mode
       map.addControl(new maplibregl.AttributionControl({ compact: true }));
 
+      // Accelerate mouse wheel zoom (default is around 1/450)
+      // Higher values = faster zoom
+      map.scrollZoom.setWheelZoomRate(1/125);
+
       map.on('style.load', () => {
         map.setProjection({ type: 'globe' });
       });
@@ -133,6 +137,10 @@ export default function GlobeVis() {
     <div
       id={globeId}
       className="vis-container globe-vis-container"
+        style={{
+        backgroundColor: 'rgba(0, 0, 0, 0)', // troubleshooting hit detection for controls?
+        cursor: 'grab'
+      }}
     ></div>
   );
 }
